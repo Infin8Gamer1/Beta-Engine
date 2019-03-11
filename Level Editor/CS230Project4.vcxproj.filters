@@ -31,6 +31,10 @@
     <ClCompile Include="Source\LevelEditorLevel.cpp">
       <Filter>Game\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="Source\LevelEditorUI.cpp">
+      <Filter>Game\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CameraMovement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -48,5 +52,9 @@
     <ClInclude Include="Source\LevelEditorLevel.h">
       <Filter>Game\Levels</Filter>
     </ClInclude>
+    <ClInclude Include="Source\LevelEditorUI.h">
+      <Filter>Game\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CameraMovement.h" />
   </ItemGroup>
 </Project>

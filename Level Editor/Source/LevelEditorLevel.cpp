@@ -12,10 +12,12 @@
 #include "stdafx.h"
 #include <Space.h>
 #include "LevelEditorLevel.h"
+#include "LevelEditorUI.h"
 
 //Components
 #include "ScreenWrap.h"
 #include "TimedDeath.h"
+#include "CameraMovement.h"
 #include <SpriteText.h>
 #include <Transform.h>
 #include <Physics.h>
@@ -47,11 +49,16 @@ void Levels::LevelEditorLevel::Load()
 
 	System::GetInstance().SetWindowTitle(WindowTitle);
 
+	//setup the UI Space
+	uiSpace = new Space("UISpace");
+	uiSpace->SetLevel(new Levels::LevelEditorUI());
+	Engine::GetInstance().AddModule(uiSpace);
+
 	////Register Custom Components
 	//GameObjectFactory::GetInstance().RegisterComponent<Behaviors::TimedDeath>();
 	//GameObjectFactory::GetInstance().RegisterComponent<Behaviors::Bullet>();
 	//GameObjectFactory::GetInstance().RegisterComponent<Behaviors::PlayerShip>();
-	//GameObjectFactory::GetInstance().RegisterComponent<Behaviors::Asteroid>();
+	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::CameraMovement>();
 
 	//GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Bullet"));
 
@@ -69,6 +76,12 @@ void Levels::LevelEditorLevel::Load()
 void Levels::LevelEditorLevel::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
+
+	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("CameraMovement");
+	GetSpace()->GetObjectManager().AddObject(*CameraMovement);
+
+	GameObject* circle = GameObjectFactory::GetInstance().CreateObject("Circle");
+	GetSpace()->GetObjectManager().AddObject(*circle);
 
 	////arena setup
 	//GameObject* walls = GameObjectFactory::GetInstance().CreateObject("Walls");

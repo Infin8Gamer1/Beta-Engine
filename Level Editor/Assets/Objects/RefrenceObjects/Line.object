@@ -1,0 +1,28 @@
+Line
+{
+  numComponents : 3
+  Transform
+  {
+    translation : { 0, 0 }
+    rotation : 0
+    scale : { 400, 400 }
+  }
+  Sprite
+  {
+    frameIndex : 0
+    color : { 1 , 1 , 1 , 0 }
+	spriteSourceName : Empty
+  }
+  ColliderLine
+  {
+	CollisionGroup : line
+	CollisionFlags : default,bullet,ship,asteroid
+	LineTypeRelitive : 1
+	Reflection : 1
+	NumberOfLines : 4
+	Line : { { 0, -0.5 }, { 0.5, 0 } }
+	Line : { { 0.5, 0 }, { 0, 0.5 } }
+	Line : { { 0, 0.5 }, { -0.5, 0 } }
+	Line : { { -0.5, 0 }, { 0, -0.5 } }
+  }
+}

@@ -1,0 +1,19 @@
+Instructions
+{
+  numComponents : 2
+  Transform
+  {
+    translation : { 0, -25 }
+    rotation : 0
+    scale : { 40, 40 }
+  }
+  SpriteText
+  {
+    frameIndex : 0
+	color : { 0 , 1 , 1 , 1 }
+	spriteSourceName : CodeNewRoman
+	text : T to Teleport\nW to Move
+	horizontalAlignment : 0
+	verticalAlignment : 0
+  }
+}

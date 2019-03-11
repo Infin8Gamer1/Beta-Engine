@@ -45,13 +45,13 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	UNREFERENCED_PARAMETER(instance);
 
 	// Create a new space called "GameSpace"
-	Space* space = new Space("GameSpace");
-
+	Space* space = new Space("LevelSpace");
 	// Set initial level to the second level.
 	space->SetLevel(new Levels::LevelEditorLevel());
-
-	// Add additional modules to engine
+	// Add Game Space
 	Engine::GetInstance().AddModule(space);
+
+	// Add Sound Manager
 	Engine::GetInstance().AddModule(new SoundManager());
 
 	// Game engine goes!

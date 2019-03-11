@@ -1,6 +1,6 @@
 Circle
 {
-  numComponents : 6
+  numComponents : 4
   Transform
   {
     translation : { 0, 0 }
@@ -26,14 +26,5 @@ Circle
 	CollisionGroup : default
 	CollisionFlags : all
     radius : 50
-  }
-  Behaviors::ColorChange
-  {
-    normalColor : { 1 , 1 , 0 , 1 }
-    collidedColor : { 1 , 0 , 0 , 1 }
-    collidedColorTime : 0.1
-  }
-  Behaviors::ScreenWrap
-  {
   }
 }
