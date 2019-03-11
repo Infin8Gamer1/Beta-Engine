@@ -1,0 +1,39 @@
+Bullet
+{
+  numComponents : 6
+  Transform
+  {
+    translation : { 0, 0 }
+    rotation : 0
+    scale : { 15, 15 }
+  }
+  Sprite
+  {
+    frameIndex : 0
+    color : { 1 , 1 , 1 , 1 }
+	spriteSourceName : Bullet
+  }
+  Physics
+  {
+    acceleration : { 0, 0 }
+    velocity : { 0, 0 }
+    angularVelocity : 0
+    mass : 1
+	gravity : { 0, 0 }
+  }
+  ColliderCircle
+  {
+	CollisionGroup : bullet
+	CollisionFlags : asteroid,!bullet,!line,!ship,default
+    radius : 7
+  }
+  Behaviors::Bullet
+  {
+	speed : 200
+	damage : 1
+  }
+  Behaviors::TimedDeath
+  {
+	timeUntilDeath : 7.5
+  }
+}

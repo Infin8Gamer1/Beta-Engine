@@ -1,0 +1,36 @@
+Asteroid
+{
+  numComponents : 5
+  Transform
+  {
+    translation : { 0, 0 }
+    rotation : 0
+    scale : { 65, 65 }
+  }
+  Sprite
+  {
+    frameIndex : 0
+    color : { 1 , 1 , 1 , 1 }
+	spriteSourceName : Asteroid
+  }
+  Physics
+  {
+    acceleration : { 0, 0 }
+    velocity : { 0, 0 }
+    angularVelocity : 0
+    mass : 1
+	gravity : { 0, 0 }
+  }
+  ColliderCircle
+  {
+    CollisionGroup : asteroid
+	CollisionFlags : !asteroid,default,ship,line,bullet
+	radius : 33
+  }
+  Behaviors::Asteroid
+  {
+	minSpeed : 75
+	maxSpeed : 125
+	sizeChangePerHit : 0.7
+  }
+}

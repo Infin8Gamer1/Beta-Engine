@@ -1,0 +1,38 @@
+Point
+{
+  numComponents : 6
+  Transform
+  {
+    translation : { 0, 0 }
+    rotation : 0
+    scale : { 20, 20 }
+  }
+  Sprite
+  {
+    frameIndex : 0
+    color : { 1 , 1 , 1 , 1 }
+	spriteSourceName : Circle
+  }
+  Physics
+  {
+    acceleration : { 0, 0 }
+    velocity : { 0, 0 }
+    angularVelocity : 0
+    mass : 1
+	gravity : { 0, 0 }
+  }
+  ColliderPoint
+  {
+	CollisionGroup : default
+	CollisionFlags : all
+  }
+  Behaviors::ColorChange
+  {
+    normalColor : { 0 , 0 , 1 , 1 }
+    collidedColor : { 1 , 0 , 0 , 1 }
+    collidedColorTime : 0.1
+  }
+  Behaviors::ScreenWrap
+  {
+  }
+}

@@ -1,0 +1,8 @@
+Ship
+{
+	textureName : Ship.png
+    textureRows : 1
+    textureColumns : 1
+	frameCount : 1
+	frameStart : 0
+}

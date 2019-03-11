@@ -1,0 +1,8 @@
+TileMap
+{
+	textureName : Tilemap.png
+    textureRows : 3
+    textureColumns : 4
+	frameCount : -1
+	frameStart : -1
+}

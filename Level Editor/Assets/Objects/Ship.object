@@ -1,0 +1,33 @@
+Ship
+{
+  numComponents : 5
+  Transform
+  {
+    translation : { -350, 0 }
+    rotation : 0
+    scale : { 30, 30 }
+  }
+  Sprite
+  {
+    frameIndex : 0
+    color : { 1 , 1 , 1 , 1 }
+	spriteSourceName : Ship
+  }
+  Physics
+  {
+    acceleration : { 0, 0 }
+    velocity : { 0, 0 }
+    angularVelocity : 0
+    mass : 1
+	gravity : { 0, 0 }
+  }
+  ColliderCircle
+  {
+	CollisionGroup : ship
+	CollisionFlags : !bullet,asteroid,default
+    radius : 20
+  }
+  Behaviors::PlayerShip
+  {
+  }
+}
