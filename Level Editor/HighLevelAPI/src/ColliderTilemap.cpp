@@ -50,7 +50,7 @@ void ColliderTilemap::Serialize(Parser & parser) const
 
 void ColliderTilemap::Draw()
 {
-
+	//TODO::DebugDraw
 }
 
 bool ColliderTilemap::IsCollidingWith(const Collider & other) const
@@ -91,6 +91,11 @@ bool ColliderTilemap::IsCollidingWith(const Collider & other) const
 void ColliderTilemap::SetTilemap(const Tilemap * _map)
 {
 	map = _map;
+}
+
+const Tilemap * ColliderTilemap::GetTilemap()
+{
+	return map;
 }
 
 bool ColliderTilemap::IsSideColliding(const BoundingRectangle & rectangle, RectangleSide side) const
@@ -280,4 +285,16 @@ Vector2D ColliderTilemap::ConvertTileMapCordsToWorldCords(Vector2D inputCords) {
 	Output = transform->GetMatrix() * Output;
 
 	return Vector2D(Output.x + 0.5f, Output.y + 0.5f);
+}
+
+Vector2D ColliderTilemap::ConvertWorldCordsToTileMapCords(Vector2D inputCords)
+{
+	// Transform the world space point into tile space
+	Vector2D point = transform->GetInverseMatrix() * inputCords;
+	// Flip the y-axis
+	point.y = -point.y;
+	// Move completely into cell
+	point += Vector2D(0.5, 0.5);
+
+	return point;
 }

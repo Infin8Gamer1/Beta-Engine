@@ -19,6 +19,9 @@
     <Filter Include="Game\Behaviors\Utils">
       <UniqueIdentifier>{d18abd17-deda-4e4d-a433-4f35e6d54fda}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Behaviors\LevelEdit">
+      <UniqueIdentifier>{2bae48c8-1090-464e-b362-798022ca1eb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\stdafx.cpp">
@@ -46,6 +49,9 @@
     <ClCompile Include="Source\TimedDeath.cpp">
       <Filter>Game\Behaviors\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TileMapBrush.cpp">
+      <Filter>Game\Behaviors\LevelEdit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -71,6 +77,9 @@
     </ClInclude>
     <ClInclude Include="Source\TimedDeath.h">
       <Filter>Game\Behaviors\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TileMapBrush.h">
+      <Filter>Game\Behaviors\LevelEdit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

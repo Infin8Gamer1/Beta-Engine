@@ -88,6 +88,8 @@ public:
 		stream << value << std::endl;
 	}
 
+	void Write2DArrayVariable(const std::string& name, int** variable, const int columns, const int rows);
+
 #define ReadVar(var) ReadVariable(#var, var)
 
 	// Reads the value of a variable with the given name from the currently open file.
@@ -139,6 +141,8 @@ public:
 
 		variable = variable.substr(strBegin, strEnd);
 	}
+
+	void Read2DArrayVariable(const std::string& name, int**& variable, int columns, int rows);
 
 	// Reads the next value from the currently open file.
 	// Returns:

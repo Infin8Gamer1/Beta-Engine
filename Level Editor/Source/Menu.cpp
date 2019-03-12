@@ -18,6 +18,14 @@ Component * Menu::Clone() const
 	return new Menu();
 }
 
+void Menu::Serialize(Parser & parser) const
+{
+}
+
+void Menu::Deserialize(Parser & parser)
+{
+}
+
 void Menu::Initialize()
 {
 }

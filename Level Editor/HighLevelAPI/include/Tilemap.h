@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------
 
 #include "Vector2D.h"
+#include "Serializable.h"
 
 //------------------------------------------------------------------------------
 
@@ -31,7 +32,7 @@ class Matrix2D;
 
 // You are free to change the contents of this structure as long as you do not
 //   change the public interface declared in the header.
-class Tilemap
+class Tilemap : public Serializable
 {
 public:
 	//------------------------------------------------------------------------------
@@ -44,6 +45,11 @@ public:
 	//   numRows = The height of the map.
 	//   data = The array containing the map data.
 	Tilemap(unsigned numColumns, unsigned numRows, int** data);
+
+	// Create a tilemap from the given parameters.
+	// Params:
+	//   name = the name of the tilemap
+	Tilemap(std::string name);
 
 	// Destructor.
 	~Tilemap();
@@ -63,21 +69,25 @@ public:
 	//   or a positive integer otherwise.
 	int GetCellValue(unsigned column, unsigned row) const;
 
-	// Create a tilemap from the given file.
-	// Params:
-	//   filename = The name of the file containing the tilemap data.
-	static Tilemap* CreateTilemapFromFile(const std::string& filename);
+	void SetCellValue(int column, int row, int newValue) const;
+
+	// Loads object data from a file.
+	virtual void Deserialize(Parser& parser);
+	// Saves object data to a file.
+	virtual void Serialize(Parser& parser) const;
 
 	std::string GetName() const;
 
 	void setName(std::string _name);
+
+	void Print();
 
 private:
 	//------------------------------------------------------------------------------
 	// Private Functions:
 	//------------------------------------------------------------------------------
 
-	// Helper function for reading in values of integers.
+	/*// Helper function for reading in values of integers.
 	// Params:
 	//   file = The file stream to read from.
 	//   name = The text to look for before reading the value.
@@ -95,7 +105,7 @@ private:
 	// Returns:
 	//   A pointer to the dynamically allocated array if the data is valid, nullptr otherwise.
 	static int** ReadArrayVariable(std::ifstream& file, const std::string& name, 
-		unsigned columns, unsigned rows);
+		unsigned columns, unsigned rows);*/
 
 	//------------------------------------------------------------------------------
 	// Private Variables:
@@ -109,6 +119,7 @@ private:
 
 	// The map data (a 2D array)
 	int** data;
+	//std::vector<std::vector<int>> data;
 
 	// Relative path for tilemaps
 	static std::string mapPath;

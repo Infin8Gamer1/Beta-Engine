@@ -19,10 +19,10 @@
 
 Behaviors::CameraMovement::CameraMovement() : Component("CameraMovement")
 {
-	up = 'w';
-	down = 's';
-	left = 'a';
-	right = 'd';
+	up = 'W';
+	down = 'S';
+	left = 'A';
+	right = 'D';
 	speed = 10.0f;
 }
 

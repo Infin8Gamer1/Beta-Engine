@@ -133,6 +133,8 @@ private:
 
 	std::string SpriteSourcesFilePath = "Assets/SpriteSources/";
 
+	std::string TileMapsFilePath = "Assets/TileMaps/";
+
 };
 
 //------------------------------------------------------------------------------

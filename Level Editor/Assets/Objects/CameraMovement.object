@@ -7,6 +7,6 @@ CameraMovement
 	DOWN : S
 	LEFT : A
 	RIGHT : D
-	Speed : 10.0
+	Speed : 5.0
   }
 }

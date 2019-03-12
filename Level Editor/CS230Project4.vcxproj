@@ -114,6 +114,7 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Source\TileMapBrush.cpp" />
     <ClCompile Include="Source\TimedDeath.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -124,6 +125,7 @@ xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\ScreenWrap.h" />
     <ClInclude Include="Source\stdafx.h" />
+    <ClInclude Include="Source\TileMapBrush.h" />
     <ClInclude Include="Source\TimedDeath.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

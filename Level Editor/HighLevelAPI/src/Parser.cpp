@@ -76,3 +76,57 @@ void Parser::CheckFileOpen()
 		throw ParseException(filename, "Filestream isn't open! ERROR 3");
 	}
 }
+
+// Reads the value of a variable with the given name from the currently open file.
+void Parser::Write2DArrayVariable(const std::string& name, int** variable, const int columns, const int rows) {
+	CheckFileOpen();
+
+	for (unsigned i = 0; i < indentLevel; i++)
+	{
+		stream << tab;
+	}
+
+	stream << name << " : ";
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			stream << variable[j][i] << " ";
+		}
+	}
+
+	stream << std::endl;
+}
+
+// Reads the value of a variable with the given name from the currently open file.
+void Parser::Read2DArrayVariable(const std::string& name, int**& variable, int columns, int rows) {
+	CheckFileOpen();
+
+	//Create a string variable and use the input operator (>>) to place the next word in the stream into it.
+	std::string word;
+	stream >> word;
+
+	//If the contents of the string don't match the name parameter, throw a ParseException, passing it the name and filename.
+	if (word != name) {
+		throw ParseException(filename, "the name " + name + "didn't match " + word + ". ERROR 1");
+	}
+
+	//skip forward in the stream to after the next colon character
+	ReadSkip(":");
+
+	//make a new 2D int array
+	variable = new int *[columns];
+	for (int r = 0; r < columns; ++r)
+	{
+		variable[r] = new int[rows];
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			stream >> variable[j][i];
+		}
+	}
+}

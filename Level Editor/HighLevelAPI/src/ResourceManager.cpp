@@ -234,7 +234,13 @@ const Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, boo
 	}
 
 	if (createIfNotFound) {
-		Tilemap* map = Tilemap::CreateTilemapFromFile(tilemapName);
+		Parser* parser = new Parser(TileMapsFilePath + tilemapName + ".tileMap", std::fstream::in);
+
+		Tilemap* map = new Tilemap(tilemapName); //Tilemap::CreateTilemapFromFile(tilemapName);
+
+		map->Deserialize(*parser);
+
+		map->Print();
 
 		if (map == nullptr)
 		{

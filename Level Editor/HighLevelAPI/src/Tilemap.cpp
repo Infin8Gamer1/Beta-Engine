@@ -14,6 +14,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <Parser.h>
 
 Tilemap::Tilemap(unsigned _numColumns, unsigned _numRows, int ** _data)
 {
@@ -23,7 +24,16 @@ Tilemap::Tilemap(unsigned _numColumns, unsigned _numRows, int ** _data)
 
 	// The map data (a 2D array)
 	data = _data;
-		
+}
+
+Tilemap::Tilemap(std::string _name)
+{
+	name = _name;
+
+	numColumns = 0;
+	numRows = 0;
+
+	data = nullptr;
 }
 
 Tilemap::~Tilemap()
@@ -60,99 +70,72 @@ int Tilemap::GetCellValue(unsigned column, unsigned row) const
 	return data[column][row];
 }
 
-Tilemap * Tilemap::CreateTilemapFromFile(const std::string & filename)
-{
-	std::ifstream infile(filename);
-	if (!infile.is_open()) 
-	{ 
-		std::cout << "Can't open file '" + filename + "'." << std::endl;
-		return nullptr;
+void Tilemap::SetCellValue(int column, int row, int newValue) const {
+	//if given row or column is outside of the array then just return
+	if ((column >= numColumns || column < 0) || (row >= numRows || row < 0)) {
+		return;
 	}
-	
-	int rows = -1;
-	int columns = -1;
 
-	ReadIntegerVariable(infile, "width", columns);
-	ReadIntegerVariable(infile, "height", rows);
+	data[column][row] = newValue;
 
-	int** data = ReadArrayVariable(infile, "data", columns, rows);
+	/*//loop through each value in the 2D array of tiles and print out its value
+	for (unsigned r = 0; r < GetHeight(); r++)
+	{
+		for (unsigned c = 0; c < GetWidth(); c++)
+		{
+			std::cout << GetCellValue(c, r) << " ";
+		}
+		std::cout << std::endl;
+	}*/
+}
 
-	Tilemap* output = new Tilemap(columns, rows, data);
+void Tilemap::Deserialize(Parser & parser)
+{
+	parser.ReadSkip(name);
+	parser.ReadSkip("{");
 
-	output->setName(filename);
+	parser.ReadVariable("width", numColumns);
+	parser.ReadVariable("height", numRows);
 
-	infile.close();
+	parser.Read2DArrayVariable("data", data, numColumns, numRows);
 
+	parser.ReadSkip("}");
+}
+
+void Tilemap::Serialize(Parser & parser) const
+{
+	parser.WriteValue(name);
+
+	parser.BeginScope();
+
+	parser.WriteVariable("width", numColumns);
+	parser.WriteVariable("height", numRows);
+
+	parser.Write2DArrayVariable("data", data, numColumns, numRows);
+
+	parser.EndScope();
+}
+
+void Tilemap::Print()
+{
 	//print out data from tilemap to check if it was read sucessfully
-	std::cout << "Height : " << output->GetHeight() << std::endl;
-	std::cout << "Width : " << output->GetWidth() << std::endl;
+	std::cout << "Height : " << GetHeight() << std::endl;
+	std::cout << "Width : " << GetWidth() << std::endl;
 	
 	//loop through each value in the 2D array of tiles and print out its value
-	for (unsigned r = 0; r < output->GetHeight(); r++)
+	for (unsigned r = 0; r < GetHeight(); r++)
 	{
-		for (unsigned c = 0; c < output->GetWidth(); c++)
+		for (unsigned c = 0; c < GetWidth(); c++)
 		{
-			std::cout << output->GetCellValue(c, r) << "   ";
+			std::cout << GetCellValue(c, r) << " ";
 		}
 		std::cout << std::endl;
 	}
-	
-	return output;
 }
 
 std::string Tilemap::GetName() const
 {
 	return name;
-}
-
-bool Tilemap::ReadIntegerVariable(std::ifstream & file, const std::string & name, int & variable)
-{
-	std::string str;
-	//read name
-	file >> str;
-	//if correct name then return true and put stuff in variable
-	if (str == name) {
-		file >> variable;
-		return true;
-	}
-	//we didn't find it and we are failures!
-	return false;
-}
-
-int ** Tilemap::ReadArrayVariable(std::ifstream & file, const std::string & name, unsigned columns, unsigned rows)
-{
-
-	std::string str;
-	//read name
-	file >> str;
-
-	if (str != name) {
-		return nullptr;
-	}
-
-	//make a new 2D int array
-	int ** data = new int *[columns];
-	for (unsigned r = 0; r < columns; ++r)
-	{
-		//warning creates memory leak!
-		//TODO: FIX MEMORY LEAK FROM THIS!
-		data[r] = new int[rows];
-	}
-
-	//loop through each value in the 2D array of tiles and set each one to the correct one here
-	for (unsigned r = 0; r < rows; r++)
-	{
-		for (unsigned c = 0; c < columns; c++)
-		{
-			//read the next int
-			int value;
-			file >> value;
-			//set that value in output
-			data[c][r] = value;
-		}
-	}
-
-	return data;
 }
 
 void Tilemap::setName(std::string _name)
