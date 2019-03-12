@@ -31,7 +31,12 @@
 #include <Engine.h>
 #include <SoundManager.h>
 #include <Random.h>
+<<<<<<< HEAD
 #include <Graphics.h>
+=======
+#include "MenuController.h"
+#include "Tab.h"
+>>>>>>> 9e030bda733cc634e12f13bf41d7fe1087b577f3
 
 Levels::LevelEditorUI::LevelEditorUI() : Level("UI")
 {
@@ -46,15 +51,17 @@ void Levels::LevelEditorUI::Load()
 
 	////Register Custom Components
 	GameObjectFactory::GetInstance().RegisterComponent<Menu>();
+    GameObjectFactory::GetInstance().RegisterComponent<MenuController>();
+    GameObjectFactory::GetInstance().RegisterComponent<Tab>();
 }
 
 void Levels::LevelEditorUI::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
 
-	GameObject* Menu = GameObjectFactory::GetInstance().CreateObject("Menu");
+	GameObject* MenuController = GameObjectFactory::GetInstance().CreateObject("MenuController");
     
-	GetSpace()->GetObjectManager().AddObject(*Menu);
+	GetSpace()->GetObjectManager().AddObject(*MenuController);
 }
 
 void Levels::LevelEditorUI::Update(float dt)

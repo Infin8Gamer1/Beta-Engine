@@ -17,6 +17,7 @@
 //------------------------------------------------------------------------------
 
 #include <Component.h> // base class
+#include <Vector>
 
 //------------------------------------------------------------------------------
 
@@ -32,29 +33,29 @@ class Vector2D;
 // Public Structures:
 //------------------------------------------------------------------------------
 
-class Menu : public Component
+class MenuController : public Component
 {
 public:
     //------------------------------------------------------------------------------
     // Public Functions:
     //------------------------------------------------------------------------------
 
-	Menu();
+    MenuController();
 
-	// Clone a component and return a pointer to the cloned component.
-		// Returns:
-		//   A pointer to a dynamically allocated clone of the component.
-	Component* Clone() const override;
+    // Clone a component and return a pointer to the cloned component.
+    // Returns:
+    //   A pointer to a dynamically allocated clone of the component.
+    Component* Clone() const override;
 
-	// Write object data to file
-	// Params:
-	//   parser = The parser that is writing this object to a file.
-	void Serialize(Parser& parser) const override;
+    // Write object data to file
+    // Params:
+    //   parser = The parser that is writing this object to a file.
+    void Serialize(Parser& parser) const override;
 
-	// Read object data from a file
-	// Params:
-	//   parser = The parser that is reading this object's data from a file.
-	void Deserialize(Parser& parser) override;
+    // Read object data from a file
+    // Params:
+    //   parser = The parser that is reading this object's data from a file.
+    void Deserialize(Parser& parser) override;
 
     // Initialize this component (happens at object creation).
     void Initialize() override;
@@ -64,15 +65,9 @@ public:
     //   dt = The (fixed) change in time since the last step.
     void Update(float dt) override;
 
-    void SetTab(GameObject* tab_);
+    void ToggleMenus();
 
-    GameObject* GetTab();
-
-    GameObject* GetMenuController();
-
-    void SetMenuController(GameObject* controller_);
-
-    bool IsShown();
+    void ShowMenu(GameObject* menu);
 
 private:
 
@@ -80,8 +75,6 @@ private:
     // Private Variables:
     //------------------------------------------------------------------------------
 
-    GameObject* tab;
-    GameObject* menuController;
-
-    bool isShown;
+    int menuCount;
+    std::vector<GameObject*> menus;
 };

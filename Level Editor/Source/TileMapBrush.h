@@ -67,6 +67,10 @@ public:
 	//   parser = The parser that is reading this object's data from a file.
 	void Deserialize(Parser& parser) override;
 
+    void Enable();
+
+    void Disable();
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Variables:
@@ -76,6 +80,8 @@ private:
 	Tilemap* map;
 
 	int SelectedTileID;
+
+    bool enabled;
 };
 
 
