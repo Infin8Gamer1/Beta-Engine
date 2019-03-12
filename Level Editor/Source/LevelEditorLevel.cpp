@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	Omega.cpp
+// File Name:	LevelEditorLevel.cpp
 // Author(s):	Jacob Holyfield
 // Project:		BetaEngine
 // Course:		CS230
@@ -35,6 +35,7 @@
 #include <Engine.h>
 #include <SoundManager.h>
 #include <Random.h>
+#include <SpaceManager.h>
 
 Levels::LevelEditorLevel::LevelEditorLevel() : Level("LevelEditor")
 {
@@ -49,15 +50,7 @@ void Levels::LevelEditorLevel::Load()
 
 	System::GetInstance().SetWindowTitle(WindowTitle);
 
-	//setup the UI Space
-	uiSpace = new Space("UISpace");
-	uiSpace->SetLevel(new Levels::LevelEditorUI());
-	Engine::GetInstance().AddModule(uiSpace);
-
 	////Register Custom Components
-	//GameObjectFactory::GetInstance().RegisterComponent<Behaviors::TimedDeath>();
-	//GameObjectFactory::GetInstance().RegisterComponent<Behaviors::Bullet>();
-	//GameObjectFactory::GetInstance().RegisterComponent<Behaviors::PlayerShip>();
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::CameraMovement>();
 
 	//GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Bullet"));
@@ -83,26 +76,8 @@ void Levels::LevelEditorLevel::Initialize()
 	GameObject* circle = GameObjectFactory::GetInstance().CreateObject("Circle");
 	GetSpace()->GetObjectManager().AddObject(*circle);
 
-	////arena setup
-	//GameObject* walls = GameObjectFactory::GetInstance().CreateObject("Walls");
-	//GetSpace()->GetObjectManager().AddObject(*walls);
-
-	//GameObject* Line = GameObjectFactory::GetInstance().CreateObject("Line");
-	//GetSpace()->GetObjectManager().AddObject(*Line);
-
-	//GameObject* text = GameObjectFactory::GetInstance().CreateObject("ScoreText");
-	//scoreText = text->GetComponent<SpriteText>();
-	//GetSpace()->GetObjectManager().AddObject(*text);
-
-	//GameObject* instructionText = GameObjectFactory::GetInstance().CreateObject("Instructions");
-	//GetSpace()->GetObjectManager().AddObject(*instructionText);
-
-	//GameObject* Ship = GameObjectFactory::GetInstance().CreateObject("Ship");
-	//playerShip = Ship->GetComponent<Behaviors::PlayerShip>();
-	//GetSpace()->GetObjectManager().AddObject(*Ship);
-
 	//play background music
-	musicChannel = soundManager->PlaySound("Asteroid Field");
+	//musicChannel = soundManager->PlaySound("Asteroid Field");
 }
 
 void Levels::LevelEditorLevel::Update(float dt)
@@ -121,8 +96,6 @@ void Levels::LevelEditorLevel::Shutdown()
 void Levels::LevelEditorLevel::Unload()
 {
 	std::cout << GetName() << "::Unload" << std::endl;
-
-	ResourceManager::GetInstance().Shutdown();
 
 	soundManager->Shutdown();
 }

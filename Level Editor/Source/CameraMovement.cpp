@@ -15,6 +15,7 @@
 #include <Graphics.h>
 #include <Input.h>
 #include <Parser.h>
+#include <Camera.h>
 
 Behaviors::CameraMovement::CameraMovement() : Component("CameraMovement")
 {

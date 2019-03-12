@@ -16,8 +16,7 @@
 // Include Files:
 //------------------------------------------------------------------------------
 
-#include "Component.h" // base class
-#include "GameObject.h"
+#include <Component.h> // base class
 
 //------------------------------------------------------------------------------
 
@@ -25,9 +24,9 @@
 // Forward Declarations:
 //------------------------------------------------------------------------------
 
-typedef class Transform Transform;
-typedef class Physics Physics;
-typedef class Vector2D Vector2D;
+class Transform;
+class Physics;
+class Vector2D;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -39,6 +38,13 @@ public:
     //------------------------------------------------------------------------------
     // Public Functions:
     //------------------------------------------------------------------------------
+
+	Menu();
+
+	// Clone a component and return a pointer to the cloned component.
+		// Returns:
+		//   A pointer to a dynamically allocated clone of the component.
+	Component* Clone() const override;
 
     // Initialize this component (happens at object creation).
     void Initialize() override;
@@ -62,7 +68,5 @@ private:
     // Private Variables:
     //------------------------------------------------------------------------------
 
-    GameObject tab;
-
-
+    GameObject* tab;
 };

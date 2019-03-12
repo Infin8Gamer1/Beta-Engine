@@ -15,22 +15,29 @@
 #include "GameObjectManager.h"
 #include <GameObjectFactory.h>
 #include <ResourceManager.h>
+#include <Graphics.h>
+#include <Camera.h>
 
 Space::Space(const std::string & name) : BetaObject(name), objectManager(this)
 {
 	paused = false;
 	currentLevel = nullptr;
 	nextLevel = nullptr;
+	camera = new Camera();
 }
 
 Space::~Space()
 {
 	Shutdown();
+
+	delete camera;
 }
 
 void Space::Update(float dt)
 {
 	//std::cout << "Space::Update" << std::endl;
+
+	Graphics::GetInstance().SetCurrentCamera(*camera);
 
 	if (nextLevel != nullptr) {
 		ChangeLevel();

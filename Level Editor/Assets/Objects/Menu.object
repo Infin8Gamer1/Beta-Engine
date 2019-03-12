@@ -1,0 +1,19 @@
+Menu
+{
+  numComponents : 3
+  Transform
+  {
+    translation : { 0, 0 }
+    rotation : 0
+    scale : { 300, 720 }
+  }
+  Sprite
+  {
+    frameIndex : 0
+    color : { 1 , 1 , 1 , 1 }
+	spriteSourceName : Empty
+  }
+  Menu
+  {
+  }
+}

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	Omega.cpp
+// File Name:	LevelEditorUI.cpp
 // Author(s):	Jacob Holyfield
 // Project:		BetaEngine
 // Course:		CS230
@@ -14,11 +14,9 @@
 #include "LevelEditorUI.h"
 
 //Components
-#include "ScreenWrap.h"
-#include "TimedDeath.h"
 #include <SpriteText.h>
 #include <Transform.h>
-#include <Physics.h>
+#include "Menu.h"
 
 //Resources
 #include <Mesh.h>
@@ -44,42 +42,20 @@ void Levels::LevelEditorUI::Load()
 	std::cout << GetName() << "::Load" << std::endl;
 
 	////Register Custom Components
-	//GameObjectFactory::GetInstance().RegisterComponent<Behaviors::TimedDeath>();
-	//GameObjectFactory::GetInstance().RegisterComponent<Behaviors::Bullet>();
-	//GameObjectFactory::GetInstance().RegisterComponent<Behaviors::PlayerShip>();
-	//GameObjectFactory::GetInstance().RegisterComponent<Behaviors::Asteroid>();
-
-	//GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Bullet"));
-
-	//GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Asteroid"));
+	GameObjectFactory::GetInstance().RegisterComponent<Menu>();
 }
 
 void Levels::LevelEditorUI::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
 
-	////arena setup
-	//GameObject* walls = GameObjectFactory::GetInstance().CreateObject("Walls");
-	//GetSpace()->GetObjectManager().AddObject(*walls);
-
-	//GameObject* Line = GameObjectFactory::GetInstance().CreateObject("Line");
-	//GetSpace()->GetObjectManager().AddObject(*Line);
-
-	//GameObject* text = GameObjectFactory::GetInstance().CreateObject("ScoreText");
-	//scoreText = text->GetComponent<SpriteText>();
-	//GetSpace()->GetObjectManager().AddObject(*text);
-
-	//GameObject* instructionText = GameObjectFactory::GetInstance().CreateObject("Instructions");
-	//GetSpace()->GetObjectManager().AddObject(*instructionText);
-
-	//GameObject* Ship = GameObjectFactory::GetInstance().CreateObject("Ship");
-	//playerShip = Ship->GetComponent<Behaviors::PlayerShip>();
-	//GetSpace()->GetObjectManager().AddObject(*Ship);
+	GameObject* Rectangle = GameObjectFactory::GetInstance().CreateObject("Menu");
+	GetSpace()->GetObjectManager().AddObject(*Rectangle);
 }
 
 void Levels::LevelEditorUI::Update(float dt)
 {
-
+	UNREFERENCED_PARAMETER(dt);
 }
 
 void Levels::LevelEditorUI::Shutdown()

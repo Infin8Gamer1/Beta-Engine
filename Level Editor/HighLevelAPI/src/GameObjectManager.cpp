@@ -14,8 +14,6 @@
 #include "Space.h"
 #include "GameObject.h"
 #include "Collider.h"
-#include <GameObjectFactory.h>
-#include <ResourceManager.h>
 
 GameObjectManager::GameObjectManager(Space * space) : BetaObject("ObjectManager", space)
 {
@@ -26,12 +24,6 @@ GameObjectManager::~GameObjectManager()
 {
 	Shutdown();
 	Unload();
-
-	GameObjectFactory* GOFactory = &GameObjectFactory::GetInstance();
-	delete GOFactory;
-
-	ResourceManager* ReManager = &ResourceManager::GetInstance();
-	delete ReManager;
 }
 
 void GameObjectManager::Update(float dt)

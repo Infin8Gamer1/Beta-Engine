@@ -46,7 +46,7 @@ GameObjectFactory::GameObjectFactory()
 }
 
 GameObjectFactory::~GameObjectFactory()
-{
+{	
 	std::vector<Component*>::iterator i;
 
 	for (i = registeredComponents.begin(); i != registeredComponents.end(); ++i)

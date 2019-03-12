@@ -20,10 +20,12 @@
 
 // Engine modules
 #include "Space.h"
-#include "SoundManager.h"
+#include <SoundManager.h>
+#include <SpaceManager.h>
 
 // Initial game state
 #include "LevelEditorLevel.h"
+#include "LevelEditorUI.h"
 
 //------------------------------------------------------------------------------
 
@@ -44,12 +46,20 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	UNREFERENCED_PARAMETER(show);
 	UNREFERENCED_PARAMETER(instance);
 
-	// Create a new space called "GameSpace"
-	Space* space = new Space("LevelSpace");
+	// Create a new space called "Level"
+	Space* space = new Space("Level");
 	// Set initial level to the second level.
 	space->SetLevel(new Levels::LevelEditorLevel());
-	// Add Game Space
-	Engine::GetInstance().AddModule(space);
+
+	//setup the UI Space
+	Space* uiSpace = new Space("UI");
+	uiSpace->SetLevel(new Levels::LevelEditorUI());
+
+	SpaceManager* spaceManager = new SpaceManager();
+	spaceManager->AddSpace(*space);
+	spaceManager->AddSpace(*uiSpace);
+
+	Engine::GetInstance().AddModule(spaceManager);
 
 	// Add Sound Manager
 	Engine::GetInstance().AddModule(new SoundManager());

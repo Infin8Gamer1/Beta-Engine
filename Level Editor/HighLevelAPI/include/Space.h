@@ -25,6 +25,7 @@
 //------------------------------------------------------------------------------
 
 class Level;
+class Camera;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -77,12 +78,6 @@ public:
 		SetLevel(new T());
 	}
 
-	// Sets the level that the space is using after unloading the current level.
-	// Template params:
-	//   LevelType = The next level that the space will be using.
-	//template <class LevelType>
-	//void SetLevel()
-
 	// Restarts the current level (next level = current)
 	void RestartLevel();
 	
@@ -105,6 +100,7 @@ private:
 	Level* currentLevel;
 	Level* nextLevel;
 	GameObjectManager objectManager;
+	Camera* camera;
 };
 
 //------------------------------------------------------------------------------

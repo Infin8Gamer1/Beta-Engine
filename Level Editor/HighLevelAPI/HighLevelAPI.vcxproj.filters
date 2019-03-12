@@ -121,6 +121,9 @@
     <ClInclude Include="include\ColliderLine.h">
       <Filter>Collisions</Filter>
     </ClInclude>
+    <ClInclude Include="include\SpaceManager.h">
+      <Filter>Levels</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
@@ -206,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="include\ColliderLine.cpp">
       <Filter>Collisions</Filter>
+    </ClCompile>
+    <ClCompile Include="include\SpaceManager.cpp">
+      <Filter>Levels</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

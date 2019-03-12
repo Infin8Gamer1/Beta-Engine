@@ -108,6 +108,7 @@
     <ClInclude Include="include\Serializable.h" />
     <ClInclude Include="include\SoundManager.h" />
     <ClInclude Include="include\Space.h" />
+    <ClInclude Include="include\SpaceManager.h" />
     <ClInclude Include="include\Sprite.h" />
     <ClInclude Include="include\SpriteSource.h" />
     <ClInclude Include="include\SpriteText.h" />
@@ -118,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="include\ColliderLine.cpp" />
+    <ClCompile Include="include\SpaceManager.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Collider.cpp" />
     <ClCompile Include="src\ColliderCircle.cpp" />
