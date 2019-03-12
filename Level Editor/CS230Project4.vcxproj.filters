@@ -52,6 +52,15 @@
     <ClCompile Include="Source\TileMapBrush.cpp">
       <Filter>Game\Behaviors\LevelEdit</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Button.cpp">
+      <Filter>Game\Behaviors\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Tab.cpp">
+      <Filter>Game\Behaviors\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MenuController.cpp">
+      <Filter>Game\Behaviors\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -80,6 +89,15 @@
     </ClInclude>
     <ClInclude Include="Source\TileMapBrush.h">
       <Filter>Game\Behaviors\LevelEdit</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Button.h">
+      <Filter>Game\Behaviors\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tab.h">
+      <Filter>Game\Behaviors\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MenuController.h">
+      <Filter>Game\Behaviors\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

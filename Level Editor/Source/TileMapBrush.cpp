@@ -47,6 +47,16 @@ void TileMapBrush::Deserialize(Parser & parser)
 	parser.ReadVariable("SelectedTileID", SelectedTileID);
 }
 
+void TileMapBrush::Enable()
+{
+    enabled = true;
+}
+
+void TileMapBrush::Disable()
+{
+    enabled = false;
+}
+
 void TileMapBrush::PlaceTile(Vector2D MousePos)
 {
 	ColliderTilemap* CT = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("TileMap")->GetComponent<ColliderTilemap>();

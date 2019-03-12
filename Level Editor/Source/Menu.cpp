@@ -7,9 +7,9 @@
 #include "GameObject.h"
 #include "Transform.h"
 #include "Physics.h"
-#include "GameObject.h"
 #include "GameObjectFactory.h"
 #include "Space.h"
+#include "Tab.h"
 
 Menu::Menu() : Component("Menu")
 {
@@ -18,7 +18,7 @@ Menu::Menu() : Component("Menu")
 
 Component * Menu::Clone() const
 {
-	return new Menu();
+	return new Menu(*this);
 }
 
 void Menu::Serialize(Parser & parser) const
@@ -31,43 +31,18 @@ void Menu::Deserialize(Parser & parser)
 
 void Menu::Initialize()
 {
-    GameObject* Tab = GameObjectFactory::GetInstance().CreateObject("Tab");
-    SetTab(Tab);
+    GameObject* newTab = GameObjectFactory::GetInstance().CreateObject("Tab");
+    SetTab(newTab);
+    tab->GetComponent<Tab>()->SetMenu(GetOwner());
 
-    GetOwner()->GetSpace()->GetObjectManager().AddObject(*Tab);
+    Vector2D pos = Vector2D(GetOwner()->GetComponent<Transform>()->GetTranslation().x - GetOwner()->GetComponent<Transform>()->GetTranslation().x / 2.0f, 0.0f);
+
+    tab->GetComponent<Transform>()->SetTranslation(pos);
+
+    GetOwner()->GetSpace()->GetObjectManager().AddObject(*newTab);
 }
 
 void Menu::Update(float dt)
-{
-    if (IsTabClickedOn())
-    {
-        //timer += dt;
-        ToggleTab();
-    }
-}
-
-Vector2D Menu::GetMousePosition()
-{
-    Vector2D mousepos = Input::GetInstance().GetCursorPosition();
-    return Graphics::GetInstance().ScreenToWorldPosition(mousepos, &Graphics::GetInstance().GetCurrentCamera());
-}
-
-//dont forget to actualy check if the left mouse has been clicked too //DURRRRR, forgot .-.
-bool Menu::IsTabClickedOn()
-{
-    Vector2D pos = GetMousePosition();
-    Transform* tran = tab->GetComponent<Transform>();
-
-    BoundingRectangle rect = BoundingRectangle(tran->GetTranslation(), tran->GetScale() / 2.0f);
-    if (PointRectangleIntersection(pos, rect))
-    {
-        return true;
-    }
-
-    return false;
-}
-
-void Menu::ToggleTab()
 {
     
 }
@@ -80,4 +55,19 @@ void Menu::SetTab(GameObject* tab_)
 GameObject* Menu::GetTab()
 {
     return tab;
+}
+
+GameObject * Menu::GetMenuController()
+{
+    return menuController;
+}
+
+void Menu::SetMenuController(GameObject * controller_)
+{
+    menuController = controller_;
+}
+
+bool Menu::IsShown()
+{
+    return isShown;
 }

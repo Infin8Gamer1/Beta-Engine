@@ -64,17 +64,15 @@ public:
     //   dt = The (fixed) change in time since the last step.
     void Update(float dt) override;
 
-    // Get Muse Pos
-    Vector2D GetMousePosition();
-
-    //Check if clicked on
-    bool IsTabClickedOn();
-
-    void ToggleTab();
-
     void SetTab(GameObject* tab_);
 
     GameObject* GetTab();
+
+    GameObject* GetMenuController();
+
+    void SetMenuController(GameObject* controller_);
+
+    bool IsShown();
 
 private:
 
@@ -83,4 +81,7 @@ private:
     //------------------------------------------------------------------------------
 
     GameObject* tab;
+    GameObject* menuController;
+
+    bool isShown;
 };
