@@ -13,20 +13,16 @@
     <Filter Include="Game\Behaviors">
       <UniqueIdentifier>{30b4313e-2f34-40ba-9613-d250bab122eb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Behaviors\UI">
+      <UniqueIdentifier>{cc62bbbb-6a5c-4d49-a444-46fc767a0280}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Behaviors\Utils">
+      <UniqueIdentifier>{d18abd17-deda-4e4d-a433-4f35e6d54fda}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <Filter>Precompiled</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TimedDeath.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ColorChange.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ScreenWrap.cpp">
-      <Filter>Game\Behaviors</Filter>
     </ClCompile>
     <ClCompile Include="Source\LevelEditorLevel.cpp">
       <Filter>Game\Levels</Filter>
@@ -34,20 +30,26 @@
     <ClCompile Include="Source\LevelEditorUI.cpp">
       <Filter>Game\Levels</Filter>
     </ClCompile>
-    <ClCompile Include="Source\CameraMovement.cpp" />
+    <ClCompile Include="Source\CameraMovement.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Menu.cpp">
+      <Filter>Game\Behaviors\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ColorChange.cpp">
+      <Filter>Game\Behaviors\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ScreenWrap.cpp">
+      <Filter>Game\Behaviors\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TimedDeath.cpp">
+      <Filter>Game\Behaviors\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
       <Filter>Precompiled</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TimedDeath.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ColorChange.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ScreenWrap.h">
-      <Filter>Game\Behaviors</Filter>
     </ClInclude>
     <ClInclude Include="Source\LevelEditorLevel.h">
       <Filter>Game\Levels</Filter>
@@ -55,6 +57,20 @@
     <ClInclude Include="Source\LevelEditorUI.h">
       <Filter>Game\Levels</Filter>
     </ClInclude>
-    <ClInclude Include="Source\CameraMovement.h" />
+    <ClInclude Include="Source\CameraMovement.h">
+      <Filter>Game\Behaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Menu.h">
+      <Filter>Game\Behaviors\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ColorChange.h">
+      <Filter>Game\Behaviors\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ScreenWrap.h">
+      <Filter>Game\Behaviors\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TimedDeath.h">
+      <Filter>Game\Behaviors\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
