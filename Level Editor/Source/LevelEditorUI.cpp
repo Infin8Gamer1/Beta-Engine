@@ -49,8 +49,9 @@ void Levels::LevelEditorUI::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
 
-	GameObject* Rectangle = GameObjectFactory::GetInstance().CreateObject("Menu");
-	GetSpace()->GetObjectManager().AddObject(*Rectangle);
+	GameObject* Menu = GameObjectFactory::GetInstance().CreateObject("Menu");
+    
+	GetSpace()->GetObjectManager().AddObject(*Menu);
 }
 
 void Levels::LevelEditorUI::Update(float dt)

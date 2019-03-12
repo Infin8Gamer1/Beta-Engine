@@ -7,6 +7,9 @@
 #include "GameObject.h"
 #include "Transform.h"
 #include "Physics.h"
+#include "GameObject.h"
+#include "GameObjectFactory.h"
+#include "Space.h"
 
 Menu::Menu() : Component("Menu")
 {
@@ -28,11 +31,19 @@ void Menu::Deserialize(Parser & parser)
 
 void Menu::Initialize()
 {
+    GameObject* Tab = GameObjectFactory::GetInstance().CreateObject("Tab");
+    SetTab(Tab);
+
+    GetOwner()->GetSpace()->GetObjectManager().AddObject(*Tab);
 }
 
 void Menu::Update(float dt)
 {
-
+    if (IsTabClickedOn())
+    {
+        timer += dt;
+        ToggleTab();
+    }
 }
 
 Vector2D Menu::GetMousePosition()
@@ -41,7 +52,7 @@ Vector2D Menu::GetMousePosition()
     return Graphics::GetInstance().ScreenToWorldPosition(mousepos, &Graphics::GetInstance().GetCurrentCamera());
 }
 
-//dont forget to auctualy check if the left mouse has been clicked too
+//dont forget to actualy check if the left mouse has been clicked too //DURRRRR, forgot .-.
 bool Menu::IsTabClickedOn()
 {
     Vector2D pos = GetMousePosition();
@@ -58,4 +69,15 @@ bool Menu::IsTabClickedOn()
 
 void Menu::ToggleTab()
 {
+    
+}
+
+void Menu::SetTab(GameObject* tab_)
+{
+    tab = tab_;
+}
+
+GameObject* Menu::GetTab()
+{
+    return tab;
 }

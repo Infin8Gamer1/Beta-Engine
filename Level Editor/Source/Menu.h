@@ -72,6 +72,10 @@ public:
 
     void ToggleTab();
 
+    void SetTab(GameObject* tab_);
+
+    GameObject* GetTab();
+
 private:
 
     //------------------------------------------------------------------------------
