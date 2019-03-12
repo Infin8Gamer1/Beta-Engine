@@ -57,7 +57,7 @@ public:
 	// Sets the tilemap data that will be used by the sprite.
 	// Params:
 	//   map = A pointer to the tilemap resource.
-	void SetTilemap(const Tilemap* map);
+	void SetTilemap(Tilemap* map);
 
 private:
 	//------------------------------------------------------------------------------
@@ -65,7 +65,7 @@ private:
 	//------------------------------------------------------------------------------
 
 	// The tilemap
-	const Tilemap* map;
+	Tilemap* map;
 };
 
 //------------------------------------------------------------------------------

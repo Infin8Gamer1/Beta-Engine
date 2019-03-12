@@ -23,6 +23,9 @@ Behaviors::CameraMovement::CameraMovement() : Component("CameraMovement")
 	down = 'S';
 	left = 'A';
 	right = 'D';
+	in = 'E';
+	out = 'Q';
+	zoomSpeed = 1.0f;
 	speed = 10.0f;
 }
 
@@ -51,8 +54,9 @@ void Behaviors::CameraMovement::Serialize(Parser & parser) const
 
 void Behaviors::CameraMovement::Update(float dt)
 {
-	
+
 	Vector2D cameraTranslation = Graphics::GetInstance().GetCurrentCamera().GetTranslation();
+	float cameraFOV = Graphics::GetInstance().GetCurrentCamera().GetFOV();
 
 	if (Input::GetInstance().IsKeyDown(up))
 	{
@@ -72,5 +76,15 @@ void Behaviors::CameraMovement::Update(float dt)
 	if (Input::GetInstance().IsKeyDown(right))
 	{
 		Graphics::GetInstance().GetCurrentCamera().SetTranslation(cameraTranslation + Vector2D(speed, 0));
+	}
+
+	if (Input::GetInstance().IsKeyDown(in))
+	{
+		Graphics::GetInstance().GetCurrentCamera().SetFOV(cameraFOV - zoomSpeed);
+	}
+
+	if (Input::GetInstance().IsKeyDown(out))
+	{
+		Graphics::GetInstance().GetCurrentCamera().SetFOV(cameraFOV + zoomSpeed);
 	}
 }

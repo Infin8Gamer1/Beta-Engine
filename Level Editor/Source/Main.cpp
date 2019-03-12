@@ -17,6 +17,7 @@
 
 // BetaFramework Engine
 #include <Engine.h>
+#include <Graphics.h>
 
 // Engine modules
 #include "Space.h"
@@ -47,12 +48,12 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	UNREFERENCED_PARAMETER(instance);
 
 	// Create a new space called "Level"
-	Space* space = new Space("Level");
+	Space* space = new Space("Level", true);
 	// Set initial level to the second level.
 	space->SetLevel(new Levels::LevelEditorLevel());
 
 	//setup the UI Space
-	Space* uiSpace = new Space("UI");
+	Space* uiSpace = new Space("UI", false);
 	uiSpace->SetLevel(new Levels::LevelEditorUI());
 
 	SpaceManager* spaceManager = new SpaceManager();

@@ -8,6 +8,8 @@
 #include <Space.h>
 #include <GameObjectManager.h>
 #include <Parser.h>
+#include <Transform.h>
+#include <GameObject.h>
 
 TileMapBrush::TileMapBrush() : Component("TileMapBrush")
 {
@@ -27,7 +29,7 @@ void TileMapBrush::Update(float dt)
 	}
 }
 
-void TileMapBrush::SetTilemap(const Tilemap * _map)
+void TileMapBrush::SetTilemap(Tilemap * _map)
 {
 	map = _map;
 }
@@ -62,5 +64,11 @@ void TileMapBrush::PlaceTile(Vector2D MousePos)
 		return;
 	}
 
-	map->SetCellValue(tileX, tileY, SelectedTileID);
+	Vector2D offset = map->SetCellValue(tileX, tileY, SelectedTileID);
+	offset.y = offset.y * CT->GetOwner()->GetComponent<Transform>()->GetScale().y;
+	offset.x = offset.x * CT->GetOwner()->GetComponent<Transform>()->GetScale().x;
+
+	Vector2D trans = CT->GetOwner()->GetComponent<Transform>()->GetTranslation();
+
+	CT->GetOwner()->GetComponent<Transform>()->SetTranslation(trans + offset);
 }

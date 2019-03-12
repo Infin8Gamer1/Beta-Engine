@@ -70,13 +70,57 @@ int Tilemap::GetCellValue(unsigned column, unsigned row) const
 	return data[column][row];
 }
 
-void Tilemap::SetCellValue(int column, int row, int newValue) const {
+Vector2D Tilemap::SetCellValue(int column, int row, int newValue) {
 	//if given row or column is outside of the array then just return
 	if ((column >= numColumns || column < 0) || (row >= numRows || row < 0)) {
-		return;
+		int colL = 0;
+		int colR = 0;
+		int rowT = 0;
+		int rowB = 0;
+
+		if (column < 0)
+		{
+			colL = -column;
+
+			if (colL < 0) {
+				colL = 0;
+			}
+		}
+		else
+		{
+			colR = column - (numColumns - 1);
+
+			if (colR < 0) {
+				colR = 0;
+			}
+		}
+
+		if (row < 0)
+		{
+			rowT = -row;
+
+			if (rowT < 0) {
+				rowT = 0;
+			}
+		}
+		else
+		{
+			rowB = row - (numRows - 1);
+
+			if (rowB < 0) {
+				rowB = 0;
+			}
+		}
+
+		Resize(colL, colR, rowT, rowB);
+		
+		data[column + colL][row + rowT] = newValue;
+		return Vector2D(-colL, rowT);
 	}
 
 	data[column][row] = newValue;
+
+	return Vector2D();
 
 	/*//loop through each value in the 2D array of tiles and print out its value
 	for (unsigned r = 0; r < GetHeight(); r++)
@@ -131,6 +175,48 @@ void Tilemap::Print()
 		}
 		std::cout << std::endl;
 	}
+}
+
+void Tilemap::Resize(int columnLeft, int columnRight, int rowTop, int rowBottom)
+{
+	int columns = numColumns + columnLeft + columnRight;
+	int rows = numRows + rowTop + rowBottom;
+
+	//make a new 2D int array
+	int** temp = new int *[columns];
+	for (int r = 0; r < columns; ++r)
+	{
+		temp[r] = new int[rows];
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			temp[j][i] = 0;
+		}
+	}
+
+	for (int i = 0; i < numRows; i++)
+	{
+		for (int j = 0; j < numColumns; j++)
+		{
+			int value = data[j][i];
+
+			int x = j + columnLeft;
+			int y = i + rowTop;
+
+			temp[x][y] = value;
+		}
+	}
+
+	numColumns = columns;
+	numRows = rows;
+
+	delete data;
+	data = temp;
+
+	Print();
 }
 
 std::string Tilemap::GetName() const

@@ -73,6 +73,9 @@ namespace Behaviors
 		char down;
 		char left;
 		char right;
+		char in;
+		char out;
+		float zoomSpeed;
 		float speed;
 	};
 }

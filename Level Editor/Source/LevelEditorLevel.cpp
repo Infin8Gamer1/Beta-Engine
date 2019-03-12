@@ -38,6 +38,7 @@
 #include <SoundManager.h>
 #include <Random.h>
 #include <SpaceManager.h>
+#include <Graphics.h>
 
 Levels::LevelEditorLevel::LevelEditorLevel() : Level("LevelEditor")
 {
@@ -51,6 +52,7 @@ void Levels::LevelEditorLevel::Load()
 	std::cout << GetName() << "::Load" << std::endl;
 
 	System::GetInstance().SetWindowTitle(WindowTitle);
+	Graphics::GetInstance().GetCurrentCamera().Reset();
 
 	////Register Custom Components
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::CameraMovement>();

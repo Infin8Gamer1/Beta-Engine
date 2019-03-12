@@ -88,12 +88,12 @@ bool ColliderTilemap::IsCollidingWith(const Collider & other) const
 	return false;
 }
 
-void ColliderTilemap::SetTilemap(const Tilemap * _map)
+void ColliderTilemap::SetTilemap(Tilemap * _map)
 {
 	map = _map;
 }
 
-const Tilemap * ColliderTilemap::GetTilemap()
+Tilemap * ColliderTilemap::GetTilemap()
 {
 	return map;
 }

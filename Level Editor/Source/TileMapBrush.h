@@ -53,7 +53,7 @@ public:
 	//   dt = The (fixed) change in time since the last step.
 	void Update(float dt) override;
 
-	void SetTilemap(const Tilemap * _map);
+	void SetTilemap(Tilemap * _map);
 
 	void SetSelectedTile(int selectedTileID);
 
@@ -73,7 +73,7 @@ private:
 	//------------------------------------------------------------------------------
 	void PlaceTile(Vector2D mousePosition);
 
-	const Tilemap* map;
+	Tilemap* map;
 
 	int SelectedTileID;
 };

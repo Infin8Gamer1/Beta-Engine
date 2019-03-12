@@ -69,7 +69,7 @@ void SpriteTilemap::Draw()
 
 }
 
-void SpriteTilemap::SetTilemap(const Tilemap * _map)
+void SpriteTilemap::SetTilemap(Tilemap * _map)
 {
 	map = _map;
 }

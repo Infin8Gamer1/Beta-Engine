@@ -69,7 +69,7 @@ public:
 	//   or a positive integer otherwise.
 	int GetCellValue(unsigned column, unsigned row) const;
 
-	void SetCellValue(int column, int row, int newValue) const;
+	Vector2D SetCellValue(int column, int row, int newValue);
 
 	// Loads object data from a file.
 	virtual void Deserialize(Parser& parser);
@@ -81,6 +81,8 @@ public:
 	void setName(std::string _name);
 
 	void Print();
+
+	void Resize(int columnLeft, int columnRight, int rowTop, int rowBottom);
 
 private:
 	//------------------------------------------------------------------------------

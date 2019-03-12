@@ -18,12 +18,13 @@
 #include <Graphics.h>
 #include <Camera.h>
 
-Space::Space(const std::string & name) : BetaObject(name), objectManager(this)
+Space::Space(const std::string & name, bool _depth) : BetaObject(name), objectManager(this)
 {
 	paused = false;
 	currentLevel = nullptr;
 	nextLevel = nullptr;
 	camera = new Camera();
+	depth = _depth;
 }
 
 Space::~Space()
@@ -38,6 +39,8 @@ void Space::Update(float dt)
 	//std::cout << "Space::Update" << std::endl;
 
 	Graphics::GetInstance().SetCurrentCamera(*camera);
+	Graphics::GetInstance().SetDepthEnabled(depth);
+	
 
 	if (nextLevel != nullptr) {
 		ChangeLevel();

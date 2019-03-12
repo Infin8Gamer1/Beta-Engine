@@ -31,6 +31,7 @@
 #include <Engine.h>
 #include <SoundManager.h>
 #include <Random.h>
+#include <Graphics.h>
 
 Levels::LevelEditorUI::LevelEditorUI() : Level("UI")
 {
@@ -40,6 +41,8 @@ Levels::LevelEditorUI::LevelEditorUI() : Level("UI")
 void Levels::LevelEditorUI::Load()
 {
 	std::cout << GetName() << "::Load" << std::endl;
+
+	Graphics::GetInstance().GetCurrentCamera().Reset();
 
 	////Register Custom Components
 	GameObjectFactory::GetInstance().RegisterComponent<Menu>();
