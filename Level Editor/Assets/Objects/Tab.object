@@ -1,6 +1,6 @@
 Tab
 {
-  numComponents : 3
+  numComponents : 2
   Transform
   {
     translation : { 465, 0 }
@@ -11,12 +11,6 @@ Tab
   {
     frameIndex : 0
     color : { 0.5 , 1 , 1 , 0.5 }
-	spriteSourceName : Empty
-  }
-  Sprite
-  {
-    frameIndex : 0
-    color : { 1 , 1 , 1 , 0.95 }
-	spriteSourceName : Circle
+	spriteSourceName : Tab
   }
 }

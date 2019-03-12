@@ -41,7 +41,7 @@ void Menu::Update(float dt)
 {
     if (IsTabClickedOn())
     {
-        timer += dt;
+        //timer += dt;
         ToggleTab();
     }
 }
