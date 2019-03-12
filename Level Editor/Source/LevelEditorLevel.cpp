@@ -76,15 +76,15 @@ void Levels::LevelEditorLevel::Initialize()
 	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("CameraMovement");
 	GetSpace()->GetObjectManager().AddObject(*CameraMovement);
 
-	GameObject* circle = GameObjectFactory::GetInstance().CreateObject("Circle");
-	GetSpace()->GetObjectManager().AddObject(*circle);
-
 	GameObject* Tilemap = GameObjectFactory::GetInstance().CreateObject("TileMap");
 	GetSpace()->GetObjectManager().AddObject(*Tilemap);
 
 	GameObject* Brush = GameObjectFactory::GetInstance().CreateObject("Brush");
 	Brush->GetComponent<TileMapBrush>()->SetTilemap(Tilemap->GetComponent<ColliderTilemap>()->GetTilemap());
 	GetSpace()->GetObjectManager().AddObject(*Brush);
+
+	GameObject* circle = GameObjectFactory::GetInstance().CreateObject("Circle");
+	GetSpace()->GetObjectManager().AddObject(*circle);
 
 	//play background music
 	//musicChannel = soundManager->PlaySound("Asteroid Field");

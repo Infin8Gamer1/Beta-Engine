@@ -1,6 +1,6 @@
 UICircle
 {
-	textureName : UI/dotWhite.png
+	textureName : UI/dotBlue.png
     textureRows : 1
     textureColumns : 1
 	frameCount : 1
