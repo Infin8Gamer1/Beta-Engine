@@ -25,7 +25,7 @@ void TileMapBrush::Update(float dt)
 	UNREFERENCED_PARAMETER(dt);
 
 	//see if the player has clicked and has enough tiles
-	if (enabled && Input::GetInstance().CheckTriggered(VK_LBUTTON)) {
+	if (enabled && Input::GetInstance().IsKeyDown(VK_LBUTTON)) {
 		PlaceTile(Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition()));
 	}
 }
