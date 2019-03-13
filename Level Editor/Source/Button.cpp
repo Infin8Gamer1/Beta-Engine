@@ -54,7 +54,7 @@ bool Button::IsClicked()
     {
         //brush->Disable();
 		isHovered = true;
-		std::cout << "Colliding with button " << GetName() << std::endl;
+		//std::cout << "Colliding with button " << GetName() << std::endl;
         return true;
     }
 

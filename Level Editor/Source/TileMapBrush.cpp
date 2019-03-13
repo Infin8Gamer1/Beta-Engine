@@ -38,6 +38,7 @@ void TileMapBrush::SetTilemap(Tilemap * _map)
 void TileMapBrush::SetSelectedTile(int selectedTileID)
 {
 	SelectedTileID = selectedTileID;
+	std::cout << "Selected Tile : " << SelectedTileID << std::endl;
 }
 
 void TileMapBrush::Serialize(Parser & parser) const

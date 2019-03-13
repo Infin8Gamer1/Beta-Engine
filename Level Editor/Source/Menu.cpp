@@ -130,7 +130,9 @@ void Menu::InitButtons(MenuType type)
 {
 	int TileCount = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("TileMap")->GetComponent<SpriteTilemap>()->GetSpriteSource()->GetFrameCountTexture();
 
-	int rows = 3;
+	int rows = 5;
+	float xScale = 55;
+	float yScale = 65;
 
 	Transform* transform = GetOwner()->GetComponent<Transform>();
 
@@ -142,11 +144,11 @@ void Menu::InitButtons(MenuType type)
 		
 		button->GetComponent<TileButton>()->SetBrush(Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>());
 		
-		Vector2D pos = Vector2D(i / rows, i % rows);
+		Vector2D pos = Vector2D(i % rows, -(i / rows));
 
-		Vector2D offset = Vector2D(-100, 100);
+		Vector2D offset = Vector2D(-(rows * xScale / 2) + 30, 300);
 
-		button->GetComponent<Transform>()->SetTranslation(transform->GetTranslation() + (pos * 100) + offset);
+		button->GetComponent<Transform>()->SetTranslation(transform->GetTranslation() + Vector2D(pos.x * xScale, pos.y * yScale) + offset);
 
 		GetOwner()->GetSpace()->GetObjectManager().AddObject(*button);
 
