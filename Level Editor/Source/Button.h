@@ -25,7 +25,6 @@
 class Transform;
 class Physics;
 class Vector2D;
-class TileMapBrush;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -48,6 +47,8 @@ public:
     //   dt = The (fixed) change in time since the last step.
     void Update(float dt) override;
 
+	bool getIsHovered();
+
     virtual void Clicked() = 0;
 
 private:
@@ -60,5 +61,6 @@ private:
 
     bool IsClicked();
 
-	TileMapBrush* brush;
+	
+	bool isHovered;
 };

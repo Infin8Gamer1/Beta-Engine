@@ -67,10 +67,33 @@ void Menu::Initialize()
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*newTab);
 
 	InitButtons(MenuType::TileMap);
+
+	brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
 }
 
 void Menu::Update(float dt)
 {
+	bool canBrush = true;
+
+	for (size_t i = 0; i < buttons.size(); i++)
+	{
+		if (buttons[i]->GetComponent<Button>()->getIsHovered())
+		{
+			canBrush = false;
+		}
+	}
+
+	if (tab->GetComponent<Button>()->getIsHovered()) {
+		canBrush = false;
+	}
+
+	if (canBrush)
+	{
+		brush->Enable();
+	}
+	else {
+		brush->Disable();
+	}
 }
 
 void Menu::SetTab(GameObject* tab_)
@@ -121,10 +144,12 @@ void Menu::InitButtons(MenuType type)
 		
 		Vector2D pos = Vector2D(i / rows, i % rows);
 
-		Vector2D offset = Vector2D(-100, 0);
+		Vector2D offset = Vector2D(-100, 100);
 
 		button->GetComponent<Transform>()->SetTranslation(transform->GetTranslation() + (pos * 100) + offset);
 
 		GetOwner()->GetSpace()->GetObjectManager().AddObject(*button);
+
+		buttons.push_back(button);
 	}
 }

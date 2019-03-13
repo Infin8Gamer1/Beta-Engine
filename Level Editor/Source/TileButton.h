@@ -59,6 +59,4 @@ private:
 	Sprite* sprite;
 
 	int TileID;
-
-	
 };

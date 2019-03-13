@@ -28,6 +28,8 @@ class Transform;
 class Physics;
 class Vector2D;
 
+class TileMapBrush;
+
 enum MenuType
 {
 	TileMap,
@@ -95,4 +97,6 @@ private:
     GameObject* menuController;
 
     bool isShown;
+
+	TileMapBrush* brush;
 };

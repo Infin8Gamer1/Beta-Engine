@@ -21,7 +21,6 @@ Button::Button(std::string name) : Component(name)
 
 void Button::Initialize()
 {
-	brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
 }
 
 void Button::Update(float dt)
@@ -32,6 +31,11 @@ void Button::Update(float dt)
     {
         Clicked();
     }
+}
+
+bool Button::getIsHovered()
+{
+	return isHovered;
 }
 
 Vector2D Button::GetMousePosition()
@@ -48,11 +52,13 @@ bool Button::IsClicked()
     BoundingRectangle rect = BoundingRectangle(tran->GetTranslation(), tran->GetScale() / 2.0f);
     if (PointRectangleIntersection(pos, rect))
     {
-        brush->Disable();
+        //brush->Disable();
+		isHovered = true;
 		std::cout << "Colliding with button " << GetName() << std::endl;
         return true;
     }
 
-    brush->Enable();
+    //brush->Enable();
+	isHovered = false;
     return false;
 }
