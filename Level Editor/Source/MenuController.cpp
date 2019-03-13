@@ -39,8 +39,11 @@ void MenuController::Initialize()
     for (int i = 0; i < menuCount; i++)
     {
         GameObject* newMenu = GameObjectFactory::GetInstance().CreateObject("Menu");
-        menus.push_back(newMenu);
+		newMenu->GetComponent<Menu>()->SetMenuController(GetOwner());
+
         GetOwner()->GetSpace()->GetObjectManager().AddObject(*newMenu);
+
+		menus.push_back(newMenu);
     }
 }
 

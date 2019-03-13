@@ -74,6 +74,8 @@ public:
 
     bool IsShown();
 
+	void setIsShown(bool show);
+
 private:
 
     //------------------------------------------------------------------------------

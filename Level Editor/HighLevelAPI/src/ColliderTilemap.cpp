@@ -296,5 +296,8 @@ Vector2D ColliderTilemap::ConvertWorldCordsToTileMapCords(Vector2D inputCords)
 	// Move completely into cell
 	point += Vector2D(0.5, 0.5);
 
+	point.x = floor(point.x);
+	point.y = floor(point.y);
+
 	return point;
 }

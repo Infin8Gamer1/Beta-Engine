@@ -24,7 +24,7 @@ void TileMapBrush::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
 	//see if the player has clicked and has enough tiles
-	if (Input::GetInstance().CheckTriggered(VK_LBUTTON)) {
+	if (Input::GetInstance().CheckTriggered(VK_LBUTTON) && enabled) {
 		PlaceTile(Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition()));
 	}
 }
@@ -68,11 +68,6 @@ void TileMapBrush::PlaceTile(Vector2D MousePos)
 	int tileY = static_cast<int>(tile.y);
 
 	std::cout << "X : " << tileX << "Y : " << tileY << std::endl;
-
-	//if the chosen path tile is already equal to selected tile then return
-	if (map->GetCellValue(tileX, tileY) == SelectedTileID) {
-		return;
-	}
 
 	Vector2D offset = map->SetCellValue(tileX, tileY, SelectedTileID);
 	offset.y = offset.y * CT->GetOwner()->GetComponent<Transform>()->GetScale().y;

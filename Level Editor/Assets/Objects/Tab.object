@@ -3,9 +3,9 @@ Tab
   numComponents : 3
   Transform
   {
-    translation : { 465, 0 }
+    translation : { 0, 0 }
     rotation : 0
-    scale : { 50, 50 }
+    scale : { 25, 75 }
   }
   Sprite
   {
@@ -13,7 +13,7 @@ Tab
     color : { 0.5 , 1 , 1 , 0.5 }
 	spriteSourceName : Tab
   }
-  Button
+  Tab
   {
   }
 }

@@ -240,6 +240,9 @@ Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool crea
 
 		map->Deserialize(*parser);
 
+		delete parser;
+		parser = nullptr;
+
 		map->Print();
 
 		if (map == nullptr)

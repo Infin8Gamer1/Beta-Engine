@@ -17,6 +17,8 @@
 #include <SpriteText.h>
 #include <Transform.h>
 #include "Menu.h"
+#include "MenuController.h"
+#include "Tab.h"
 
 //Resources
 #include <Mesh.h>
@@ -31,12 +33,7 @@
 #include <Engine.h>
 #include <SoundManager.h>
 #include <Random.h>
-<<<<<<< HEAD
 #include <Graphics.h>
-=======
-#include "MenuController.h"
-#include "Tab.h"
->>>>>>> 9e030bda733cc634e12f13bf41d7fe1087b577f3
 
 Levels::LevelEditorUI::LevelEditorUI() : Level("UI")
 {

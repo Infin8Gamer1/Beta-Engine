@@ -10,6 +10,8 @@
 #include "GameObjectFactory.h"
 #include "Space.h"
 #include "Tab.h"
+#include <System.h>
+#include <glfw3.h>
 
 Menu::Menu() : Component("Menu")
 {
@@ -31,20 +33,36 @@ void Menu::Deserialize(Parser & parser)
 
 void Menu::Initialize()
 {
+	Transform* transform = GetOwner()->GetComponent<Transform>();
+
+	Vector2D menuScale = transform->GetScale();
+
+	int windowWidth, windowHeight;
+	GLFWwindow* handle = System::GetInstance().GetWindowHandle();
+	glfwGetWindowSize(handle, &windowWidth, &windowHeight);
+
+	Vector2D menuLocation = Vector2D((windowWidth / 2) - (menuScale.x / 2), 0);
+
+	transform->SetTranslation(menuLocation);
+	transform->SetScale(Vector2D(menuScale.x, windowHeight));
+
+	menuScale = transform->GetScale();
+
     GameObject* newTab = GameObjectFactory::GetInstance().CreateObject("Tab");
     SetTab(newTab);
     tab->GetComponent<Tab>()->SetMenu(GetOwner());
 
-    Vector2D pos = Vector2D(GetOwner()->GetComponent<Transform>()->GetTranslation().x - GetOwner()->GetComponent<Transform>()->GetTranslation().x / 2.0f, 0.0f);
+	Transform* tabTransform = tab->GetComponent<Transform>();
 
-    tab->GetComponent<Transform>()->SetTranslation(pos);
+    Vector2D TabPos = Vector2D((transform->GetTranslation().x - (menuScale.x / 2)) - (tabTransform->GetScale().x / 2), (menuScale.y / 2) - (tabTransform->GetScale().y));
+
+    tabTransform->SetTranslation(TabPos);
 
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*newTab);
 }
 
 void Menu::Update(float dt)
 {
-    
 }
 
 void Menu::SetTab(GameObject* tab_)
@@ -70,4 +88,9 @@ void Menu::SetMenuController(GameObject * controller_)
 bool Menu::IsShown()
 {
     return isShown;
+}
+
+void Menu::setIsShown(bool show)
+{
+	isShown = show;
 }

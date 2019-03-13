@@ -36,7 +36,7 @@ public:
     // Public Functions:
     //------------------------------------------------------------------------------
 
-    Button();
+    Button(std::string Name);
 
     // Initialize this component (happens at object creation).
     void Initialize() override;

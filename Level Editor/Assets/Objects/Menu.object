@@ -3,9 +3,9 @@ Menu
   numComponents : 4
   Transform
   {
-    translation : {465, 0 }
+    translation : { 0, 0 }
     rotation : 0
-    scale : { 350, 720 }
+    scale : { 350, 350 }
   }
   Sprite
   {

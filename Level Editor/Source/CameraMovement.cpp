@@ -25,7 +25,7 @@ Behaviors::CameraMovement::CameraMovement() : Component("CameraMovement")
 	right = 'D';
 	in = 'E';
 	out = 'Q';
-	zoomSpeed = 1.0f;
+	zoomSpeed = 1.5f;
 	speed = 10.0f;
 }
 

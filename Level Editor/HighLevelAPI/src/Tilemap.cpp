@@ -210,11 +210,31 @@ void Tilemap::Resize(int columnLeft, int columnRight, int rowTop, int rowBottom)
 		}
 	}
 
+	// Deleting the 2D array of ints
+	// delete in the opposite order of creation
+	for (unsigned r = 0; r < numColumns; ++r)
+	{
+		delete[] data[r]; // delete each allocated row with array delete
+		data[r] = nullptr; // safely set to nullptr
+	}
+	// Use array delete, since array new was used in allocation
+	delete[] data;
+	data = nullptr; // safely set to nullptr.
+
+	data = temp;
 	numColumns = columns;
 	numRows = rows;
 
-	delete data;
-	data = temp;
+	/*// Deleting the 2D array of ints
+	// delete in the opposite order of creation
+	for (unsigned r = 0; r < columns; ++r)
+	{
+		delete[] temp[r]; // delete each allocated row with array delete
+		temp[r] = nullptr; // safely set to nullptr
+	}
+	// Use array delete, since array new was used in allocation
+	delete[] temp;
+	temp = nullptr; // safely set to nullptr.*/
 
 	Print();
 }

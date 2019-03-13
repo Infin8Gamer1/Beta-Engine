@@ -14,7 +14,7 @@
 #include "Menu.h"
 #include "MenuController.h"
 
-Tab::Tab() : Button()
+Tab::Tab() : Button("Tab")
 {
 }
 
@@ -27,18 +27,10 @@ void Tab::Clicked()
 {
     Menu* m = menu->GetComponent<Menu>();
 
-    if (m->IsShown())
+    if (!m->IsShown())
     {
-        //toggle
-        m->GetMenuController()->GetComponent<MenuController>()->ShowMenu(GetMenu());
-        GetMenu()->GetComponent<Sprite>()->SetAlpha(0.0f);
-
-        m->GetMenuController()->GetComponent<MenuController>()->ToggleMenus();
-    }
-    else
-    {
-        //show self
-        m->GetMenuController()->GetComponent<MenuController>()->ShowMenu(GetMenu());
+		//show self
+		m->GetMenuController()->GetComponent<MenuController>()->ShowMenu(GetMenu());
     }
 }
 

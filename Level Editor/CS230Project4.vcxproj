@@ -45,15 +45,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>BetaFramework</TargetName>
-    <IncludePath>LowLevelAPI\include;FMOD\inc;HighLevelAPI\include;$(IncludePath)</IncludePath>
-    <LibraryPath>LowLevelAPI\lib;FMOD\lib;HighLevelAPI\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>glfw\include;LowLevelAPI\include;FMOD\inc;HighLevelAPI\include;$(IncludePath)</IncludePath>
+    <LibraryPath>glfw\lib;LowLevelAPI\lib;FMOD\lib;HighLevelAPI\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>BetaFramework</TargetName>
-    <IncludePath>LowLevelAPI\include;FMOD\inc;HighLevelAPI\include;$(IncludePath)</IncludePath>
-    <LibraryPath>LowLevelAPI\lib;FMOD\lib;HighLevelAPI\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>glfw\include;LowLevelAPI\include;FMOD\inc;HighLevelAPI\include;$(IncludePath)</IncludePath>
+    <LibraryPath>glfw\lib;LowLevelAPI\lib;FMOD\lib;HighLevelAPI\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
@@ -75,7 +75,8 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy fmod\lib\fmodL64.dll "$(OutDir)" /Y
-xcopy fmod\lib\fmodstudioL64.dll "$(OutDir)" /Y</Command>
+xcopy fmod\lib\fmodstudioL64.dll "$(OutDir)" /Y
+xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -99,7 +100,8 @@ xcopy fmod\lib\fmodstudioL64.dll "$(OutDir)" /Y</Command>
     </Link>
     <PostBuildEvent>
       <Command>xcopy fmod\lib\fmod64.dll "$(OutDir)" /Y
-xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y</Command>
+xcopy fmod\lib\fmodstudio64.dll "$(OutDir)" /Y
+xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

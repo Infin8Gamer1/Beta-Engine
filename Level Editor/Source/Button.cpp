@@ -15,7 +15,7 @@
 #include "SpaceManager.h"
 #include "TileMapBrush.h"
 
-Button::Button() : Component("Button")
+Button::Button(std::string name) : Component(name)
 {
 }
 
@@ -34,21 +34,23 @@ void Button::Update(float dt)
 Vector2D Button::GetMousePosition()
 {
     Vector2D mousepos = Input::GetInstance().GetCursorPosition();
-    return Graphics::GetInstance().ScreenToWorldPosition(mousepos, &Graphics::GetInstance().GetCurrentCamera());
+    return Graphics::GetInstance().ScreenToWorldPosition(mousepos);
 }
 
 bool Button::IsClicked()
 {
+	TileMapBrush* brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
+
     Vector2D pos = GetMousePosition();
     Transform* tran = GetOwner()->GetComponent<Transform>();
 
     BoundingRectangle rect = BoundingRectangle(tran->GetTranslation(), tran->GetScale() / 2.0f);
     if (PointRectangleIntersection(pos, rect))
     {
-        Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>()->Disable();
+        brush->Disable();
         return true;
     }
 
-    Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>()->Enable();
+    brush->Enable();
     return false;
 }
