@@ -28,6 +28,12 @@ class Transform;
 class Physics;
 class Vector2D;
 
+enum MenuType
+{
+	TileMap,
+	GameObjects
+};
+
 //------------------------------------------------------------------------------
 // Public Structures:
 //------------------------------------------------------------------------------
@@ -76,6 +82,8 @@ public:
 
 	void setIsShown(bool show);
 
+	void InitButtons(MenuType type);
+
 private:
 
     //------------------------------------------------------------------------------
@@ -83,6 +91,7 @@ private:
     //------------------------------------------------------------------------------
 
     GameObject* tab;
+	std::vector<GameObject*> buttons;
     GameObject* menuController;
 
     bool isShown;

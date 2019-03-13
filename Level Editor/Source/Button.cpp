@@ -21,10 +21,13 @@ Button::Button(std::string name) : Component(name)
 
 void Button::Initialize()
 {
+	brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
 }
 
 void Button::Update(float dt)
 {
+	UNREFERENCED_PARAMETER(dt);
+
     if (IsClicked() && Input::GetInstance().CheckTriggered(VK_LBUTTON))
     {
         Clicked();
@@ -39,8 +42,6 @@ Vector2D Button::GetMousePosition()
 
 bool Button::IsClicked()
 {
-	TileMapBrush* brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
-
     Vector2D pos = GetMousePosition();
     Transform* tran = GetOwner()->GetComponent<Transform>();
 
@@ -48,6 +49,7 @@ bool Button::IsClicked()
     if (PointRectangleIntersection(pos, rect))
     {
         brush->Disable();
+		std::cout << "Colliding with button " << GetName() << std::endl;
         return true;
     }
 

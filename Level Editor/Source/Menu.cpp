@@ -4,7 +4,7 @@
 #include "Graphics.h"
 #include "Input.h"
 #include "Intersection2D.h"
-#include "GameObject.h"
+#include <GameObject.h>
 #include "Transform.h"
 #include "Physics.h"
 #include "GameObjectFactory.h"
@@ -12,6 +12,12 @@
 #include "Tab.h"
 #include <System.h>
 #include <glfw3.h>
+#include <SpriteTilemap.h>
+#include <Engine.h>
+#include <SpaceManager.h>
+#include <SpriteSource.h>
+#include "TileButton.h"
+#include "TileMapBrush.h"
 
 Menu::Menu() : Component("Menu")
 {
@@ -59,6 +65,8 @@ void Menu::Initialize()
     tabTransform->SetTranslation(TabPos);
 
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*newTab);
+
+	InitButtons(MenuType::TileMap);
 }
 
 void Menu::Update(float dt)
@@ -93,4 +101,30 @@ bool Menu::IsShown()
 void Menu::setIsShown(bool show)
 {
 	isShown = show;
+}
+
+void Menu::InitButtons(MenuType type)
+{
+	int TileCount = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("TileMap")->GetComponent<SpriteTilemap>()->GetSpriteSource()->GetFrameCountTexture();
+
+	int rows = 3;
+
+	Transform* transform = GetOwner()->GetComponent<Transform>();
+
+	for (int i = 0; i < TileCount; i++)
+	{
+		GameObject* button = GameObjectFactory::GetInstance().CreateObject("TileButton");
+
+		button->GetComponent<TileButton>()->SetTileID(i);
+		
+		button->GetComponent<TileButton>()->SetBrush(Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>());
+		
+		Vector2D pos = Vector2D(i / rows, i % rows);
+
+		Vector2D offset = Vector2D(-100, 0);
+
+		button->GetComponent<Transform>()->SetTranslation(transform->GetTranslation() + (pos * 100) + offset);
+
+		GetOwner()->GetSpace()->GetObjectManager().AddObject(*button);
+	}
 }

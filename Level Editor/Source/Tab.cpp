@@ -14,7 +14,7 @@
 #include "Menu.h"
 #include "MenuController.h"
 
-Tab::Tab() : Button("Tab")
+Tab::Tab() : Button("TabButton")
 {
 }
 

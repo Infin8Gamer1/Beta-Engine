@@ -105,6 +105,8 @@ public:
 	// Retrieves the blend color for the sprite.
 	const Color& GetColor() const;
 
+	void RefreshAutoMesh();
+
 	friend SpriteText;
 
 protected:

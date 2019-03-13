@@ -19,6 +19,7 @@
 #include "Menu.h"
 #include "MenuController.h"
 #include "Tab.h"
+#include "TileButton.h"
 
 //Resources
 #include <Mesh.h>
@@ -50,6 +51,7 @@ void Levels::LevelEditorUI::Load()
 	GameObjectFactory::GetInstance().RegisterComponent<Menu>();
     GameObjectFactory::GetInstance().RegisterComponent<MenuController>();
     GameObjectFactory::GetInstance().RegisterComponent<Tab>();
+	GameObjectFactory::GetInstance().RegisterComponent<TileButton>();
 }
 
 void Levels::LevelEditorUI::Initialize()

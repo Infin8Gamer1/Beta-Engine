@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 //
-// File Name:	Menu.h
+// File Name:	Button.h
 // Author(s):	Sage Dupuy
 // Project:		BetaEngine
 // Course:		CS230
@@ -10,6 +10,7 @@
 //------------------------------------------------------------------------------
 
 #include "stdafx.h"
+#pragma once
 
 //------------------------------------------------------------------------------
 // Include Files:
@@ -24,6 +25,7 @@
 class Transform;
 class Physics;
 class Vector2D;
+class TileMapBrush;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -57,4 +59,6 @@ private:
     Vector2D GetMousePosition();
 
     bool IsClicked();
+
+	TileMapBrush* brush;
 };

@@ -153,3 +153,24 @@ const Color & Sprite::GetColor() const
 {
 	return color;
 }
+
+void Sprite::RefreshAutoMesh()
+{
+	char alphanum[] =
+		"0123456789"
+		"!@#$%^&*"
+		"ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+		"abcdefghijklmnopqrstuvwxyz";
+
+	int stringLength = sizeof(alphanum) - 1;
+
+	std::string random;
+
+	for (unsigned i = 0; i < 20; i++)
+	{
+		random += alphanum[rand() % stringLength];
+	}
+
+	//get mesh
+	SetMesh(ResourceManager::GetInstance().GetMesh(GetOwner()->GetName() + "_AutoMesh_" + random, true, Vector2D(1.0f / spriteSource->GetTextureDimensions().x, 1.0f / spriteSource->GetTextureDimensions().y)));
+}

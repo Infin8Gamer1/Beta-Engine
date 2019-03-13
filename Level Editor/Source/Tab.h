@@ -1,7 +1,7 @@
 #pragma once
 //------------------------------------------------------------------------------
 //
-// File Name:	Menu.h
+// File Name:	Tab.h
 // Author(s):	Sage Dupuy
 // Project:		BetaEngine
 // Course:		CS230

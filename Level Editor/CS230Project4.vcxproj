@@ -119,6 +119,7 @@ xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Source\Tab.cpp" />
+    <ClCompile Include="Source\TileButton.cpp" />
     <ClCompile Include="Source\TileMapBrush.cpp" />
     <ClCompile Include="Source\TimedDeath.cpp" />
   </ItemGroup>
@@ -133,6 +134,7 @@ xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
     <ClInclude Include="Source\ScreenWrap.h" />
     <ClInclude Include="Source\stdafx.h" />
     <ClInclude Include="Source\Tab.h" />
+    <ClInclude Include="Source\TileButton.h" />
     <ClInclude Include="Source\TileMapBrush.h" />
     <ClInclude Include="Source\TimedDeath.h" />
   </ItemGroup>
