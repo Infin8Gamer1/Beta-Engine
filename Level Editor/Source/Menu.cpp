@@ -52,7 +52,7 @@ void Menu::Initialize()
 	transform->SetTranslation(menuLocation);
 	transform->SetScale(Vector2D(menuScale.x, windowHeight));
 
-	InitButtons(MenuType::TileMap);
+	InitButtons(menuType);
 }
 
 void Menu::Update(float dt)
@@ -78,6 +78,26 @@ bool Menu::IsMouseOnUI()
     
     return inOnUI;
 }
+
+GameObject* Menu::InitTab(int order, int buffer)
+{
+    GameObject* newTab = GameObjectFactory::GetInstance().CreateObject("Tab");
+    newTab->GetComponent<Tab>()->SetMenu(GetOwner());
+    SetTab(newTab);
+
+    Transform* tabTransform = newTab->GetComponent<Transform>();
+
+    Vector2D menuScale = GetOwner()->GetComponent<Transform>()->GetScale();
+
+    Vector2D TabPos = Vector2D((GetOwner()->GetComponent<Transform>()->GetTranslation().x - (menuScale.x / 2)) - (tabTransform->GetScale().x / 2), (menuScale.y / 2) - (tabTransform->GetScale().y) - (tabTransform->GetScale().y * order + buffer * order));
+
+    tabTransform->SetTranslation(TabPos);
+
+    GetOwner()->GetSpace()->GetObjectManager().AddObject(*newTab);
+    return newTab;
+}
+
+
 
 void Menu::SetTab(GameObject* tab_)
 {
@@ -109,8 +129,38 @@ void Menu::setIsShown(bool show)
 	isShown = show;
 }
 
+void Menu::HideButtons()
+{
+    std::cout << "Showing... " + GetOwner()->GetName() + " " << menuType << std::endl;
+    for (unsigned i = 0; i < buttons.size(); ++i)
+    {
+        std::cout << buttons[i]->GetName() << std::endl;
+
+        if (buttons[i] == tab) continue;
+        if(menuType == TileMap) buttons[i]->GetComponent<TileButton>()->setEnabled(false);
+        buttons[i]->GetComponent<Sprite>()->SetAlpha(0.0f);
+    }
+}
+
+void Menu::ShowButtons()
+{
+    std::cout << "Hiding... " + GetOwner()->GetName() + " " << menuType << std::endl;
+
+    for (unsigned i = 0; i < buttons.size(); ++i)
+    {
+        std::cout << buttons[i]->GetName() << std::endl;
+        if (buttons[i] == tab) continue;
+        if (menuType == TileMap) buttons[i]->GetComponent<TileButton>()->setEnabled(true);
+        buttons[i]->GetComponent<Sprite>()->SetAlpha(1.0f);
+    }
+}
+
+
+
 void Menu::InitButtons(MenuType type)
 {
+    if (type != TileMap) return;
+
 	int TileCount = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("TileMap")->GetComponent<SpriteTilemap>()->GetSpriteSource()->GetFrameCountTexture();
 
 	int rows = 5;
@@ -137,4 +187,14 @@ void Menu::InitButtons(MenuType type)
 
 		buttons.push_back(button);
 	}
+}
+
+void Menu::SetType(MenuType type)
+{
+    menuType = type;
+}
+
+MenuType Menu::GetType()
+{
+    return menuType;
 }

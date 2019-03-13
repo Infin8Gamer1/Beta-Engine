@@ -1,6 +1,6 @@
 Menu
 {
-	textureName : UI\glassPanel.png
+	textureName : UI\glassPanel_menu.png
     textureRows : 1
     textureColumns : 1
 	frameCount : 1

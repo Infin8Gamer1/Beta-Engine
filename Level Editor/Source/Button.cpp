@@ -15,7 +15,7 @@
 #include "SpaceManager.h"
 #include "TileMapBrush.h"
 
-Button::Button(std::string name) : Component(name)
+Button::Button(std::string name) : Component(name), enabled(true)
 {
 }
 
@@ -27,6 +27,8 @@ void Button::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
 
+    if (!enabled) return;
+
     if (IsClicked() && Input::GetInstance().CheckTriggered(VK_LBUTTON))
     {
         Clicked();
@@ -36,6 +38,16 @@ void Button::Update(float dt)
 bool Button::getIsHovered()
 {
 	return isHovered;
+}
+
+void Button::setEnabled(bool value)
+{
+    enabled = value;
+}
+
+bool Button::getEnabled()
+{
+    return enabled;
 }
 
 Vector2D Button::GetMousePosition()

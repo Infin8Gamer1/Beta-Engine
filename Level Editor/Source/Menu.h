@@ -72,6 +72,8 @@ public:
 
     bool IsMouseOnUI();
 
+    GameObject* InitTab(int order, int buffer);
+
     void SetTab(GameObject* tab_);
 
     GameObject* GetTab();
@@ -84,7 +86,15 @@ public:
 
 	void setIsShown(bool show);
 
+    void HideButtons();
+
+    void ShowButtons();
+
 	void InitButtons(MenuType type);
+
+    void SetType(MenuType type);
+
+    MenuType GetType();
 
 private:
 
@@ -95,6 +105,8 @@ private:
     GameObject* tab;
 	std::vector<GameObject*> buttons;
     GameObject* menuController;
+
+    MenuType menuType;
 
     bool isShown;
 };

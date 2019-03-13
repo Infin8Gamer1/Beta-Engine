@@ -27,7 +27,7 @@ void Tab::Clicked()
 {
     Menu* m = menu->GetComponent<Menu>();
 
-    std::cout << m->IsShown() << std::endl;
+    std::cout << m->GetType() << std::endl;
 
     if (!m->IsShown())
     {

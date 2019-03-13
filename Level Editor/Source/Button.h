@@ -51,6 +51,10 @@ public:
 
     virtual void Clicked() = 0;
 
+    void setEnabled(bool value);
+
+    bool getEnabled();
+
 private:
     //------------------------------------------------------------------------------
     // Private Variables:
@@ -61,6 +65,7 @@ private:
 
     bool IsClicked();
 
+    bool enabled;
 	
 	bool isHovered;
 };

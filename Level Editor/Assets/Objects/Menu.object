@@ -1,17 +1,11 @@
 Menu
 {
-  numComponents : 4
+  numComponents : 3
   Transform
   {
     translation : { 0, 0 }
     rotation : 0
     scale : { 350, 350 }
-  }
-  Sprite
-  {
-    frameIndex : 0
-    color : { 0.5 , 1 , 1 , 0.5 }
-	spriteSourceName : Empty
   }
   Sprite
   {
