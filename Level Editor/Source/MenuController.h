@@ -77,4 +77,6 @@ private:
 
     int menuCount;
     std::vector<GameObject*> menus;
+
+    int tabBuffer;
 };

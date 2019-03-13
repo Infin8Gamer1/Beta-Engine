@@ -3,6 +3,6 @@ MenuController
   numComponents : 1
   MenuController
   {
-	menuCount : 1
+	menuCount : 2
   }
 }
