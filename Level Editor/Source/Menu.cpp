@@ -52,8 +52,6 @@ void Menu::Initialize()
 	transform->SetTranslation(menuLocation);
 	transform->SetScale(Vector2D(menuScale.x, windowHeight));
 
-	menuScale = transform->GetScale();
-
 	InitButtons(MenuType::TileMap);
 }
 

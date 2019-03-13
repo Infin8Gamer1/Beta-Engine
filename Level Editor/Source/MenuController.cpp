@@ -55,7 +55,7 @@ void MenuController::Initialize()
 
         Transform* tabTransform = newTab->GetComponent<Transform>();
 
-        Vector2D TabPos = Vector2D((tabTransform->GetTranslation().x - (menuScale.x / 2)) - (tabTransform->GetScale().x / 2), (menuScale.y / 2) - (tabTransform->GetScale().y) - (tabTransform->GetScale().y * i + tabBuffer));
+        Vector2D TabPos = Vector2D((newMenu->GetComponent<Transform>()->GetTranslation().x - (menuScale.x / 2)) - (tabTransform->GetScale().x / 2), (menuScale.y / 2) - (tabTransform->GetScale().y) - (tabTransform->GetScale().y * i + tabBuffer));
 
         tabTransform->SetTranslation(TabPos);
 
@@ -79,7 +79,6 @@ void MenuController::Update(float dt)
         }
         
     }
-
 
     if (canBrush)
     {
