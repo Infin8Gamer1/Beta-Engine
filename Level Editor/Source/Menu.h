@@ -28,8 +28,6 @@ class Transform;
 class Physics;
 class Vector2D;
 
-class TileMapBrush;
-
 enum MenuType
 {
 	TileMap,
@@ -72,6 +70,8 @@ public:
     //   dt = The (fixed) change in time since the last step.
     void Update(float dt) override;
 
+    bool IsMouseOnUI();
+
     void SetTab(GameObject* tab_);
 
     GameObject* GetTab();
@@ -97,6 +97,4 @@ private:
     GameObject* menuController;
 
     bool isShown;
-
-	TileMapBrush* brush;
 };

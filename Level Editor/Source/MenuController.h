@@ -28,6 +28,7 @@
 class Transform;
 class Physics;
 class Vector2D;
+class TileMapBrush;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -79,4 +80,6 @@ private:
     std::vector<GameObject*> menus;
 
     int tabBuffer;
+
+    TileMapBrush* brush;
 };

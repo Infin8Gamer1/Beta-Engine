@@ -15,6 +15,9 @@
 #include "Space.h"
 #include "Parser.h"
 #include "Tab.h"
+#include "TileMapBrush.h"
+#include <Engine.h>
+#include <SpaceManager.h>
 
 MenuController::MenuController() : Component("MenuController"), tabBuffer(50)
 {
@@ -60,10 +63,32 @@ void MenuController::Initialize()
 
 		menus.push_back(newMenu);
     }
+
+    brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
 }
 
 void MenuController::Update(float dt)
 {
+    bool canBrush = true;
+
+    for (size_t i = 0; i < menus.size(); i++)
+    {
+        if (menus[i]->GetComponent<Menu>()->IsMouseOnUI())
+        {
+            canBrush = false;
+        }
+        
+    }
+
+
+    if (canBrush)
+    {
+        brush->Enable();
+    }
+    else
+    {
+        brush->Disable();
+    }
 }
 
 void MenuController::ToggleMenus()

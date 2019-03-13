@@ -55,33 +55,30 @@ void Menu::Initialize()
 	menuScale = transform->GetScale();
 
 	InitButtons(MenuType::TileMap);
-
-	brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
 }
 
 void Menu::Update(float dt)
 {
-	bool canBrush = true;
+}
 
-	for (size_t i = 0; i < buttons.size(); i++)
-	{
-		if (buttons[i]->GetComponent<Button>()->getIsHovered())
-		{
-			canBrush = false;
-		}
-	}
+bool Menu::IsMouseOnUI()
+{
+    bool inOnUI = false;
 
-	if (tab->GetComponent<Button>()->getIsHovered()) {
-		canBrush = false;
-	}
+    for (size_t i = 0; i < buttons.size(); i++)
+    {
+        if (buttons[i]->GetComponent<Button>()->getIsHovered())
+        {
+            inOnUI = true;
+        }
+    }
 
-	if (canBrush)
-	{
-		brush->Enable();
-	}
-	else {
-		brush->Disable();
-	}
+    if (tab->GetComponent<Button>()->getIsHovered())
+    {
+        inOnUI = true;
+    }
+    
+    return inOnUI;
 }
 
 void Menu::SetTab(GameObject* tab_)
