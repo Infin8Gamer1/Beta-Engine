@@ -19,7 +19,7 @@
 #include <Engine.h>
 #include <SpaceManager.h>
 
-MenuController::MenuController() : Component("MenuController"), tabBuffer(50)
+MenuController::MenuController() : Component("MenuController"), tabBuffer(10)
 {
 }
 
@@ -40,29 +40,21 @@ void MenuController::Deserialize(Parser & parser)
 
 void MenuController::Initialize()
 {
-    for (int i = 0; i < menuCount; i++)
-    {
-        GameObject* newMenu = GameObjectFactory::GetInstance().CreateObject("Menu");
-		newMenu->GetComponent<Menu>()->SetMenuController(GetOwner());
+    GameObject* TileMenu = GameObjectFactory::GetInstance().CreateObject("Menu");
+    TileMenu->GetComponent<Menu>()->SetMenuController(GetOwner());
+    TileMenu->GetComponent<Menu>()->SetType(TileMap);
+    GetOwner()->GetSpace()->GetObjectManager().AddObject(*TileMenu);
+    menus.push_back(TileMenu);
+    GameObject* TileTab = TileMenu->GetComponent<Menu>()->InitTab(0, tabBuffer);
 
-        GetOwner()->GetSpace()->GetObjectManager().AddObject(*newMenu);
+    GameObject* ObjectMenu = GameObjectFactory::GetInstance().CreateObject("Menu");
+    ObjectMenu->GetComponent<Menu>()->SetMenuController(GetOwner());
+    ObjectMenu->GetComponent<Menu>()->SetType(GameObjects);
+    GetOwner()->GetSpace()->GetObjectManager().AddObject(*ObjectMenu);
+    menus.push_back(ObjectMenu);
+    GameObject* ObjectTab = ObjectMenu->GetComponent<Menu>()->InitTab(1, tabBuffer);
 
-        Vector2D menuScale = newMenu->GetComponent<Transform>()->GetScale();
-
-        GameObject* newTab = GameObjectFactory::GetInstance().CreateObject("Tab");
-        newMenu->GetComponent<Menu>()->SetTab(newTab);
-        newTab->GetComponent<Tab>()->SetMenu(newMenu);
-
-        Transform* tabTransform = newTab->GetComponent<Transform>();
-
-        Vector2D TabPos = Vector2D((newMenu->GetComponent<Transform>()->GetTranslation().x - (menuScale.x / 2)) - (tabTransform->GetScale().x / 2), (menuScale.y / 2) - (tabTransform->GetScale().y) - (tabTransform->GetScale().y * i + tabBuffer));
-
-        tabTransform->SetTranslation(TabPos);
-
-        GetOwner()->GetSpace()->GetObjectManager().AddObject(*newTab);
-
-		menus.push_back(newMenu);
-    }
+    ShowMenu(TileMenu);
 
     brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
 }
@@ -99,14 +91,17 @@ void MenuController::ShowMenu(GameObject * menu)
 {
     for (int i = 0; i < menuCount; i++)
     {
-        if (&menu == &menus[i])
+        if (menu == menus[i])
         {
             menus[i]->GetComponent<Sprite>()->SetAlpha(1.0f);
+            menus[i]->GetComponent<Menu>()->setIsShown(true);
+            menus[i]->GetComponent<Menu>()->ShowButtons();
         }
         else
         {
             menus[i]->GetComponent<Sprite>()->SetAlpha(0.0f);
+            menus[i]->GetComponent<Menu>()->setIsShown(false);
+            menus[i]->GetComponent<Menu>()->HideButtons();
         }
-        
     }
 }
