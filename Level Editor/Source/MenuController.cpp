@@ -14,8 +14,9 @@
 #include "GameObjectFactory.h"
 #include "Space.h"
 #include "Parser.h"
+#include "Tab.h"
 
-MenuController::MenuController() : Component("MenuController")
+MenuController::MenuController() : Component("MenuController"), tabBuffer(50)
 {
 }
 
@@ -42,6 +43,20 @@ void MenuController::Initialize()
 		newMenu->GetComponent<Menu>()->SetMenuController(GetOwner());
 
         GetOwner()->GetSpace()->GetObjectManager().AddObject(*newMenu);
+
+        Vector2D menuScale = newMenu->GetComponent<Transform>()->GetScale();
+
+        GameObject* newTab = GameObjectFactory::GetInstance().CreateObject("Tab");
+        newMenu->GetComponent<Menu>()->SetTab(newTab);
+        newTab->GetComponent<Tab>()->SetMenu(newMenu);
+
+        Transform* tabTransform = newTab->GetComponent<Transform>();
+
+        Vector2D TabPos = Vector2D((tabTransform->GetTranslation().x - (menuScale.x / 2)) - (tabTransform->GetScale().x / 2), (menuScale.y / 2) - (tabTransform->GetScale().y) - (tabTransform->GetScale().y * i + tabBuffer));
+
+        tabTransform->SetTranslation(TabPos);
+
+        GetOwner()->GetSpace()->GetObjectManager().AddObject(*newTab);
 
 		menus.push_back(newMenu);
     }

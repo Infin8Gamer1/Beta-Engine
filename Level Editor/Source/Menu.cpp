@@ -54,18 +54,6 @@ void Menu::Initialize()
 
 	menuScale = transform->GetScale();
 
-    GameObject* newTab = GameObjectFactory::GetInstance().CreateObject("Tab");
-    SetTab(newTab);
-    tab->GetComponent<Tab>()->SetMenu(GetOwner());
-
-	Transform* tabTransform = tab->GetComponent<Transform>();
-
-    Vector2D TabPos = Vector2D((transform->GetTranslation().x - (menuScale.x / 2)) - (tabTransform->GetScale().x / 2), (menuScale.y / 2) - (tabTransform->GetScale().y));
-
-    tabTransform->SetTranslation(TabPos);
-
-    GetOwner()->GetSpace()->GetObjectManager().AddObject(*newTab);
-
 	InitButtons(MenuType::TileMap);
 
 	brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
