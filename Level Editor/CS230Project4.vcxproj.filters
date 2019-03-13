@@ -64,6 +64,7 @@
     <ClCompile Include="Source\TileButton.cpp">
       <Filter>Game\Behaviors\UI</Filter>
     </ClCompile>
+    <ClCompile Include="Source\SaveManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -104,6 +105,9 @@
     </ClInclude>
     <ClInclude Include="Source\TileButton.h">
       <Filter>Game\Behaviors\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SaveManager.h">
+      <Filter>Game\Behaviors</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

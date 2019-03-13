@@ -16,6 +16,8 @@
 //------------------------------------------------------------------------------
 
 #include <BetaObject.h>
+#include <Vector2D.h>
+#include <Serializable.h>
 
 //------------------------------------------------------------------------------
 
@@ -31,7 +33,7 @@ typedef class Space Space;
 
 // You are free to change the contents of this structure as long as you do not
 //   change the public interface (functions) declared in the header.
-class Level : public BetaObject
+class Level : public BetaObject, public Serializable
 {
 public:
 	// Creates a game state.

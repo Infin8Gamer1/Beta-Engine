@@ -12,9 +12,11 @@
 #include "stdafx.h"
 #include "Level.h"
 #include "Space.h"
+#include <Parser.h>
 
 Level::Level(const std::string & name) : BetaObject(name)
 {
+
 }
 
 Space * Level::GetSpace() const
