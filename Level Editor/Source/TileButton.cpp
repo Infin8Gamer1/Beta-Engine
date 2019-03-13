@@ -32,8 +32,11 @@ void TileButton::SetTileID(int ID)
 {
 	TileID = ID;
 
-	sprite = GetOwner()->GetComponent<Sprite>();
-	sprite->SetSpriteSource(Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("TileMap")->GetComponent<SpriteTilemap>()->GetSpriteSource());
-	sprite->RefreshAutoMesh();
-	sprite->SetFrame(ID - 1);
+	if (ID != 0)
+	{
+		sprite = GetOwner()->GetComponent<Sprite>();
+		sprite->SetSpriteSource(Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("TileMap")->GetComponent<SpriteTilemap>()->GetSpriteSource());
+		sprite->RefreshAutoMesh();
+		sprite->SetFrame(ID - 1);
+	}
 }
