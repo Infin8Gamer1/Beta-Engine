@@ -236,7 +236,7 @@ void Tilemap::Resize(int columnLeft, int columnRight, int rowTop, int rowBottom)
 	delete[] temp;
 	temp = nullptr; // safely set to nullptr.*/
 
-	Print();
+	//Print();
 }
 
 std::string Tilemap::GetName() const
