@@ -62,6 +62,8 @@ namespace Behaviors
 
 		void Save();
 
+		void Test();
+
 		//HRESULT BasicFileOpen();
 
 	private:

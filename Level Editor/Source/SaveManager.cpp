@@ -13,9 +13,9 @@
 #include <Parser.h>
 #include <Input.h>
 
-
 Behaviors::SaveManager::SaveManager() : Component("SaveManager")
 {
+	
 }
 
 Component * Behaviors::SaveManager::Clone() const
@@ -39,6 +39,13 @@ void Behaviors::SaveManager::Update(float dt)
 	{
 		Load();
 	}
+
+	if (Input::GetInstance().CheckReleased(VK_F3))
+	{
+		Test();
+	}
+
+	
 }
 
 void Behaviors::SaveManager::Load()
@@ -106,6 +113,28 @@ void Behaviors::SaveManager::Save()
 		Parser* parser = new Parser(szFile, std::fstream::out);
 
 		map->Serialize(*parser);
+	}
+
+}
+
+void Behaviors::SaveManager::Test() {
+
+	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());
+
+	int msgBoxID = MessageBox(
+		hwnd,
+		"this is a test. I am testing!",
+		"Confirm That This is a Test",
+		MB_ICONINFORMATION | MB_YESNO | MB_APPLMODAL
+	);
+
+	if (msgBoxID == IDYES)
+	{
+		// TODO: add code
+		std::cout << "User Clicked Yes";
+	}
+	else if (msgBoxID == IDNO) {
+		std::cout << "User Clicked NO!";
 	}
 
 }

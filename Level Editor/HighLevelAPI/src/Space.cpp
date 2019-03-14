@@ -96,6 +96,11 @@ GameObjectManager & Space::GetObjectManager()
 	return objectManager;
 }
 
+Camera * Space::GetCamera()
+{
+	return camera;
+}
+
 void Space::ChangeLevel()
 {
 	//std::cout << "Space::ChangeLevel" << std::endl;

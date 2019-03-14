@@ -84,6 +84,9 @@ public:
 	// Returns the object manager, which you can use to retrieve and add objects.
 	GameObjectManager& GetObjectManager();
 
+	// Returns the camera for the space
+	Camera* GetCamera();
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Functions:

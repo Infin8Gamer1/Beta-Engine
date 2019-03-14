@@ -17,13 +17,12 @@
 
 #include "Component.h" // base class
 
-#include "Vector2D.h" // Vector2D
-
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
 // Forward Declarations:
 //------------------------------------------------------------------------------
+
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -48,6 +47,9 @@ namespace Behaviors
 		//   A pointer to a dynamically allocated clone of the component.
 		Component* Clone() const override;
 
+		// Initialize data for this object.
+		void Initialize() override;
+
 		// Update function for this component.
 		// Params:
 		//   dt = The (fixed) change in time since the last step.
@@ -63,12 +65,15 @@ namespace Behaviors
 		//   parser = The parser that is reading this object's data from a file.
 		void Deserialize(Parser& parser) override;
 
+		static int MouseWheelY;
+
 	private:
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
-
 		
+
+
 		char up;
 		char down;
 		char left;
@@ -77,6 +82,9 @@ namespace Behaviors
 		char out;
 		float zoomSpeed;
 		float speed;
+
+
+		int previousMouseWheelY;
 	};
 }
 
