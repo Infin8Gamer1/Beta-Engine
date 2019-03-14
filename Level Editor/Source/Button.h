@@ -39,9 +39,6 @@ public:
 
     Button(std::string Name);
 
-    // Initialize this component (happens at object creation).
-    void Initialize() override;
-
     // Update function for this component.
     // Params:
     //   dt = The (fixed) change in time since the last step.

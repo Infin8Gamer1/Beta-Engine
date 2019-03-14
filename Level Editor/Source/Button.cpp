@@ -19,10 +19,6 @@ Button::Button(std::string name) : Component(name), enabled(true)
 {
 }
 
-void Button::Initialize()
-{
-}
-
 void Button::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);

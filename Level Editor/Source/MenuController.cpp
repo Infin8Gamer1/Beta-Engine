@@ -58,6 +58,13 @@ void MenuController::Initialize()
 
     ShowMenu(TileMenu);
 
+    GameObject* SaveButton = GameObjectFactory::GetInstance().CreateObject("SaveButton");
+    GameObject* LoadButton = GameObjectFactory::GetInstance().CreateObject("LoadButton");
+    buttons.push_back(SaveButton->GetComponent<Button>());
+    buttons.push_back(LoadButton->GetComponent<Button>());
+    GetOwner()->GetSpace()->GetObjectManager().AddObject(*SaveButton);
+    GetOwner()->GetSpace()->GetObjectManager().AddObject(*LoadButton);
+
     brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
 }
 
@@ -72,6 +79,14 @@ void MenuController::Update(float dt)
             canBrush = false;
         }
         
+    }
+    for (size_t i = 0; i < buttons.size(); i++)
+    {
+        if (buttons[i]->getIsHovered())
+        {
+            canBrush = false;
+        }
+
     }
 
     if (canBrush && !Input::GetInstance().IsKeyDown(VK_LBUTTON))
