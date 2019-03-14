@@ -47,7 +47,7 @@ public:
 	//	 If the object file exists and can be loaded, then return a pointer to a new instance 
 	//    of the specified game object type, else nullptr.
 	GameObject* CreateObject(const std::string& name, 
-		Mesh* mesh = nullptr, SpriteSource* spriteSource = nullptr);
+		bool absolutePath = false, Mesh* mesh = nullptr, SpriteSource* spriteSource = nullptr);
 
 	// Create a single instance of the specified component.
 	// Params:

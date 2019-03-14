@@ -43,6 +43,12 @@ public:
 
 	// Retrieve the space in which the level is running.
 	Space* GetSpace() const;
+
+	// Loads object data from a file.
+	void Deserialize(Parser& parser) override;
+
+	// Saves object data to a file.
+	void Serialize(Parser& parser) const override;
 };
 
 //------------------------------------------------------------------------------

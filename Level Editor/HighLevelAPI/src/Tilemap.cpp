@@ -197,9 +197,9 @@ void Tilemap::Resize(int columnLeft, int columnRight, int rowTop, int rowBottom)
 		}
 	}
 
-	for (int i = 0; i < numRows; i++)
+	for (unsigned i = 0; i < numRows; i++)
 	{
-		for (int j = 0; j < numColumns; j++)
+		for (unsigned j = 0; j < numColumns; j++)
 		{
 			int value = data[j][i];
 

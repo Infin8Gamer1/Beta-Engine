@@ -59,11 +59,18 @@ GameObjectFactory::~GameObjectFactory()
 	registeredComponents.shrink_to_fit();
 }
 
-GameObject * GameObjectFactory::CreateObject(const std::string & name, Mesh * mesh, SpriteSource * spriteSource)
+GameObject * GameObjectFactory::CreateObject(const std::string & name, bool absolutePath, Mesh * mesh, SpriteSource * spriteSource)
 {
 	GameObject* GO = new GameObject(name);
 
-	Parser* parser = new Parser(objectFilePath + name + ".object", std::fstream::in);
+	Parser* parser = nullptr;
+
+	if (absolutePath)
+	{
+		parser = new Parser(name, std::fstream::in);
+	} else {
+		parser = new Parser(objectFilePath + name + ".object", std::fstream::in);
+	}
 	
 	try
 	{
