@@ -1,6 +1,7 @@
+#pragma once
 //------------------------------------------------------------------------------
 //
-// File Name:	Button.h
+// File Name:	SaveLoadButton.h
 // Author(s):	Sage Dupuy
 // Project:		BetaEngine
 // Course:		CS230
@@ -10,13 +11,14 @@
 //------------------------------------------------------------------------------
 
 #include "stdafx.h"
-#pragma once
 
 //------------------------------------------------------------------------------
 // Include Files:
 //------------------------------------------------------------------------------
 
-#include <Component.h> // base class
+#include "Button.h" // base class
+
+//------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
 // Forward Declarations:
@@ -30,39 +32,50 @@ class Vector2D;
 // Public Structures:
 //------------------------------------------------------------------------------
 
-class Button : public Component
+class Transform;
+class Physics;
+class Vector2D;
+
+//------------------------------------------------------------------------------
+// Public Structures:
+//------------------------------------------------------------------------------
+
+enum state { Save, Load };
+
+class SaveLoadButton : public Button
 {
 public:
     //------------------------------------------------------------------------------
     // Public Functions:
     //------------------------------------------------------------------------------
 
-    Button(std::string Name);
+    SaveLoadButton(state state = Save);
 
-    // Update function for this component.
+    // Initialize this component (happens at object creation).
+    void Initialize() override;
+
+    Component* Clone() const override;
+
+    // Write object data to file
     // Params:
-    //   dt = The (fixed) change in time since the last step.
-    void Update(float dt) override;
+    //   parser = The parser that is writing this object to a file.
+    void Serialize(Parser& parser) const override;
 
-	bool getIsHovered();
+    // Read object data from a file
+    // Params:
+    //   parser = The parser that is reading this object's data from a file.
+    void Deserialize(Parser& parser) override;
 
-    virtual void Clicked() = 0;
-
-    void setEnabled(bool value);
-
-    bool getEnabled();
+    //Click function for Saving
+    void Clicked();
 
 private:
+
     //------------------------------------------------------------------------------
     // Private Variables:
     //------------------------------------------------------------------------------
 
-    // Get Muse Pos
-    Vector2D GetMousePosition();
+    state myState;
 
-    bool IsClicked();
-
-    bool enabled;
-	
-	bool isHovered;
+    GameObject* saveManager;
 };

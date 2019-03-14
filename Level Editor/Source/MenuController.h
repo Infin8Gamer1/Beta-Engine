@@ -29,6 +29,7 @@ class Transform;
 class Physics;
 class Vector2D;
 class TileMapBrush;
+class Button;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -80,6 +81,7 @@ private:
 
     int menuCount;
     std::vector<GameObject*> menus;
+    std::vector<Button*> buttons;
 
     int tabBuffer;
 

@@ -35,6 +35,7 @@
 #include <SoundManager.h>
 #include <Random.h>
 #include <Graphics.h>
+#include "SaveLoadButton.h"
 
 Levels::LevelEditorUI::LevelEditorUI() : Level("UI")
 {
@@ -52,6 +53,7 @@ void Levels::LevelEditorUI::Load()
     GameObjectFactory::GetInstance().RegisterComponent<MenuController>();
     GameObjectFactory::GetInstance().RegisterComponent<Tab>();
 	GameObjectFactory::GetInstance().RegisterComponent<TileButton>();
+    GameObjectFactory::GetInstance().RegisterComponent<SaveLoadButton>();
 }
 
 void Levels::LevelEditorUI::Initialize()
@@ -61,6 +63,9 @@ void Levels::LevelEditorUI::Initialize()
 	GameObject* MenuController = GameObjectFactory::GetInstance().CreateObject("MenuController");
     
 	GetSpace()->GetObjectManager().AddObject(*MenuController);
+
+    GameObject* saveText = GameObjectFactory::GetInstance().CreateObject("SpriteText");
+
 }
 
 void Levels::LevelEditorUI::Update(float dt)
