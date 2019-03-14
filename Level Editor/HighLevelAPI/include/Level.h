@@ -26,6 +26,7 @@
 //------------------------------------------------------------------------------
 
 typedef class Space Space;
+class GameObject;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -49,6 +50,10 @@ public:
 
 	// Saves object data to a file.
 	void Serialize(Parser& parser) const override;
+
+private:
+
+	std::vector<GameObject*> gameObjects;
 };
 
 //------------------------------------------------------------------------------

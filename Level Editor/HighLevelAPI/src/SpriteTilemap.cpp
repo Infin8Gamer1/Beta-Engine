@@ -73,3 +73,8 @@ void SpriteTilemap::SetTilemap(Tilemap * _map)
 {
 	map = _map;
 }
+
+Tilemap * SpriteTilemap::GetTilemap()
+{
+	return map;
+}

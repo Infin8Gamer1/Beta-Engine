@@ -13,11 +13,23 @@
 
 TileMapBrush::TileMapBrush() : Component("TileMapBrush")
 {
+	map = nullptr;
 }
 
 Component * TileMapBrush::Clone() const
 {
 	return new TileMapBrush(*this);
+}
+
+void TileMapBrush::Initialize()
+{
+
+	GameObject* TileMapObject = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("TileMap");
+
+	if (TileMapObject != nullptr)
+	{
+		map = TileMapObject->GetComponent<ColliderTilemap>()->GetTilemap();
+	}
 }
 
 void TileMapBrush::Update(float dt)
@@ -63,6 +75,10 @@ void TileMapBrush::Disable()
 
 void TileMapBrush::PlaceTile(Vector2D MousePos)
 {
+	if (map == nullptr) {
+		return;
+	}
+
 	ColliderTilemap* CT = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("TileMap")->GetComponent<ColliderTilemap>();
 	Vector2D tile = CT->ConvertWorldCordsToTileMapCords(MousePos);
 

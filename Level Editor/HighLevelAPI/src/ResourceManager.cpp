@@ -222,7 +222,7 @@ void ResourceManager::SaveSpriteSourceToFile(SpriteSource * object)
 	std::cout << "The Game Object: " << object->GetName() << " was saved to \"" << SpriteSourcesFilePath << object->GetName() << ".spriteSource\"" << std::endl;
 }
 
-Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool createIfNotFound, bool absolutePath)
+Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool createIfNotFound)
 {
 	for (size_t i = 0; i < Tilemaps.size(); i++)
 	{
@@ -235,15 +235,7 @@ Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool crea
 
 	if (createIfNotFound) {
 
-		Parser* parser = nullptr;
-
-		if (absolutePath)
-		{
-			parser = new Parser(tilemapName, std::fstream::in);
-		} else {
-			parser = new Parser(TileMapsFilePath + tilemapName + ".tileMap", std::fstream::in);
-		}
-			
+		Parser* parser = new Parser(TileMapsFilePath + tilemapName + ".tileMap", std::fstream::in);
 
 		Tilemap* map = new Tilemap(tilemapName);
 

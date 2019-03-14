@@ -48,6 +48,9 @@ public:
 	//   A pointer to a dynamically allocated clone of the component.
 	Component* Clone() const override;
 
+	// Initialize data for this object.
+	void Initialize() override;
+
 	// Update function for this component.
 	// Params:
 	//   dt = The (fixed) change in time since the last step.

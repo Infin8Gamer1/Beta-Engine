@@ -85,7 +85,7 @@ public:
 	// Params:
 	//   tilemapName = The name of the tilemap.
 	//   createIfNotFound = Whether to create a tilemap if no tilemap is found.
-	Tilemap* GetTilemap(const std::string& tilemapName, bool createIfNotFound = true, bool absolutePath = false);
+	Tilemap* GetTilemap(const std::string& tilemapName, bool createIfNotFound = true);
 
 	bool TilemapExists(Tilemap* mesh);
 

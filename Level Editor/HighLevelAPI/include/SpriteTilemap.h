@@ -59,6 +59,8 @@ public:
 	//   map = A pointer to the tilemap resource.
 	void SetTilemap(Tilemap* map);
 
+	Tilemap* GetTilemap();
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Variables:

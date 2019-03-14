@@ -86,6 +86,11 @@ void Space::SetLevel(Level * level)
 	nextLevel->SetParent(this);
 }
 
+Level * Space::GetLevel()
+{
+	return currentLevel;
+}
+
 void Space::RestartLevel()
 {
 	SetLevel(currentLevel);

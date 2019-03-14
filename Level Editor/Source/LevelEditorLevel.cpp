@@ -77,15 +77,8 @@ void Levels::LevelEditorLevel::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
 
-	GameObject* Tilemap = GameObjectFactory::GetInstance().CreateObject("TileMap");
-	GetSpace()->GetObjectManager().AddObject(*Tilemap);
-
 	GameObject* Brush = GameObjectFactory::GetInstance().CreateObject("Brush");
-	Brush->GetComponent<TileMapBrush>()->SetTilemap(Tilemap->GetComponent<ColliderTilemap>()->GetTilemap());
 	GetSpace()->GetObjectManager().AddObject(*Brush);
-
-	GameObject* circle = GameObjectFactory::GetInstance().CreateObject("Circle");
-	GetSpace()->GetObjectManager().AddObject(*circle);
 
 	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("EditorManager");
 	GetSpace()->GetObjectManager().AddObject(*CameraMovement);

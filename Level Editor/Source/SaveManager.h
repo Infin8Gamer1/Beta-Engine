@@ -25,7 +25,7 @@
 // Forward Declarations:
 //------------------------------------------------------------------------------
 
-class Tilemap;
+class Level;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -71,7 +71,9 @@ namespace Behaviors
 		// Private Variables:
 		//------------------------------------------------------------------------------
 
-		Tilemap* map;
+		Level* level;
+
+		std::string LevelFilePath = "Assets/Levels/";
 
 	};
 }

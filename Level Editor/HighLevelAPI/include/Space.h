@@ -78,6 +78,8 @@ public:
 		SetLevel(new T());
 	}
 
+	Level* GetLevel();
+
 	// Restarts the current level (next level = current)
 	void RestartLevel();
 	

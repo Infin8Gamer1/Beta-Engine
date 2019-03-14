@@ -160,7 +160,14 @@ void Menu::InitButtons(MenuType type)
 {
     if (type != TileMap) return;
 
-	int TileCount = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("TileMap")->GetComponent<SpriteTilemap>()->GetSpriteSource()->GetFrameCountTexture();
+	GameObject* tileMapGO = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("TileMap");
+
+	if (tileMapGO == nullptr)
+	{
+		return;
+	}
+
+	int TileCount = tileMapGO->GetComponent<SpriteTilemap>()->GetSpriteSource()->GetFrameCountTexture();
 
 	int rows = 5;
 	float xScale = 55;

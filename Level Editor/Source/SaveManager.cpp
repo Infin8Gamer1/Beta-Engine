@@ -12,10 +12,11 @@
 #include <glfw3native.h>
 #include <Parser.h>
 #include <Input.h>
+#include <Level.h>
 
 Behaviors::SaveManager::SaveManager() : Component("SaveManager")
 {
-	
+	level = nullptr;
 }
 
 Component * Behaviors::SaveManager::Clone() const
@@ -25,11 +26,14 @@ Component * Behaviors::SaveManager::Clone() const
 
 void Behaviors::SaveManager::Initialize()
 {
-	map = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("TileMap")->GetComponent<ColliderTilemap>()->GetTilemap();
 }
 
 void Behaviors::SaveManager::Update(float dt)
 {
+	if (level == nullptr) {
+		level = GetOwner()->GetSpace()->GetLevel();
+	}
+
 	if (Input::GetInstance().CheckReleased(VK_F1))
 	{
 		Save();
@@ -63,8 +67,8 @@ void Behaviors::SaveManager::Load()
 	// use the contents of szFile to initialize itself.
 	ofn.lpstrFile[0] = '\0';
 	ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = "All\0*.*\0Text\0*.TXT\0";
-	ofn.nFilterIndex = 1;
+	ofn.lpstrFilter = "All\0*.*\0Level\0*.lvl\0";
+	ofn.nFilterIndex = 2;
 	ofn.lpstrFileTitle = NULL;
 	ofn.nMaxFileTitle = 0;
 	ofn.lpstrInitialDir = NULL;
@@ -75,15 +79,26 @@ void Behaviors::SaveManager::Load()
 	if (GetOpenFileName(&ofn) == TRUE)
 	{
 		//std::cout << szFile << std::endl;
+		std::string fileName = szFile;
+		fileName = fileName.substr(fileName.find_last_of("\\") + 1);
 
-		Parser* parser = new Parser(szFile, std::fstream::in);
+		//fileName = fileName.substr(0, fileName.find_first_of("."));
 
-		map->Deserialize(*parser);
+		Parser* parser = new Parser(LevelFilePath + fileName, std::fstream::in);
+
+		level->Deserialize(*parser);
+
+		delete parser;
 	}
 }
 
 void Behaviors::SaveManager::Save()
 {
+	if (level == nullptr)
+	{
+		return;
+	}
+
 	OPENFILENAME ofn;       // common dialog box structure
 	char szFile[260];       // buffer for file name
 	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());              // owner window
@@ -97,8 +112,8 @@ void Behaviors::SaveManager::Save()
 	// use the contents of szFile to initialize itself.
 	ofn.lpstrFile[0] = '\0';
 	ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = "All\0*.*\0Text\0*.TXT\0";
-	ofn.nFilterIndex = 1;
+	ofn.lpstrFilter = "All\0*.*\0Level\0*.lvl\0";
+	ofn.nFilterIndex = 2;
 	ofn.lpstrFileTitle = NULL;
 	ofn.nMaxFileTitle = 0;
 	ofn.lpstrInitialDir = NULL;
@@ -109,10 +124,16 @@ void Behaviors::SaveManager::Save()
 	if (GetSaveFileName(&ofn) == TRUE)
 	{
 		//std::cout << szFile << std::endl;
+		std::string fileName = szFile;
+		fileName = fileName.substr(fileName.find_last_of("\\") + 1);
 
-		Parser* parser = new Parser(szFile, std::fstream::out);
+		//fileName = fileName.substr(0, fileName.find_first_of("."));
 
-		map->Serialize(*parser);
+		Parser* parser = new Parser(LevelFilePath + fileName, std::fstream::out);
+
+		level->Serialize(*parser);
+
+		delete parser;
 	}
 
 }
