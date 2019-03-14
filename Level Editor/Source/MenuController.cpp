@@ -74,11 +74,11 @@ void MenuController::Update(float dt)
         
     }
 
-    if (canBrush)
+    if (canBrush && !Input::GetInstance().IsKeyDown(VK_LBUTTON))
     {
         brush->Enable();
     }
-    else
+    else if(!canBrush)
     {
         brush->Disable();
     }
@@ -113,11 +113,7 @@ void MenuController::ShiftTabsPos()
     {
         Transform* tran = menus[i]->GetComponent<Menu>()->GetTab()->GetComponent<Transform>();
 
-        std::cout << "Before Pos: " << tran->GetTranslation() << std::endl;
-
         tran->SetTranslation(Vector2D((windowWidth / 2) - (tran->GetScale().x / 2), tran->GetTranslation().y));
-
-        std::cout << "After Pos: " << tran->GetTranslation() << std::endl;
     }
 }
 
@@ -133,10 +129,6 @@ void MenuController::RestoreTabsPos()
 
         float x = (menus[i]->GetComponent<Transform>()->GetTranslation().x - (menus[i]->GetComponent<Transform>()->GetScale().x / 2)) - (tran->GetScale().x / 2);
 
-        std::cout << "Before Pos: " << tran->GetTranslation() << std::endl;
-
         tran->SetTranslation(Vector2D(x, tran->GetTranslation().y));
-
-        std::cout << "After Pos: " << tran->GetTranslation() << std::endl;
     }
 }
