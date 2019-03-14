@@ -85,6 +85,11 @@ GameObject* Menu::InitTab(int order, int buffer)
     newTab->GetComponent<Tab>()->SetMenu(GetOwner());
     SetTab(newTab);
 
+    Sprite* tabSprite = newTab->GetComponent<Sprite>();
+    Sprite* mySprite = GetOwner()->GetComponent<Sprite>();
+
+    tabSprite->SetColor(mySprite->GetColor());
+
     Transform* tabTransform = newTab->GetComponent<Transform>();
 
     Vector2D menuScale = GetOwner()->GetComponent<Transform>()->GetScale();
@@ -131,11 +136,8 @@ void Menu::setIsShown(bool show)
 
 void Menu::HideButtons()
 {
-    std::cout << "Showing... " + GetOwner()->GetName() + " " << menuType << std::endl;
     for (unsigned i = 0; i < buttons.size(); ++i)
     {
-        std::cout << buttons[i]->GetName() << std::endl;
-
         if (buttons[i] == tab) continue;
         if(menuType == TileMap) buttons[i]->GetComponent<TileButton>()->setEnabled(false);
         buttons[i]->GetComponent<Sprite>()->SetAlpha(0.0f);
@@ -144,11 +146,8 @@ void Menu::HideButtons()
 
 void Menu::ShowButtons()
 {
-    std::cout << "Hiding... " + GetOwner()->GetName() + " " << menuType << std::endl;
-
     for (unsigned i = 0; i < buttons.size(); ++i)
     {
-        std::cout << buttons[i]->GetName() << std::endl;
         if (buttons[i] == tab) continue;
         if (menuType == TileMap) buttons[i]->GetComponent<TileButton>()->setEnabled(true);
         buttons[i]->GetComponent<Sprite>()->SetAlpha(1.0f);

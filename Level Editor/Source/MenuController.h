@@ -66,9 +66,11 @@ public:
     //   dt = The (fixed) change in time since the last step.
     void Update(float dt) override;
 
-    void ToggleMenus();
-
     void ShowMenu(GameObject* menu);
+
+    void ShiftTabsPos();
+
+    void RestoreTabsPos();
 
 private:
 

@@ -14,6 +14,7 @@
 #include "Menu.h"
 #include "MenuController.h"
 
+
 Tab::Tab() : Button("TabButton")
 {
 }
@@ -33,6 +34,16 @@ void Tab::Clicked()
     {
 		//show self
 		m->GetMenuController()->GetComponent<MenuController>()->ShowMenu(GetMenu());
+        m->GetMenuController()->GetComponent<MenuController>()->RestoreTabsPos();
+    }
+    else
+    {
+        m->GetMenuController()->GetComponent<MenuController>()->ShowMenu(GetMenu());
+        m->GetMenuController()->GetComponent<MenuController>()->ShiftTabsPos();
+
+        GetMenu()->GetComponent<Sprite>()->SetAlpha(0.0f);
+        GetMenu()->GetComponent<Menu>()->setIsShown(false);
+        GetMenu()->GetComponent<Menu>()->HideButtons();
     }
 }
 

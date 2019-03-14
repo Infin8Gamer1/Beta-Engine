@@ -18,6 +18,8 @@
 #include "TileMapBrush.h"
 #include <Engine.h>
 #include <SpaceManager.h>
+#include "glfw3.h"
+#include <System.h>
 
 MenuController::MenuController() : Component("MenuController"), tabBuffer(10)
 {
@@ -40,14 +42,14 @@ void MenuController::Deserialize(Parser & parser)
 
 void MenuController::Initialize()
 {
-    GameObject* TileMenu = GameObjectFactory::GetInstance().CreateObject("Menu");
+    GameObject* TileMenu = GameObjectFactory::GetInstance().CreateObject("TileMenu");
     TileMenu->GetComponent<Menu>()->SetMenuController(GetOwner());
     TileMenu->GetComponent<Menu>()->SetType(TileMap);
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*TileMenu);
     menus.push_back(TileMenu);
     GameObject* TileTab = TileMenu->GetComponent<Menu>()->InitTab(0, tabBuffer);
 
-    GameObject* ObjectMenu = GameObjectFactory::GetInstance().CreateObject("Menu");
+    GameObject* ObjectMenu = GameObjectFactory::GetInstance().CreateObject("ObjectMenu");
     ObjectMenu->GetComponent<Menu>()->SetMenuController(GetOwner());
     ObjectMenu->GetComponent<Menu>()->SetType(GameObjects);
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*ObjectMenu);
@@ -82,11 +84,6 @@ void MenuController::Update(float dt)
     }
 }
 
-void MenuController::ToggleMenus()
-{
-    
-}
-
 void MenuController::ShowMenu(GameObject * menu)
 {
     for (int i = 0; i < menuCount; i++)
@@ -103,5 +100,43 @@ void MenuController::ShowMenu(GameObject * menu)
             menus[i]->GetComponent<Menu>()->setIsShown(false);
             menus[i]->GetComponent<Menu>()->HideButtons();
         }
+    }
+}
+
+void MenuController::ShiftTabsPos()
+{
+    int windowWidth, windowHeight;
+    GLFWwindow* handle = System::GetInstance().GetWindowHandle();
+    glfwGetWindowSize(handle, &windowWidth, &windowHeight);
+
+    for (int i = 0; i < menuCount; i++)
+    {
+        Transform* tran = menus[i]->GetComponent<Menu>()->GetTab()->GetComponent<Transform>();
+
+        std::cout << "Before Pos: " << tran->GetTranslation() << std::endl;
+
+        tran->SetTranslation(Vector2D((windowWidth / 2) - (tran->GetScale().x / 2), tran->GetTranslation().y));
+
+        std::cout << "After Pos: " << tran->GetTranslation() << std::endl;
+    }
+}
+
+void MenuController::RestoreTabsPos()
+{
+    int windowWidth, windowHeight;
+    GLFWwindow* handle = System::GetInstance().GetWindowHandle();
+    glfwGetWindowSize(handle, &windowWidth, &windowHeight);
+
+    for (int i = 0; i < menuCount; i++)
+    {
+        Transform* tran = menus[i]->GetComponent<Menu>()->GetTab()->GetComponent<Transform>();
+
+        float x = (menus[i]->GetComponent<Transform>()->GetTranslation().x - (menus[i]->GetComponent<Transform>()->GetScale().x / 2)) - (tran->GetScale().x / 2);
+
+        std::cout << "Before Pos: " << tran->GetTranslation() << std::endl;
+
+        tran->SetTranslation(Vector2D(x, tran->GetTranslation().y));
+
+        std::cout << "After Pos: " << tran->GetTranslation() << std::endl;
     }
 }
