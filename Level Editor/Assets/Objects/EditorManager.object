@@ -1,6 +1,6 @@
-CameraMovement
+EditorManager
 {
-  numComponents : 1
+  numComponents : 2
   Behaviors::CameraMovement
   {
 	UP : W
@@ -8,5 +8,8 @@ CameraMovement
 	LEFT : A
 	RIGHT : D
 	Speed : 5.0
+  }
+  Behaviors::SaveManager
+  {
   }
 }

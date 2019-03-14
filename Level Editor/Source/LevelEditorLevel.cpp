@@ -23,6 +23,7 @@
 #include <Transform.h>
 #include <Physics.h>
 #include <ColliderTilemap.h>
+#include "SaveManager.h"
 
 //Resources
 #include <Mesh.h>
@@ -56,6 +57,7 @@ void Levels::LevelEditorLevel::Load()
 
 	////Register Custom Components
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::CameraMovement>();
+	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::SaveManager>();
 	GameObjectFactory::GetInstance().RegisterComponent<TileMapBrush>();
 
 	//GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Bullet"));
@@ -75,9 +77,6 @@ void Levels::LevelEditorLevel::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
 
-	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("CameraMovement");
-	GetSpace()->GetObjectManager().AddObject(*CameraMovement);
-
 	GameObject* Tilemap = GameObjectFactory::GetInstance().CreateObject("TileMap");
 	GetSpace()->GetObjectManager().AddObject(*Tilemap);
 
@@ -87,6 +86,9 @@ void Levels::LevelEditorLevel::Initialize()
 
 	GameObject* circle = GameObjectFactory::GetInstance().CreateObject("Circle");
 	GetSpace()->GetObjectManager().AddObject(*circle);
+
+	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("EditorManager");
+	GetSpace()->GetObjectManager().AddObject(*CameraMovement);
 
 	//play background music
 	//musicChannel = soundManager->PlaySound("Asteroid Field");

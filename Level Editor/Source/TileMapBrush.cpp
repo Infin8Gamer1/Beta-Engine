@@ -69,7 +69,7 @@ void TileMapBrush::PlaceTile(Vector2D MousePos)
 	int tileX = static_cast<int>(tile.x);
 	int tileY = static_cast<int>(tile.y);
 
-	std::cout << "X : " << tileX << "Y : " << tileY << std::endl;
+	//std::cout << "X : " << tileX << "Y : " << tileY << std::endl;
 
 	Vector2D offset = map->SetCellValue(tileX, tileY, SelectedTileID);
 	offset.y = offset.y * CT->GetOwner()->GetComponent<Transform>()->GetScale().y;
