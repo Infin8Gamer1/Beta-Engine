@@ -65,8 +65,18 @@ void Levels::LevelEditorUI::Initialize()
 	GameObject* MenuController = GameObjectFactory::GetInstance().CreateObject("MenuController");
 	GetSpace()->GetObjectManager().AddObject(*MenuController);
 
-    /*GameObject* saveText = GameObjectFactory::GetInstance().CreateObject("SpriteText");
-	GetSpace()->GetObjectManager().AddObject(*saveText);*/
+    GameObject* saveText = GameObjectFactory::GetInstance().CreateObject("SpriteText");
+	GetSpace()->GetObjectManager().AddObject(*saveText);
+    GameObject* loadText = GameObjectFactory::GetInstance().CreateObject("SpriteText");
+    GetSpace()->GetObjectManager().AddObject(*loadText);
+
+    GameObject* saveButton = GetSpace()->GetObjectManager().GetObjectByName("SaveButton");
+    GameObject* loadButton = GetSpace()->GetObjectManager().GetObjectByName("LoadButton");
+
+    saveText->GetComponent<SpriteText>()->SetText("Save");
+    saveText->GetComponent<Transform>()->SetTranslation(saveButton->GetComponent<Transform>()->GetTranslation());
+    loadText->GetComponent<SpriteText>()->SetText("Load");
+    loadText->GetComponent<Transform>()->SetTranslation(loadButton->GetComponent<Transform>()->GetTranslation());
 }
 
 void Levels::LevelEditorUI::Update(float dt)
