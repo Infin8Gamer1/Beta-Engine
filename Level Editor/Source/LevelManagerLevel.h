@@ -68,9 +68,9 @@ namespace Levels
 		// Private Functions:
 		//------------------------------------------------------------------------------
 
-		std::string GetSaveLocation();
+		std::string BasicFileOpen();
 
-		std::string GetOpenLocation();
+		std::string BasicFileSave();
 
 		//------------------------------------------------------------------------------
 		// Private Variables:

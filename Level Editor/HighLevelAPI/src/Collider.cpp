@@ -104,7 +104,9 @@ void Collider::BaseSerialize(Parser & parser) const
 {
 	parser.WriteVariable("CollisionGroup", CollisionGroup);
 	
-	parser.WriteVariable("CollisionFlags", printVector(CollisionFlags));
+	std::string flags = printVector(CollisionFlags);
+
+	parser.WriteVariable("CollisionFlags", flags);
 }
 
 void Collider::BaseDeserialize(Parser & parser)

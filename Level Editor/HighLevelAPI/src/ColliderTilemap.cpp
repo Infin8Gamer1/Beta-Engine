@@ -80,8 +80,10 @@ bool ColliderTilemap::IsCollidingWith(const Collider & other) const
 	ResolveCollisions(otherRect, otherTransform, otherPhysics, mapCollision);
 
 	if (mapCollision.bottom || mapCollision.left || mapCollision.right || mapCollision.top) {
-		//call collision handler for the other object
-		other.GetMapCollisionHandler()(*other.GetOwner(), mapCollision);
+		if (other.GetMapCollisionHandler() != nullptr) {
+			//call collision handler for the other object
+			other.GetMapCollisionHandler()(*other.GetOwner(), mapCollision);
+		}
 		//we collided so return true
 		return true;
 	}

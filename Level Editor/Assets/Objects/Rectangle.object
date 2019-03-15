@@ -3,7 +3,7 @@ Rectangle
   numComponents : 4
   Transform
   {
-    translation : { 0, 0 }
+    translation : { 25, 0 }
     rotation : 0
     scale : { 250, 100 }
   }
@@ -11,7 +11,7 @@ Rectangle
   {
     frameIndex : 0
     color : { 1 , 1 , 1 , 1 }
-	spriteSourceName : Empty
+    spriteSourceName : Empty
   }
   Physics
   {
@@ -19,12 +19,12 @@ Rectangle
     velocity : { 0, 0 }
     angularVelocity : 0
     mass : 1
-	gravity : { 0, 0 }
+    gravity : { 0, 0 }
   }
   ColliderRectangle
   {
-	CollisionGroup : default
-	CollisionFlags : all
+    CollisionGroup : default
+    CollisionFlags : all
     extents : { 125, 50 }
   }
 }

@@ -81,6 +81,8 @@ public:
 
 	// Draw any visible components attached to the game object.
 	void Draw() override;
+
+	size_t NumberOfComponents();
 	
 	// Adds a component to the object.
 	void AddComponent(Component* component);

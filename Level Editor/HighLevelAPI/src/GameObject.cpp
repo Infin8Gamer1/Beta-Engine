@@ -19,6 +19,7 @@
 GameObject::GameObject(const std::string & name) : BetaObject(name)
 {
 	isDestroyed = false;
+	damageHandler = nullptr;
 }
 
 GameObject::GameObject(const GameObject & other) : BetaObject(other.GetName())
@@ -35,6 +36,7 @@ GameObject::GameObject(const GameObject & other) : BetaObject(other.GetName())
 	}
 	
 	isDestroyed = false;
+	damageHandler = nullptr;
 }
 
 GameObject::~GameObject()
@@ -87,10 +89,10 @@ void GameObject::Serialize(Parser & parser) const
 
 	parser.BeginScope();
 
-	unsigned numComponents = 0;
+	size_t numComponents = components.size();
 	parser.WriteVar(numComponents);
 
-	for (unsigned i = 0; i < numComponents; i++)
+	for (size_t i = 0; i < numComponents; i++)
 	{
 		//write components name
 		parser.WriteValue(std::string(typeid(*components[i]).name()).substr(6));
@@ -135,6 +137,11 @@ void GameObject::Draw()
 	{
 		components[i]->Draw();
 	}
+}
+
+size_t GameObject::NumberOfComponents()
+{
+	return components.size();
 }
 
 void GameObject::AddComponent(Component * component)

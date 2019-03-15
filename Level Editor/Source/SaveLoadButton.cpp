@@ -63,7 +63,14 @@ void SaveLoadButton::Deserialize(Parser & parser)
 
 void SaveLoadButton::Clicked()
 {
-	saveManager = dynamic_cast<Levels::LevelManagerLevel*>(Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Manager")->GetLevel());
+	Space* saveManagerSpace = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Management");
+
+	if (saveManagerSpace == nullptr)
+	{
+		return;
+	}
+
+	saveManager = dynamic_cast<Levels::LevelManagerLevel*>(saveManagerSpace->GetLevel());
 
     if (myState == Save)
     {

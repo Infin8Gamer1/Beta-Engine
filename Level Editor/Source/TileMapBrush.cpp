@@ -38,7 +38,7 @@ void TileMapBrush::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
 
-	if (TileMapObject == nullptr || map == nullptr)
+	if (TileMapObject == nullptr || map == nullptr || TileMapObject)
 	{
 		Initialize();
 	}
@@ -87,6 +87,13 @@ void TileMapBrush::PlaceTile(Vector2D MousePos)
 	}
 
 	ColliderTilemap* CT = TileMapObject->GetComponent<ColliderTilemap>();
+
+	if (CT == nullptr)
+	{
+		Initialize();
+		return;
+	}
+
 	Vector2D tile = CT->ConvertWorldCordsToTileMapCords(MousePos);
 
 	int tileX = static_cast<int>(tile.x);

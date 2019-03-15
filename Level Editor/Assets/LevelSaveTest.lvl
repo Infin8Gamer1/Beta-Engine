@@ -1,0 +1,9 @@
+LevelEditor
+{
+  numGameObjects : 3
+  {
+    GameObjectName : TileMap
+    GameObjectName : Circle
+    GameObjectName : Rectangle
+  }
+}

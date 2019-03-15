@@ -143,10 +143,11 @@ private:
 	{
 		std::string os;
 		for (int i = 0; i < v.size(); ++i) {
-			os + v[i];
-			if (i != v.size() - 1)
-				os + ",";
+			os = os + v[i] + ", ";
 		}
+
+		os = os.substr(0, os.find_last_of(","));
+
 		return os;
 	}
 

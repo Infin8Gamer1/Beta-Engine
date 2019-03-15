@@ -49,6 +49,9 @@
 #include <glfw3.h>
 #include <glfw3native.h>
 
+#include <shobjidl.h> 
+#include <sstream>
+
 Levels::LevelManagerLevel::LevelManagerLevel() : Level("LevelManager")
 {
 	uiSpace = nullptr;
@@ -116,7 +119,12 @@ void Levels::LevelManagerLevel::Unload()
 
 void Levels::LevelManagerLevel::LoadLevel()
 {
-	std::string fileName = GetOpenLocation();
+	std::string fileName = BasicFileOpen();//GetOpenLocation();
+
+	if (fileName == "")
+	{
+		return;
+	}
 
 	fileName = fileName.substr(fileName.find_last_of("\\") + 1);
 
@@ -129,6 +137,8 @@ void Levels::LevelManagerLevel::LoadLevel()
 	levelSpace->RestartLevel();
 
 	uiSpace->RestartLevel();
+
+	GetSpace()->RestartLevel();
 }
 
 void Levels::LevelManagerLevel::SaveLevel()
@@ -138,7 +148,13 @@ void Levels::LevelManagerLevel::SaveLevel()
 		return;
 	}
 
-	std::string fileName = GetSaveLocation();
+	std::string fileName = BasicFileSave();//GetSaveLocation();
+
+	if (fileName == "")
+	{
+		return;
+	}
+
 	fileName = fileName.substr(fileName.find_last_of("\\") + 1);
 
 	//fileName = fileName.substr(0, fileName.find_first_of("."));
@@ -146,7 +162,6 @@ void Levels::LevelManagerLevel::SaveLevel()
 	fileName = LevelFilePath + fileName;
 
 	levelSpace->GetLevel()->SetFileLocation(fileName);
-
 
 	levelSpace->GetLevel()->SaveLevel();
 }
@@ -171,68 +186,104 @@ void Levels::LevelManagerLevel::Test() {
 	}
 }
 
-std::string Levels::LevelManagerLevel::GetSaveLocation()
+std::string Levels::LevelManagerLevel::BasicFileOpen()
 {
-	OPENFILENAME ofn;       // common dialog box structure
-	char szFile[260];       // buffer for file name
-	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());              // owner window
-	std::string fileName;
+	std::wstringstream ss;
 
-	// Initialize OPENFILENAME
-	ZeroMemory(&ofn, sizeof(ofn));
-	ofn.lStructSize = sizeof(ofn);
-	ofn.hwndOwner = hwnd;
-	ofn.lpstrFile = szFile;
-	// Set lpstrFile[0] to '\0' so that GetOpenFileName does not 
-	// use the contents of szFile to initialize itself.
-	ofn.lpstrFile[0] = '\0';
-	ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = "All\0*.*\0Level\0*.lvl\0";
-	ofn.nFilterIndex = 2;
-	ofn.lpstrFileTitle = NULL;
-	ofn.nMaxFileTitle = 0;
-	ofn.lpstrInitialDir = NULL;
-	ofn.Flags = OFN_PATHMUSTEXIST;
-
-	// Display the Save dialog box. 
-
-	if (GetSaveFileName(&ofn) == TRUE)
+	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED |
+		COINIT_DISABLE_OLE1DDE);
+	if (SUCCEEDED(hr))
 	{
-		fileName = std::string(szFile);
+		IFileOpenDialog *pFileOpen;
+
+		// Create the FileOpenDialog object.
+		hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_ALL,
+			IID_IFileOpenDialog, reinterpret_cast<void**>(&pFileOpen));
+
+		if (SUCCEEDED(hr))
+		{
+			// Show the Open dialog box.
+			hr = pFileOpen->Show(NULL);
+
+			// Get the file name from the dialog box.
+			if (SUCCEEDED(hr))
+			{
+				IShellItem *pItem;
+				hr = pFileOpen->GetResult(&pItem);
+				if (SUCCEEDED(hr))
+				{
+					//PWSTR pszFilePath;
+					wchar_t* pszFilePath;
+					hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);
+
+					// Display the file name to the user.
+					if (SUCCEEDED(hr))
+					{
+						//std::string filePath(pszFilePath);
+						ss << pszFilePath;
+						//MessageBox(NULL, pszFilePath, "File Path", MB_OK);
+						CoTaskMemFree(pszFilePath);
+					}
+					pItem->Release();
+				}
+			}
+			pFileOpen->Release();
+		}
+		CoUninitialize();
 	}
 
-	return fileName;
+	std::wstring output = ss.str();
+
+	return std::string(output.begin(), output.end());
 }
 
-std::string Levels::LevelManagerLevel::GetOpenLocation()
+std::string Levels::LevelManagerLevel::BasicFileSave()
 {
-	OPENFILENAME ofn;       // common dialog box structure
-	char szFile[260];       // buffer for file name
-	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());              // owner window
-	std::string fileName = "";
+	std::wstringstream ss;
 
-	// Initialize OPENFILENAME
-	ZeroMemory(&ofn, sizeof(ofn));
-	ofn.lStructSize = sizeof(ofn);
-	ofn.hwndOwner = hwnd;
-	ofn.lpstrFile = szFile;
-	// Set lpstrFile[0] to '\0' so that GetOpenFileName does not 
-	// use the contents of szFile to initialize itself.
-	ofn.lpstrFile[0] = '\0';
-	ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = "All\0*.*\0Level\0*.lvl\0";
-	ofn.nFilterIndex = 1;
-	ofn.lpstrFileTitle = NULL;
-	ofn.nMaxFileTitle = 0;
-	ofn.lpstrInitialDir = NULL;
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
-
-	// Display the Open dialog box. 
-	if (GetOpenFileName(&ofn) == TRUE)
+	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED |
+		COINIT_DISABLE_OLE1DDE);
+	if (SUCCEEDED(hr))
 	{
-		//std::cout << szFile << std::endl;
-		fileName = std::string(szFile);
+		IFileSaveDialog *pFileSave;
+
+		// Create the FileOpenDialog object.
+		hr = CoCreateInstance(CLSID_FileSaveDialog, NULL, CLSCTX_ALL,
+			IID_IFileSaveDialog, reinterpret_cast<void**>(&pFileSave));
+
+		if (SUCCEEDED(hr))
+		{
+			// Show the Open dialog box.
+			hr = pFileSave->Show(NULL);
+
+			// Get the file name from the dialog box.
+			if (SUCCEEDED(hr))
+			{
+				IShellItem *pItem;
+				hr = pFileSave->GetResult(&pItem);
+				if (SUCCEEDED(hr))
+				{
+					//PWSTR pszFilePath;
+					wchar_t* pszFilePath;
+					hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);
+
+					// Display the file name to the user.
+					if (SUCCEEDED(hr))
+					{
+						//std::string filePath(pszFilePath);
+						ss << pszFilePath;
+						//MessageBox(NULL, pszFilePath, "File Path", MB_OK);
+						CoTaskMemFree(pszFilePath);
+					}
+					pItem->Release();
+				}
+			}
+			pFileSave->Release();
+		}
+		CoUninitialize();
 	}
 
-	return fileName;
+	std::wstring output = ss.str();
+
+	return std::string(output.begin(), output.end());
 }
