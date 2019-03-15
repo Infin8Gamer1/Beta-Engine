@@ -26,6 +26,7 @@
 
 // Initial game state
 #include "LevelEditorLevel.h"
+#include "LevelManagerLevel.h"
 #include "LevelEditorUI.h"
 
 //------------------------------------------------------------------------------
@@ -56,9 +57,15 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	Space* uiSpace = new Space("UI", false);
 	uiSpace->SetLevel(new Levels::LevelEditorUI());
 
+	// Create a new space called "Level"
+	Space* managmentSpace = new Space("Management", false);
+	// Set initial level to the second level.
+	managmentSpace->SetLevel(new Levels::LevelManagerLevel());
+
 	SpaceManager* spaceManager = new SpaceManager();
 	spaceManager->AddSpace(*space);
 	spaceManager->AddSpace(*uiSpace);
+	spaceManager->AddSpace(*managmentSpace);
 
 	Engine::GetInstance().AddModule(spaceManager);
 

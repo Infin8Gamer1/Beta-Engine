@@ -23,7 +23,6 @@
 #include <Transform.h>
 #include <Physics.h>
 #include <ColliderTilemap.h>
-#include "SaveManager.h"
 
 //Resources
 #include <Mesh.h>
@@ -57,7 +56,6 @@ void Levels::LevelEditorLevel::Load()
 
 	////Register Custom Components
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::CameraMovement>();
-	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::SaveManager>();
 	GameObjectFactory::GetInstance().RegisterComponent<TileMapBrush>();
 
 	//GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Bullet"));
@@ -80,11 +78,8 @@ void Levels::LevelEditorLevel::Initialize()
 	GameObject* Brush = GameObjectFactory::GetInstance().CreateObject("Brush");
 	GetSpace()->GetObjectManager().AddObject(*Brush);
 
-	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("EditorManager");
+	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("CameraManager");
 	GetSpace()->GetObjectManager().AddObject(*CameraMovement);
-
-	//play background music
-	//musicChannel = soundManager->PlaySound("Asteroid Field");
 }
 
 void Levels::LevelEditorLevel::Update(float dt)

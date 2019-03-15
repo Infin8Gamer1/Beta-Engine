@@ -17,9 +17,10 @@ ParseException::ParseException(const std::string & fileName, const std::string &
 {
 }
 
-Parser::Parser(const std::string & _filename, std::ios_base::openmode mode) : stream(_filename, mode)
+Parser::Parser(const std::string & _filename, std::ios_base::openmode _mode) : stream(_filename, _mode)
 {	
 	filename = _filename;
+	mode = _mode;
 	indentLevel = 0;
 }
 

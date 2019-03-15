@@ -42,7 +42,7 @@ void Level::Deserialize(Parser & parser)
 
 	if (TileMapName != "Null" && TileMapName != "")
 	{
-		Tilemap* map = ResourceManager::GetInstance().GetTilemap(TileMapName, true);
+		Tilemap* map = ResourceManager::GetInstance().GetTilemap(TileMapName, true, true);
 
 		if (map == nullptr) {
 			throw ParseException(TileMapName, "TileMap " + TileMapName + " could not be found! ERROR 404");
@@ -66,25 +66,18 @@ void Level::Deserialize(Parser & parser)
 			otherTileMap->Destroy();
 		}
 
-		GameObject* GO = new GameObject("TileMap");
+		GameObject* GO = GameObjectFactory::GetInstance().CreateObject("TileMap");
 
-		Transform* transform = new Transform();
-		SpriteTilemap* spriteTilemap = new SpriteTilemap();
-		ColliderTilemap* colliderTilemap = new ColliderTilemap();
+		GO->GetComponent<Transform>()->SetScale(TileMapScale);
+		GO->GetComponent<Transform>()->SetTranslation(TileMapPos);
 
-		transform->SetScale(TileMapScale);
-		transform->SetTranslation(TileMapPos);
+		GO->GetComponent<SpriteTilemap>()->SetTilemap(map);
+		GO->GetComponent<SpriteTilemap>()->SetSpriteSource(ss);
 
-		spriteTilemap->SetTilemap(map);
-		spriteTilemap->SetSpriteSource(ss);
-
-		colliderTilemap->SetTilemap(map);
-
-		GO->AddComponent(transform);
-		GO->AddComponent(spriteTilemap);
-		GO->AddComponent(colliderTilemap);
+		GO->GetComponent<ColliderTilemap>()->SetTilemap(map);
 
 		GetSpace()->GetObjectManager().AddObject(*GO);
+		//gameObjects.push_back(GO);
 	}
 
 	unsigned numGameObjects = 0;
@@ -114,11 +107,14 @@ void Level::Serialize(Parser & parser) const
 
 	parser.BeginScope();
 
-	SpriteTilemap* spriteTileMap = GetSpace()->GetObjectManager().GetObjectByName("TileMap")->GetComponent<SpriteTilemap>();
-	
+	GameObject* tileMapGO = GetSpace()->GetObjectManager().GetObjectByName("TileMap");
 
-	if (spriteTileMap != nullptr) {
+	if (tileMapGO != nullptr) {
+		SpriteTilemap* spriteTileMap = tileMapGO->GetComponent<SpriteTilemap>();
+
 		Tilemap* map = spriteTileMap->GetTilemap();
+		ResourceManager::GetInstance().SaveTilemapToFile(map);
+
 		SpriteSource* ss = spriteTileMap->GetSpriteSource();
 		Transform* transform = spriteTileMap->GetOwner()->GetComponent<Transform>();
 
@@ -133,6 +129,8 @@ void Level::Serialize(Parser & parser) const
 
 		std::string TileMapSpriteSource = ss->GetName();
 		parser.WriteVar(TileMapSpriteSource);
+
+		
 	}
 	else {
 		std::string TileMapName = "Null";

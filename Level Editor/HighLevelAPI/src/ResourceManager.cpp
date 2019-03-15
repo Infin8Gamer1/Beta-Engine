@@ -222,8 +222,22 @@ void ResourceManager::SaveSpriteSourceToFile(SpriteSource * object)
 	std::cout << "The Game Object: " << object->GetName() << " was saved to \"" << SpriteSourcesFilePath << object->GetName() << ".spriteSource\"" << std::endl;
 }
 
-Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool createIfNotFound)
+Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool createIfNotFound, bool reload)
 {
+	if (reload) {
+		for (size_t i = 0; i < Tilemaps.size(); i++)
+		{
+			std::string currentName = Tilemaps[i]->GetName();
+
+			if (currentName == tilemapName) {
+				//return Tilemaps[i];
+				Tilemaps[i] = LoadTileMapFromFile(tilemapName);
+				return Tilemaps[i];
+			}
+		}
+	}
+	
+
 	for (size_t i = 0; i < Tilemaps.size(); i++)
 	{
 		std::string currentName = Tilemaps[i]->GetName();
@@ -235,14 +249,7 @@ Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool crea
 
 	if (createIfNotFound) {
 
-		Parser* parser = new Parser(TileMapsFilePath + tilemapName + ".tileMap", std::fstream::in);
-
-		Tilemap* map = new Tilemap(tilemapName);
-
-		map->Deserialize(*parser);
-
-		delete parser;
-		parser = nullptr;
+		Tilemap* map = LoadTileMapFromFile(tilemapName);
 
 		map->Print();
 
@@ -251,7 +258,8 @@ Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool crea
 			std::cout << "Error Loading Tilemap!";
 
 			delete map;
-		} else {
+		}
+		else {
 			AddTilemap(map);
 
 			return map;
@@ -259,6 +267,7 @@ Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool crea
 	}
 
 	return nullptr;
+	
 }
 
 bool ResourceManager::TilemapExists(Tilemap * map)
@@ -285,6 +294,32 @@ void ResourceManager::AddTilemap(Tilemap * map)
 	else {
 		delete map;
 	}
+}
+
+void ResourceManager::SaveTilemapToFile(Tilemap * map)
+{
+	Parser* parser = new Parser(TileMapsFilePath + map->GetName() + ".tileMap", std::fstream::out);
+
+	map->Serialize(*parser);
+
+	delete parser;
+	parser = nullptr;
+
+	std::cout << "The tilemap: " << map->GetName() << " was saved to \"" << TileMapsFilePath << map->GetName() << ".tileMap\"" << std::endl;
+}
+
+Tilemap * ResourceManager::LoadTileMapFromFile(const std::string & tilemapName)
+{
+	Parser* parser = new Parser(TileMapsFilePath + tilemapName + ".tileMap", std::fstream::in);
+
+	Tilemap* map = new Tilemap(tilemapName);
+
+	map->Deserialize(*parser);
+
+	delete parser;
+	parser = nullptr;
+
+	return map;
 }
 
 void ResourceManager::Shutdown()

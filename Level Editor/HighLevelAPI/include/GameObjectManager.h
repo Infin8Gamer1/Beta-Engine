@@ -90,6 +90,8 @@ public:
 	//   objectName = The name of the objects that should be counted.
 	unsigned GetObjectCount(const std::string& objectName) const;
 
+	void DestroyAllObjects();
+
 private:
 	// Disable copy constructor and assignment operator
 	GameObjectManager(const GameObjectManager&) = delete;

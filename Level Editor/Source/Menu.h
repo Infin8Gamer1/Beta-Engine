@@ -90,7 +90,7 @@ public:
 
     void ShowButtons();
 
-	void InitButtons(MenuType type);
+	void InitButtons();
 
     void SetType(MenuType type);
 

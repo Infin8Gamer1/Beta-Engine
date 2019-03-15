@@ -13,10 +13,11 @@
 #include "SpriteText.h"
 #include "SpaceManager.h"
 #include <Engine.h>
-#include "SaveManager.h"
 #include "Parser.h"
 #include "glfw3.h"
 #include <System.h>
+#include "LevelManagerLevel.h"
+#include <Level.h>
 
 SaveLoadButton::SaveLoadButton(state state) : Button("Button"), myState(state), saveManager(nullptr)
 {
@@ -27,8 +28,6 @@ void SaveLoadButton::Initialize()
     int windowWidth, windowHeight;
     GLFWwindow* handle = System::GetInstance().GetWindowHandle();
     glfwGetWindowSize(handle, &windowWidth, &windowHeight);
-
-    saveManager = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("EditorManager");
 
     float padding = 10.0f;
     Transform* t = GetOwner()->GetComponent<Transform>();
@@ -64,12 +63,14 @@ void SaveLoadButton::Deserialize(Parser & parser)
 
 void SaveLoadButton::Clicked()
 {
+	saveManager = dynamic_cast<Levels::LevelManagerLevel*>(Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Manager")->GetLevel());
+
     if (myState == Save)
     {
-        saveManager->GetComponent<Behaviors::SaveManager>()->Save();
+        saveManager->SaveLevel();
     }
     else //Load
     {
-        saveManager->GetComponent<Behaviors::SaveManager>()->Load();
+        saveManager->LoadLevel();
     }
 }

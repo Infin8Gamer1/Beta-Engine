@@ -85,11 +85,15 @@ public:
 	// Params:
 	//   tilemapName = The name of the tilemap.
 	//   createIfNotFound = Whether to create a tilemap if no tilemap is found.
-	Tilemap* GetTilemap(const std::string& tilemapName, bool createIfNotFound = true);
+	Tilemap* GetTilemap(const std::string& tilemapName, bool createIfNotFound = true, bool reload = false);
 
-	bool TilemapExists(Tilemap* mesh);
+	bool TilemapExists(Tilemap* map);
 
-	void AddTilemap(Tilemap* mesh);
+	void AddTilemap(Tilemap* map);
+
+	void SaveTilemapToFile(Tilemap* map);
+
+	Tilemap* LoadTileMapFromFile(const std::string& tilemapName);
 
 	// Unloads all resources used by the resource manager.
 	void Shutdown();

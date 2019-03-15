@@ -1,0 +1,11 @@
+LevelEditor
+{
+	TileMapName : Default
+	TileMapPos : { 0, 0 }
+	TileMapScale : { 100, 100 }
+	TileMapSpriteSource : TileMap
+	numGameObjects : 1
+	{
+		GameObjectName : Circle
+	}
+}

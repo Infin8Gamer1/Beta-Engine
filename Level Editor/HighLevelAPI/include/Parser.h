@@ -172,6 +172,7 @@ private:
 
 	std::fstream stream;
 	std::string filename;
+	std::ios_base::openmode mode;
 	unsigned indentLevel;
 	const char* tab = "  ";
 };

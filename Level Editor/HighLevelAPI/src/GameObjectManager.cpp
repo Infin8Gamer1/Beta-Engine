@@ -115,6 +115,22 @@ unsigned GameObjectManager::GetObjectCount(const std::string & objectName) const
 	return output;
 }
 
+void GameObjectManager::DestroyAllObjects()
+{
+	if (gameObjectActiveList.empty()) {
+		return;
+	}
+
+	for (size_t i = 0; i < gameObjectActiveList.size(); i++) {
+		delete gameObjectActiveList[i];
+		gameObjectActiveList[i] = nullptr;
+
+		gameObjectActiveList.erase(gameObjectActiveList.begin() + i);
+	}
+
+	gameObjectActiveList.shrink_to_fit();
+}
+
 void GameObjectManager::VariableUpdate(float dt)
 {
 	for (size_t i = 0; i < gameObjectActiveList.size(); i++)

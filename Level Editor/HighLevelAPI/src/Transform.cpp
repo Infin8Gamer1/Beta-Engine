@@ -38,7 +38,7 @@ Transform::Transform(Vector2D _translation, Vector2D _scale, float _rotation) : 
 
 Component * Transform::Clone() const
 {
-	return new Transform(translation, scale, rotation);
+	return new Transform(*this);
 }
 
 void Transform::Deserialize(Parser & parser)

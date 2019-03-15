@@ -25,8 +25,9 @@
 // Forward References:
 //------------------------------------------------------------------------------
 
-typedef class Space Space;
+class Space;
 class GameObject;
+class Tilemap;
 
 //------------------------------------------------------------------------------
 // Public Structures:

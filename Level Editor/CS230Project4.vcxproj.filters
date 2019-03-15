@@ -64,11 +64,11 @@
     <ClCompile Include="Source\TileButton.cpp">
       <Filter>Game\Behaviors\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SaveManager.cpp">
-      <Filter>Game\Behaviors</Filter>
-    </ClCompile>
     <ClCompile Include="Source\SaveLoadButton.cpp">
       <Filter>Game\Behaviors\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LevelManagerLevel.cpp">
+      <Filter>Game\Levels</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,11 +111,11 @@
     <ClInclude Include="Source\TileButton.h">
       <Filter>Game\Behaviors\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SaveManager.h">
-      <Filter>Game\Behaviors</Filter>
-    </ClInclude>
     <ClInclude Include="Source\SaveLoadButton.h">
       <Filter>Game\Behaviors\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LevelManagerLevel.h">
+      <Filter>Game\Levels</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

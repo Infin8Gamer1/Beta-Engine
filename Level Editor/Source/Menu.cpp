@@ -52,7 +52,7 @@ void Menu::Initialize()
 	transform->SetTranslation(menuLocation);
 	transform->SetScale(Vector2D(menuScale.x, windowHeight));
 
-	InitButtons(menuType);
+	InitButtons();
 }
 
 void Menu::Update(float dt)
@@ -156,9 +156,9 @@ void Menu::ShowButtons()
 
 
 
-void Menu::InitButtons(MenuType type)
+void Menu::InitButtons()
 {
-    if (type != TileMap) return;
+    if (menuType != TileMap) return;
 
 	GameObject* tileMapGO = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("TileMap");
 

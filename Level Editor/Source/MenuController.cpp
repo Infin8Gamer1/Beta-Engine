@@ -65,38 +65,42 @@ void MenuController::Initialize()
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*SaveButton);
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*LoadButton);
 
-    brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
+	brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
 }
 
 void MenuController::Update(float dt)
 {
-    bool canBrush = true;
+	if (brush != nullptr) {
 
-    for (size_t i = 0; i < menus.size(); i++)
-    {
-        if (menus[i]->GetComponent<Menu>()->IsMouseOnUI())
-        {
-            canBrush = false;
-        }
-        
-    }
-    for (size_t i = 0; i < buttons.size(); i++)
-    {
-        if (buttons[i]->getIsHovered())
-        {
-            canBrush = false;
-        }
+		bool canBrush = true;
 
-    }
+		for (size_t i = 0; i < menus.size(); i++)
+		{
+			if (menus[i]->GetComponent<Menu>()->IsMouseOnUI())
+			{
+				canBrush = false;
+			}
 
-    if (canBrush && !Input::GetInstance().IsKeyDown(VK_LBUTTON))
-    {
-        brush->Enable();
-    }
-    else if(!canBrush)
-    {
-        brush->Disable();
-    }
+		}
+		for (size_t i = 0; i < buttons.size(); i++)
+		{
+			if (buttons[i]->getIsHovered())
+			{
+				canBrush = false;
+			}
+
+		}
+
+		if (canBrush && !Input::GetInstance().IsKeyDown(VK_LBUTTON))
+		{
+			brush->Enable();
+		}
+		else if (!canBrush)
+		{
+			brush->Disable();
+		}
+	}
+	
 }
 
 void MenuController::ShowMenu(GameObject * menu)
@@ -146,4 +150,12 @@ void MenuController::RestoreTabsPos()
 
         tran->SetTranslation(Vector2D(x, tran->GetTranslation().y));
     }
+}
+
+void MenuController::Refresh()
+{
+	for (size_t i = 0; i < menus.size(); i++)
+	{
+		menus[i]->GetComponent<Menu>()->InitButtons();
+	}
 }

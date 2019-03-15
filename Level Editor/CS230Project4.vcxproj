@@ -110,11 +110,11 @@ xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
     <ClCompile Include="Source\ColorChange.cpp" />
     <ClCompile Include="Source\LevelEditorLevel.cpp" />
     <ClCompile Include="Source\LevelEditorUI.cpp" />
+    <ClCompile Include="Source\LevelManagerLevel.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Menu.cpp" />
     <ClCompile Include="Source\MenuController.cpp" />
     <ClCompile Include="Source\SaveLoadButton.cpp" />
-    <ClCompile Include="Source\SaveManager.cpp" />
     <ClCompile Include="Source\ScreenWrap.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -131,10 +131,10 @@ xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
     <ClInclude Include="Source\ColorChange.h" />
     <ClInclude Include="Source\LevelEditorLevel.h" />
     <ClInclude Include="Source\LevelEditorUI.h" />
+    <ClInclude Include="Source\LevelManagerLevel.h" />
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\MenuController.h" />
     <ClInclude Include="Source\SaveLoadButton.h" />
-    <ClInclude Include="Source\SaveManager.h" />
     <ClInclude Include="Source\ScreenWrap.h" />
     <ClInclude Include="Source\stdafx.h" />
     <ClInclude Include="Source\Tab.h" />

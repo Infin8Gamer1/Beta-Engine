@@ -23,7 +23,6 @@ Component * TileMapBrush::Clone() const
 
 void TileMapBrush::Initialize()
 {
-
 	GameObject* TileMapObject = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("TileMap");
 
 	if (TileMapObject != nullptr)
