@@ -60,11 +60,20 @@ void Levels::LevelManagerLevel::Load()
 	std::cout << GetName() << "::Load" << std::endl;
 
 	Graphics::GetInstance().GetCurrentCamera().Reset();
+
+	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::CameraMovement>();
+	GameObjectFactory::GetInstance().RegisterComponent<TileMapBrush>();
 }
 
 void Levels::LevelManagerLevel::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
+
+	GameObject* Brush = GameObjectFactory::GetInstance().CreateObject("Brush");
+	GetSpace()->GetObjectManager().AddObject(*Brush);
+
+	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("CameraManager");
+	GetSpace()->GetObjectManager().AddObject(*CameraMovement);
 }
 
 void Levels::LevelManagerLevel::Update(float dt)
@@ -107,53 +116,19 @@ void Levels::LevelManagerLevel::Unload()
 
 void Levels::LevelManagerLevel::LoadLevel()
 {
-	OPENFILENAME ofn;       // common dialog box structure
-	char szFile[260];       // buffer for file name
-	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());              // owner window
-	std::string fileName = "";
+	std::string fileName = GetOpenLocation();
 
-	// Initialize OPENFILENAME
-	ZeroMemory(&ofn, sizeof(ofn));
-	ofn.lStructSize = sizeof(ofn);
-	ofn.hwndOwner = hwnd;
-	ofn.lpstrFile = szFile;
-	// Set lpstrFile[0] to '\0' so that GetOpenFileName does not 
-	// use the contents of szFile to initialize itself.
-	ofn.lpstrFile[0] = '\0';
-	ofn.nMaxFile = sizeof(szFile);
-	ofn.lpstrFilter = "All\0*.*\0Level\0*.lvl\0";
-	ofn.nFilterIndex = 1;
-	ofn.lpstrFileTitle = NULL;
-	ofn.nMaxFileTitle = 0;
-	ofn.lpstrInitialDir = NULL;
-	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+	fileName = fileName.substr(fileName.find_last_of("\\") + 1);
 
-	levelSpace->GetObjectManager().DestroyAllObjects();
+	//fileName = fileName.substr(0, fileName.find_first_of("."));
 
-	// Display the Open dialog box. 
+	fileName = LevelFilePath + fileName;
 
-	if (GetOpenFileName(&ofn) == TRUE)
-	{
-		//std::cout << szFile << std::endl;
-		fileName = szFile;
-		fileName = fileName.substr(fileName.find_last_of("\\") + 1);
+	levelSpace->GetLevel()->SetFileLocation(fileName);
 
-		fileName = LevelFilePath + fileName;
+	levelSpace->RestartLevel();
 
-		Parser* parser = new Parser(fileName, std::fstream::in);
-
-		levelSpace->GetLevel()->Deserialize(*parser);
-
-		delete parser;
-
-		levelSpace->GetLevel()->Initialize();
-
-		levelSpace->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>()->Initialize();
-
-		uiSpace->RestartLevel();
-
-		//fileName = fileName.substr(0, fileName.find_first_of("."));
-	}
+	uiSpace->RestartLevel();
 }
 
 void Levels::LevelManagerLevel::SaveLevel()
@@ -163,9 +138,45 @@ void Levels::LevelManagerLevel::SaveLevel()
 		return;
 	}
 
+	std::string fileName = GetSaveLocation();
+	fileName = fileName.substr(fileName.find_last_of("\\") + 1);
+
+	//fileName = fileName.substr(0, fileName.find_first_of("."));
+
+	fileName = LevelFilePath + fileName;
+
+	levelSpace->GetLevel()->SetFileLocation(fileName);
+
+
+	levelSpace->GetLevel()->SaveLevel();
+}
+
+void Levels::LevelManagerLevel::Test() {
+
+	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());
+
+	int msgBoxID = MessageBox(
+		hwnd,
+		"Yes to load \nNo to save",
+		"Do You Want To Save Or Load?",
+		MB_ICONINFORMATION | MB_YESNO | MB_APPLMODAL
+	);
+
+	if (msgBoxID == IDYES)
+	{
+		LoadLevel();
+	}
+	else if (msgBoxID == IDNO) {
+		SaveLevel();
+	}
+}
+
+std::string Levels::LevelManagerLevel::GetSaveLocation()
+{
 	OPENFILENAME ofn;       // common dialog box structure
 	char szFile[260];       // buffer for file name
 	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());              // owner window
+	std::string fileName;
 
 	// Initialize OPENFILENAME
 	ZeroMemory(&ofn, sizeof(ofn));
@@ -187,57 +198,41 @@ void Levels::LevelManagerLevel::SaveLevel()
 
 	if (GetSaveFileName(&ofn) == TRUE)
 	{
-		//std::cout << szFile << std::endl;
-		std::string fileName = szFile;
-		fileName = fileName.substr(fileName.find_last_of("\\") + 1);
-
-		//fileName = fileName.substr(0, fileName.find_first_of("."));
-
-		Parser* parser = new Parser(LevelFilePath + fileName, std::fstream::out);
-
-		levelSpace->GetLevel()->Serialize(*parser);
-
-		delete parser;
+		fileName = std::string(szFile);
 	}
 
+	return fileName;
 }
 
-void Levels::LevelManagerLevel::Test() {
+std::string Levels::LevelManagerLevel::GetOpenLocation()
+{
+	OPENFILENAME ofn;       // common dialog box structure
+	char szFile[260];       // buffer for file name
+	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());              // owner window
+	std::string fileName = "";
 
-	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());
+	// Initialize OPENFILENAME
+	ZeroMemory(&ofn, sizeof(ofn));
+	ofn.lStructSize = sizeof(ofn);
+	ofn.hwndOwner = hwnd;
+	ofn.lpstrFile = szFile;
+	// Set lpstrFile[0] to '\0' so that GetOpenFileName does not 
+	// use the contents of szFile to initialize itself.
+	ofn.lpstrFile[0] = '\0';
+	ofn.nMaxFile = sizeof(szFile);
+	ofn.lpstrFilter = "All\0*.*\0Level\0*.lvl\0";
+	ofn.nFilterIndex = 1;
+	ofn.lpstrFileTitle = NULL;
+	ofn.nMaxFileTitle = 0;
+	ofn.lpstrInitialDir = NULL;
+	ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
 
-	int msgBoxID = MessageBox(
-		hwnd,
-		"Yes to load \nNo to save",
-		"Confirm That This is a Test",
-		MB_ICONINFORMATION | MB_YESNO | MB_APPLMODAL
-	);
-
-	if (msgBoxID == IDYES)
+	// Display the Open dialog box. 
+	if (GetOpenFileName(&ofn) == TRUE)
 	{
-		levelSpace->GetObjectManager().DestroyAllObjects();
-		uiSpace->GetObjectManager().DestroyAllObjects();
-
-		Parser* parser = new Parser("Assets/Level.lvl", std::fstream::in);
-
-		levelSpace->GetLevel()->Deserialize(*parser);
-
-		delete parser;
-
-		levelSpace->GetLevel()->Initialize();
-
-		uiSpace->RestartLevel();
-
-		std::cout << "Loaded";
-	}
-	else if (msgBoxID == IDNO) {
-		Parser* parser = new Parser("Assets/Level1.lvl", std::fstream::out);
-
-		levelSpace->GetLevel()->Serialize(*parser);
-
-		std::cout << "Saved";
+		//std::cout << szFile << std::endl;
+		fileName = std::string(szFile);
 	}
 
-	
-
+	return fileName;
 }

@@ -11,7 +11,6 @@
 
 #include "stdafx.h"
 #include "CameraMovement.h"
-#include "GameObject.h"
 #include <Graphics.h>
 #include <Input.h>
 #include <Parser.h>
@@ -20,6 +19,9 @@
 #include <System.h>
 #include <Space.h>
 #include <Camera.h>
+#include <Engine.h>
+#include <SpaceManager.h>
+#include <GameObject.h>
 
 int Behaviors::CameraMovement::MouseWheelY = 0;
 
@@ -73,8 +75,10 @@ void Behaviors::CameraMovement::Serialize(Parser & parser) const
 
 void Behaviors::CameraMovement::Update(float dt)
 {
-	Vector2D cameraTranslation = Graphics::GetInstance().GetCurrentCamera().GetTranslation();
-	float cameraFOV = Graphics::GetInstance().GetCurrentCamera().GetFOV();
+	Camera* camera = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetCamera();
+
+	Vector2D cameraTranslation = camera->GetTranslation();
+	float cameraFOV = camera->GetFOV();
 
 	if (Input::GetInstance().IsKeyDown(up))
 	{
@@ -112,10 +116,10 @@ void Behaviors::CameraMovement::Update(float dt)
 		previousMouseWheelY = MouseWheelY;
 	}
 	else {
-		cameraFOV = cameraFOV + MouseWheelY * 5;
+		cameraFOV = cameraFOV + MouseWheelY * -5;
 		previousMouseWheelY = MouseWheelY;
 	}
 
-	Graphics::GetInstance().GetCurrentCamera().SetTranslation(cameraTranslation);
-	Graphics::GetInstance().GetCurrentCamera().SetFOV(cameraFOV);
+	camera->SetTranslation(cameraTranslation);
+	camera->SetFOV(cameraFOV);
 }

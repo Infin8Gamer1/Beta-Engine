@@ -10,10 +10,13 @@
 #include <Parser.h>
 #include <Transform.h>
 #include <GameObject.h>
+#include <Engine.h>
+#include <SpaceManager.h>
 
 TileMapBrush::TileMapBrush() : Component("TileMapBrush")
 {
 	map = nullptr;
+	TileMapObject = nullptr;
 }
 
 Component * TileMapBrush::Clone() const
@@ -23,7 +26,7 @@ Component * TileMapBrush::Clone() const
 
 void TileMapBrush::Initialize()
 {
-	GameObject* TileMapObject = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("TileMap");
+	TileMapObject = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("TileMap");
 
 	if (TileMapObject != nullptr)
 	{
@@ -34,6 +37,11 @@ void TileMapBrush::Initialize()
 void TileMapBrush::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
+
+	if (TileMapObject == nullptr || map == nullptr)
+	{
+		Initialize();
+	}
 
 	//see if the player has clicked and has enough tiles
 	if (enabled && Input::GetInstance().IsKeyDown(VK_LBUTTON)) {
@@ -74,11 +82,11 @@ void TileMapBrush::Disable()
 
 void TileMapBrush::PlaceTile(Vector2D MousePos)
 {
-	if (map == nullptr) {
+	if (map == nullptr || TileMapObject == nullptr) {
 		return;
 	}
 
-	ColliderTilemap* CT = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("TileMap")->GetComponent<ColliderTilemap>();
+	ColliderTilemap* CT = TileMapObject->GetComponent<ColliderTilemap>();
 	Vector2D tile = CT->ConvertWorldCordsToTileMapCords(MousePos);
 
 	int tileX = static_cast<int>(tile.x);

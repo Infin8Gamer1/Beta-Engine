@@ -74,8 +74,6 @@ namespace Levels
 		// Window Title
 		const std::string WindowTitle = "Level Editor";
 
-		Space* uiSpace;
-
 		// Sound manager
 		SoundManager* soundManager;
 		FMOD::Channel* musicChannel;

@@ -20,6 +20,7 @@
 #include "MenuController.h"
 #include "Tab.h"
 #include "TileButton.h"
+#include "TileMapBrush.h"
 
 //Resources
 #include <Mesh.h>
@@ -36,6 +37,7 @@
 #include <Random.h>
 #include <Graphics.h>
 #include "SaveLoadButton.h"
+#include "CameraMovement.h"
 
 Levels::LevelEditorUI::LevelEditorUI() : Level("UI")
 {
@@ -61,11 +63,10 @@ void Levels::LevelEditorUI::Initialize()
 	std::cout << GetName() << "::Initialize" << std::endl;
 
 	GameObject* MenuController = GameObjectFactory::GetInstance().CreateObject("MenuController");
-    
 	GetSpace()->GetObjectManager().AddObject(*MenuController);
 
-    GameObject* saveText = GameObjectFactory::GetInstance().CreateObject("SpriteText");
-
+    /*GameObject* saveText = GameObjectFactory::GetInstance().CreateObject("SpriteText");
+	GetSpace()->GetObjectManager().AddObject(*saveText);*/
 }
 
 void Levels::LevelEditorUI::Update(float dt)

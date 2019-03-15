@@ -18,8 +18,23 @@ Component * TileButton::Clone() const
 	return new TileButton(*this);
 }
 
+void TileButton ::Initialize()
+{
+	GameObject* brushObject = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Management")->GetObjectManager().GetObjectByName("Brush");
+
+	if (brushObject != nullptr)
+	{
+		brush = brushObject->GetComponent<TileMapBrush>();
+	}
+}
+
 void TileButton::Clicked()
 {
+	if (brush == nullptr)
+	{
+		Initialize();
+	}
+
 	brush->SetSelectedTile(TileID);
 }
 

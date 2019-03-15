@@ -181,7 +181,7 @@ void Menu::InitButtons()
 
 		button->GetComponent<TileButton>()->SetTileID(i);
 		
-		button->GetComponent<TileButton>()->SetBrush(Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>());
+		//button->GetComponent<TileButton>()->SetBrush(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>());
 		
 		Vector2D pos = Vector2D(i % rows, -(i / rows));
 

@@ -11,20 +11,13 @@
 
 #include "stdafx.h"
 #include "Level.h"
-#include "Space.h"
+#include <Space.h>
 #include <Parser.h>
-#include <Tilemap.h>
-#include <ResourceManager.h>
 #include <GameObjectFactory.h>
-#include <GameObject.h>
-#include <Transform.h>
-#include <SpriteTilemap.h>
-#include <ColliderTilemap.h>
-#include <SpriteSource.h>
 
 Level::Level(const std::string & name) : BetaObject(name)
 {
-
+	fileLocation = "";
 }
 
 Space * Level::GetSpace() const
@@ -36,8 +29,8 @@ void Level::Deserialize(Parser & parser)
 {
 	parser.ReadSkip(GetName());
 	parser.ReadSkip("{");
-	
-	std::string TileMapName;
+
+	/*std::string TileMapName;
 	parser.ReadVar(TileMapName);
 
 	if (TileMapName != "Null" && TileMapName != "")
@@ -78,7 +71,7 @@ void Level::Deserialize(Parser & parser)
 
 		GetSpace()->GetObjectManager().AddObject(*GO);
 		//gameObjects.push_back(GO);
-	}
+	}*/
 
 	unsigned numGameObjects = 0;
 	parser.ReadVar(numGameObjects);
@@ -93,7 +86,6 @@ void Level::Deserialize(Parser & parser)
 		GameObject* object = GameObjectFactory::GetInstance().CreateObject(GameObjectName);
 
 		GetSpace()->GetObjectManager().AddObject(*object);
-		gameObjects.push_back(object);
 	}
 
 	parser.ReadSkip("}");
@@ -107,17 +99,19 @@ void Level::Serialize(Parser & parser) const
 
 	parser.BeginScope();
 
-	GameObject* tileMapGO = GetSpace()->GetObjectManager().GetObjectByName("TileMap");
+	/*GameObject* tileMapGO = GetSpace()->GetObjectManager().GetObjectByName("TileMap");
 
 	if (tileMapGO != nullptr) {
 		SpriteTilemap* spriteTileMap = tileMapGO->GetComponent<SpriteTilemap>();
 
 		Tilemap* map = spriteTileMap->GetTilemap();
-		ResourceManager::GetInstance().SaveTilemapToFile(map);
-
 		SpriteSource* ss = spriteTileMap->GetSpriteSource();
 		Transform* transform = spriteTileMap->GetOwner()->GetComponent<Transform>();
 
+		//save the map to it's file
+		ResourceManager::GetInstance().SaveTilemapToFile(map);
+
+		//save the location of the map
 		std::string TileMapName = map->GetName();
 		parser.WriteVar(TileMapName);
 
@@ -130,25 +124,93 @@ void Level::Serialize(Parser & parser) const
 		std::string TileMapSpriteSource = ss->GetName();
 		parser.WriteVar(TileMapSpriteSource);
 
-		
+
 	}
 	else {
 		std::string TileMapName = "Null";
 		parser.WriteVar(TileMapName);
-	}
+	}*/
 
-	unsigned numGameObjects = gameObjects.size();
+	std::vector<GameObject*> activeGOs = GetSpace()->GetObjectManager().GetGameObjectActiveList();
+
+	unsigned numGameObjects = activeGOs.size();
 	parser.WriteVar(numGameObjects);
 
 	parser.BeginScope();
 
 	for (unsigned i = 0; i < numGameObjects; i++)
 	{
-		std::string GameObjectName = gameObjects[i]->GetName();
+		std::string GameObjectName = activeGOs[i]->GetName();
 		parser.WriteVar(GameObjectName);
+
+		GameObjectFactory::GetInstance().SaveObjectToFile(activeGOs[i]);
 	}
 
 	parser.EndScope();
 
 	parser.EndScope();
 }
+
+void Level::SaveLevel()
+{
+	if (GetFileLocation() != "") {
+		Parser* parser = new Parser(GetFileLocation(), std::fstream::out);
+
+		try
+		{
+			Serialize(*parser);
+		}
+		catch (ParseException e)
+		{
+			std::cout << e.what() << std::endl;
+
+			DisplayMessage(e.what());
+		}
+
+		delete parser;
+		parser = nullptr;
+	}
+}
+
+void Level::LoadLevel()
+{
+	if (GetFileLocation() != "") {
+		Parser* parser = new Parser(GetFileLocation(), std::fstream::in);
+
+		try
+		{
+			Deserialize(*parser);
+		}
+		catch (ParseException e)
+		{
+			std::cout << e.what() << std::endl;
+
+			DisplayMessage(e.what());
+		}
+
+		delete parser;
+		parser = nullptr;
+	}
+}
+
+void Level::SetFileLocation(std::string _fileLocation)
+{
+	fileLocation = _fileLocation;
+}
+
+std::string Level::GetFileLocation()
+{
+	return fileLocation;
+}
+
+void Level::DisplayMessage(std::string what)
+{
+	int msgBoxID = MessageBox(
+		NULL,
+		what.c_str(),
+		"There Was An ERROR!",
+		MB_ICONHAND | MB_OK | MB_APPLMODAL
+	);
+}
+
+

@@ -35,7 +35,7 @@ void SpriteTilemap::Deserialize(Parser & parser)
 	std::string tilemapLoc;
 	parser.ReadVariable("tilemapLoc", tilemapLoc);
 
-	SetTilemap(ResourceManager::GetInstance().GetTilemap(tilemapLoc));
+	SetTilemap(ResourceManager::GetInstance().GetTilemap(tilemapLoc, true, true));
 }
 
 void SpriteTilemap::Serialize(Parser & parser) const
@@ -43,6 +43,8 @@ void SpriteTilemap::Serialize(Parser & parser) const
 	Sprite::Serialize(parser);
 
 	parser.WriteVariable("tilemapLoc", map->GetName());
+
+	ResourceManager::GetInstance().SaveTilemapToFile(map);
 }
 
 void SpriteTilemap::Draw()

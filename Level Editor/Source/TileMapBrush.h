@@ -81,6 +81,7 @@ private:
 	void PlaceTile(Vector2D mousePosition);
 
 	Tilemap* map;
+	GameObject* TileMapObject;
 
 	int SelectedTileID;
 

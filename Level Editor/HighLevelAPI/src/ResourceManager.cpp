@@ -230,8 +230,24 @@ Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool crea
 			std::string currentName = Tilemaps[i]->GetName();
 
 			if (currentName == tilemapName) {
-				//return Tilemaps[i];
-				Tilemaps[i] = LoadTileMapFromFile(tilemapName);
+				Tilemap* map = LoadTileMapFromFile(tilemapName);
+
+				if (map != nullptr)
+				{
+					//delete the map already in tilemaps[i]
+					delete Tilemaps[i];
+					Tilemaps[i] = nullptr;
+
+					//reload the tilemap and put it in tilemaps[i]
+					Tilemaps[i] = map;
+				}
+				else {
+					std::cout << "Error Reloading Tilemap!";
+
+					delete map;
+				}
+
+				//return tilemaps[i]
 				return Tilemaps[i];
 			}
 		}
@@ -266,8 +282,7 @@ Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool crea
 		}
 	}
 
-	return nullptr;
-	
+	return nullptr;	
 }
 
 bool ResourceManager::TilemapExists(Tilemap * map)

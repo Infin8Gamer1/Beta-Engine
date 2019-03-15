@@ -23,6 +23,7 @@
 
 MenuController::MenuController() : Component("MenuController"), tabBuffer(10)
 {
+	brush = nullptr;
 }
 
 Component * MenuController::Clone() const
@@ -65,7 +66,12 @@ void MenuController::Initialize()
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*SaveButton);
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*LoadButton);
 
-	brush = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>();
+	GameObject* brushObject = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Management")->GetObjectManager().GetObjectByName("Brush");
+
+	if (brushObject != nullptr)
+	{
+		brush = brushObject->GetComponent<TileMapBrush>();
+	}
 }
 
 void MenuController::Update(float dt)
@@ -98,6 +104,14 @@ void MenuController::Update(float dt)
 		else if (!canBrush)
 		{
 			brush->Disable();
+		}
+	}
+	else {
+		GameObject* brushObject = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Management")->GetObjectManager().GetObjectByName("Brush");
+
+		if (brushObject != nullptr)
+		{
+			brush = brushObject->GetComponent<TileMapBrush>();
 		}
 	}
 	

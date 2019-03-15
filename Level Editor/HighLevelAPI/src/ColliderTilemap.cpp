@@ -38,7 +38,7 @@ void ColliderTilemap::Deserialize(Parser & parser)
 	std::string tilemapLoc;
 	parser.ReadVariable("tilemapLoc", tilemapLoc);
 
-	SetTilemap(ResourceManager::GetInstance().GetTilemap(tilemapLoc));
+	SetTilemap(ResourceManager::GetInstance().GetTilemap(tilemapLoc, true, true));
 }
 
 void ColliderTilemap::Serialize(Parser & parser) const
@@ -46,6 +46,8 @@ void ColliderTilemap::Serialize(Parser & parser) const
 	BaseSerialize(parser);
 
 	parser.WriteVariable("tilemapLoc", map->GetName());
+
+	ResourceManager::GetInstance().SaveTilemapToFile(map);
 }
 
 void ColliderTilemap::Draw()

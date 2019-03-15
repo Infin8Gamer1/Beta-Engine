@@ -15,18 +15,19 @@
 #include "LevelEditorUI.h"
 
 //Components
-#include "ScreenWrap.h"
-#include "TimedDeath.h"
 #include "CameraMovement.h"
 #include "TileMapBrush.h"
 #include <SpriteText.h>
 #include <Transform.h>
 #include <Physics.h>
 #include <ColliderTilemap.h>
+#include <SpriteTilemap.h>
 
 //Resources
 #include <Mesh.h>
 #include <Color.h>
+#include <Tilemap.h>
+#include <SpriteSource.h>
 
 //Systems
 #include <GameObjectFactory.h>
@@ -39,6 +40,7 @@
 #include <Random.h>
 #include <SpaceManager.h>
 #include <Graphics.h>
+#include <Parser.h>
 
 Levels::LevelEditorLevel::LevelEditorLevel() : Level("LevelEditor")
 {
@@ -55,11 +57,8 @@ void Levels::LevelEditorLevel::Load()
 	Graphics::GetInstance().GetCurrentCamera().Reset();
 
 	////Register Custom Components
-	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::CameraMovement>();
-	GameObjectFactory::GetInstance().RegisterComponent<TileMapBrush>();
 
 	//GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Bullet"));
-
 	//GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Asteroid"));
 
 	//Setup Sounds
@@ -69,17 +68,15 @@ void Levels::LevelEditorLevel::Load()
 
 	soundManager->AddBank("Master Bank.strings.bank");
 	soundManager->AddBank("Master Bank.bank");
+
+	SetFileLocation("Assets/Level1.lvl");
 }
 
 void Levels::LevelEditorLevel::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
 
-	GameObject* Brush = GameObjectFactory::GetInstance().CreateObject("Brush");
-	GetSpace()->GetObjectManager().AddObject(*Brush);
-
-	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("CameraManager");
-	GetSpace()->GetObjectManager().AddObject(*CameraMovement);
+	LoadLevel();
 }
 
 void Levels::LevelEditorLevel::Update(float dt)
@@ -90,6 +87,8 @@ void Levels::LevelEditorLevel::Update(float dt)
 void Levels::LevelEditorLevel::Shutdown()
 {
 	std::cout << GetName() << "::Shutdown" << std::endl;
+
+	//Save();
 
 	musicChannel->stop();
 	musicChannel = nullptr;

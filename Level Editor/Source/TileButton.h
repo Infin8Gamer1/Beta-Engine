@@ -42,6 +42,9 @@ public:
 
 	Component* Clone() const;
 
+	// Initialize this component (happens at object creation).
+	void Initialize() override;
+
 	//Click function for tab
 	void Clicked();
 

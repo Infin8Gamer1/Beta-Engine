@@ -39,7 +39,7 @@ public:
 	//------------------------------------------------------------------------------
 
 	// Constructor(s)
-	Space(const std::string& name, bool depth);
+	Space(const std::string& name, bool depth, bool useFirstSpaceCamera = false);
 
 	// Destructor
 	~Space();
@@ -107,6 +107,7 @@ private:
 	GameObjectManager objectManager;
 	Camera* camera;
 	bool depth;
+	bool useFirstSpaceCamera;
 };
 
 //------------------------------------------------------------------------------

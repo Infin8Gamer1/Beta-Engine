@@ -17,14 +17,17 @@
 #include <ResourceManager.h>
 #include <Graphics.h>
 #include <Camera.h>
+#include <Engine.h>
+#include <SpaceManager.h>
 
-Space::Space(const std::string & name, bool _depth) : BetaObject(name), objectManager(this)
+Space::Space(const std::string & name, bool _depth, bool _useFirstSpaceCamera) : BetaObject(name), objectManager(this)
 {
 	paused = false;
 	currentLevel = nullptr;
 	nextLevel = nullptr;
 	camera = new Camera();
 	depth = _depth;
+	useFirstSpaceCamera = _useFirstSpaceCamera;
 }
 
 Space::~Space()
@@ -38,9 +41,15 @@ void Space::Update(float dt)
 {
 	//std::cout << "Space::Update" << std::endl;
 
-	Graphics::GetInstance().SetCurrentCamera(*camera);
-	Graphics::GetInstance().SetDepthEnabled(depth);
-	
+	if (useFirstSpaceCamera)
+	{
+		Graphics::GetInstance().SetCurrentCamera(*Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->camera);
+		Graphics::GetInstance().SetDepthEnabled(Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->depth);
+	}
+	else {
+		Graphics::GetInstance().SetCurrentCamera(*camera);
+		Graphics::GetInstance().SetDepthEnabled(depth);
+	}
 
 	if (nextLevel != nullptr) {
 		ChangeLevel();

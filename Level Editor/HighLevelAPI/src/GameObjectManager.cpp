@@ -66,6 +66,11 @@ void GameObjectManager::Unload(void)
 
 void GameObjectManager::AddObject(GameObject & _gameObject)
 {
+	if (&_gameObject == nullptr) {
+		std::cout << "Attempted to add Null object" << std::endl;
+		return;
+	}
+
 	gameObjectActiveList.push_back(&_gameObject);
 	gameObjectActiveList.back()->SetParent(GetParent());
 	gameObjectActiveList.back()->Initialize();
@@ -129,6 +134,11 @@ void GameObjectManager::DestroyAllObjects()
 	}
 
 	gameObjectActiveList.shrink_to_fit();
+}
+
+std::vector<GameObject*> GameObjectManager::GetGameObjectActiveList()
+{
+	return gameObjectActiveList;
 }
 
 void GameObjectManager::VariableUpdate(float dt)

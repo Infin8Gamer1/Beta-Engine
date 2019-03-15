@@ -58,7 +58,7 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	uiSpace->SetLevel(new Levels::LevelEditorUI());
 
 	// Create a new space called "Level"
-	Space* managmentSpace = new Space("Management", false);
+	Space* managmentSpace = new Space("Management", true, true);
 	// Set initial level to the second level.
 	managmentSpace->SetLevel(new Levels::LevelManagerLevel());
 

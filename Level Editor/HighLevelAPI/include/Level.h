@@ -52,9 +52,19 @@ public:
 	// Saves object data to a file.
 	void Serialize(Parser& parser) const override;
 
+	void SaveLevel();
+
+	void LoadLevel();
+
+	void SetFileLocation(std::string fileLocation);
+
+	std::string GetFileLocation();
+
 private:
 
-	std::vector<GameObject*> gameObjects;
+	void DisplayMessage(std::string what);
+
+	std::string fileLocation;
 };
 
 //------------------------------------------------------------------------------

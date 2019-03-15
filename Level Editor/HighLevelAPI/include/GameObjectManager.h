@@ -90,7 +90,11 @@ public:
 	//   objectName = The name of the objects that should be counted.
 	unsigned GetObjectCount(const std::string& objectName) const;
 
+	// Destroys all of the gameobjects in the scene Imeadiatly
 	void DestroyAllObjects();
+
+	// Returns a copy of the active game objects
+	std::vector<GameObject*> GetGameObjectActiveList();
 
 private:
 	// Disable copy constructor and assignment operator
