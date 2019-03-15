@@ -234,10 +234,6 @@ Tilemap * ResourceManager::GetTilemap(const std::string & tilemapName, bool crea
 
 				if (map != nullptr)
 				{
-					//delete the map already in tilemaps[i]
-					delete Tilemaps[i];
-					Tilemaps[i] = nullptr;
-
 					//reload the tilemap and put it in tilemaps[i]
 					Tilemaps[i] = map;
 				}

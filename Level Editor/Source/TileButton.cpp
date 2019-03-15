@@ -11,6 +11,7 @@
 
 TileButton::TileButton() : Button("TileButton")
 {
+	brush = nullptr;
 }
 
 Component * TileButton::Clone() const

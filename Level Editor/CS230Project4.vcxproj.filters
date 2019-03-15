@@ -22,6 +22,9 @@
     <Filter Include="Game\Behaviors\LevelEdit">
       <UniqueIdentifier>{2bae48c8-1090-464e-b362-798022ca1eb2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Behaviors\UI\Buttons">
+      <UniqueIdentifier>{36164ccd-ec0b-407f-bbfa-b57b347c0e7b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\stdafx.cpp">
@@ -32,9 +35,6 @@
     </ClCompile>
     <ClCompile Include="Source\LevelEditorUI.cpp">
       <Filter>Game\Levels</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\CameraMovement.cpp">
-      <Filter>Game\Behaviors</Filter>
     </ClCompile>
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Menu.cpp">
@@ -52,23 +52,26 @@
     <ClCompile Include="Source\TileMapBrush.cpp">
       <Filter>Game\Behaviors\LevelEdit</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Button.cpp">
-      <Filter>Game\Behaviors\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Tab.cpp">
-      <Filter>Game\Behaviors\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Source\MenuController.cpp">
-      <Filter>Game\Behaviors\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TileButton.cpp">
-      <Filter>Game\Behaviors\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\SaveLoadButton.cpp">
       <Filter>Game\Behaviors\UI</Filter>
     </ClCompile>
     <ClCompile Include="Source\LevelManagerLevel.cpp">
       <Filter>Game\Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Button.cpp">
+      <Filter>Game\Behaviors\UI\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TileButton.cpp">
+      <Filter>Game\Behaviors\UI\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Tab.cpp">
+      <Filter>Game\Behaviors\UI\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\SaveLoadButton.cpp">
+      <Filter>Game\Behaviors\UI\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\CameraMovement.cpp">
+      <Filter>Game\Behaviors\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,9 +83,6 @@
     </ClInclude>
     <ClInclude Include="Source\LevelEditorUI.h">
       <Filter>Game\Levels</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\CameraMovement.h">
-      <Filter>Game\Behaviors</Filter>
     </ClInclude>
     <ClInclude Include="Source\Menu.h">
       <Filter>Game\Behaviors\UI</Filter>
@@ -99,23 +99,26 @@
     <ClInclude Include="Source\TileMapBrush.h">
       <Filter>Game\Behaviors\LevelEdit</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Button.h">
-      <Filter>Game\Behaviors\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Tab.h">
-      <Filter>Game\Behaviors\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Source\MenuController.h">
-      <Filter>Game\Behaviors\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TileButton.h">
-      <Filter>Game\Behaviors\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\SaveLoadButton.h">
       <Filter>Game\Behaviors\UI</Filter>
     </ClInclude>
     <ClInclude Include="Source\LevelManagerLevel.h">
       <Filter>Game\Levels</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Button.h">
+      <Filter>Game\Behaviors\UI\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TileButton.h">
+      <Filter>Game\Behaviors\UI\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Tab.h">
+      <Filter>Game\Behaviors\UI\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\SaveLoadButton.h">
+      <Filter>Game\Behaviors\UI\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\CameraMovement.h">
+      <Filter>Game\Behaviors\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
