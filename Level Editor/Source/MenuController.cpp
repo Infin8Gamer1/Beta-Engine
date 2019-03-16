@@ -59,13 +59,6 @@ void MenuController::Initialize()
 
     ShowMenu(TileMenu);
 
-    GameObject* SaveButton = GameObjectFactory::GetInstance().CreateObject("SaveButton");
-    GameObject* LoadButton = GameObjectFactory::GetInstance().CreateObject("LoadButton");
-    buttons.push_back(SaveButton->GetComponent<Button>());
-    buttons.push_back(LoadButton->GetComponent<Button>());
-    GetOwner()->GetSpace()->GetObjectManager().AddObject(*SaveButton);
-    GetOwner()->GetSpace()->GetObjectManager().AddObject(*LoadButton);
-
 	GameObject* brushObject = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Management")->GetObjectManager().GetObjectByName("Brush");
 
 	if (brushObject != nullptr)

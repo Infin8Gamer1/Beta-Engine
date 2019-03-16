@@ -114,7 +114,6 @@ xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Menu.cpp" />
     <ClCompile Include="Source\MenuController.cpp" />
-    <ClCompile Include="Source\SaveLoadButton.cpp" />
     <ClCompile Include="Source\ScreenWrap.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -126,6 +125,7 @@ xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
     <ClCompile Include="Source\TimedDeath.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Button.h" />
     <ClInclude Include="Source\CameraMovement.h" />
     <ClInclude Include="Source\ColorChange.h" />
@@ -134,13 +134,15 @@ xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
     <ClInclude Include="Source\LevelManagerLevel.h" />
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\MenuController.h" />
-    <ClInclude Include="Source\SaveLoadButton.h" />
     <ClInclude Include="Source\ScreenWrap.h" />
     <ClInclude Include="Source\stdafx.h" />
     <ClInclude Include="Source\Tab.h" />
     <ClInclude Include="Source\TileButton.h" />
     <ClInclude Include="Source\TileMapBrush.h" />
     <ClInclude Include="Source\TimedDeath.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

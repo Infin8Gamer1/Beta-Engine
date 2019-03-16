@@ -49,13 +49,44 @@
 #include <glfw3.h>
 #include <glfw3native.h>
 
+#include "../resource.h"
+
 #include <shobjidl.h> 
 #include <sstream>
+
+WNDPROC Levels::LevelManagerLevel::PreviousWndProc = nullptr;
+Levels::LevelManagerLevel* Levels::LevelManagerLevel::Instance = nullptr;
 
 Levels::LevelManagerLevel::LevelManagerLevel() : Level("LevelManager")
 {
 	uiSpace = nullptr;
 	levelSpace = nullptr;
+	Instance = this;
+}
+
+LRESULT CALLBACK Levels::LevelManagerLevel::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg)
+	{
+	case WM_COMMAND:
+		switch (LOWORD(wParam))
+		{
+		case ID_FILE_OPEN:
+			std::cout << "Open Menu Clicked" << std::endl;
+			Instance->LoadLevel();
+			break;
+		case ID_FILE_SAVE:
+			std::cout << "Save Menu Clicked" << std::endl;
+			Instance->SaveLevel();
+			break;
+		case ID_FILE_OPENGAMEOBJECT:
+			std::cout << "Open Game Object Menu Clicked" << std::endl;
+			break;
+		}
+		break;
+	}
+
+	return CallWindowProc(PreviousWndProc, hwnd, uMsg, wParam, lParam);
 }
 
 void Levels::LevelManagerLevel::Load()
@@ -66,6 +97,16 @@ void Levels::LevelManagerLevel::Load()
 
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::CameraMovement>();
 	GameObjectFactory::GetInstance().RegisterComponent<TileMapBrush>();
+
+	//Create Menu and Register new windows call back
+	HMENU hmenu = LoadMenu(GetModuleHandle(NULL), MAKEINTRESOURCE(IDR_MENU1));
+	if (hmenu != NULL) {
+		HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());
+
+		PreviousWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)&WindowProc);
+
+		SetMenu(hwnd, hmenu);
+	}
 }
 
 void Levels::LevelManagerLevel::Initialize()

@@ -67,9 +67,6 @@
     <ClCompile Include="Source\Tab.cpp">
       <Filter>Game\Behaviors\UI\Buttons</Filter>
     </ClCompile>
-    <ClCompile Include="Source\SaveLoadButton.cpp">
-      <Filter>Game\Behaviors\UI\Buttons</Filter>
-    </ClCompile>
     <ClCompile Include="Source\CameraMovement.cpp">
       <Filter>Game\Behaviors\Utils</Filter>
     </ClCompile>
@@ -114,11 +111,12 @@
     <ClInclude Include="Source\Tab.h">
       <Filter>Game\Behaviors\UI\Buttons</Filter>
     </ClInclude>
-    <ClInclude Include="Source\SaveLoadButton.h">
-      <Filter>Game\Behaviors\UI\Buttons</Filter>
-    </ClInclude>
     <ClInclude Include="Source\CameraMovement.h">
       <Filter>Game\Behaviors\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
 </Project>

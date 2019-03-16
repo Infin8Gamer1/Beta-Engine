@@ -29,6 +29,8 @@
 #include "LevelManagerLevel.h"
 #include "LevelEditorUI.h"
 
+#include "../resource.h"
+
 //------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
@@ -47,6 +49,8 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	UNREFERENCED_PARAMETER(command_line);
 	UNREFERENCED_PARAMETER(show);
 	UNREFERENCED_PARAMETER(instance);
+
+	
 
 	// Create a new space called "Level"
 	Space* space = new Space("Level", true);

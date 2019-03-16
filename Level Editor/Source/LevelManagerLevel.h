@@ -72,6 +72,13 @@ namespace Levels
 
 		std::string BasicFileSave();
 
+		static LRESULT CALLBACK WindowProc(
+			_In_ HWND   hwnd,
+			_In_ UINT   uMsg,
+			_In_ WPARAM wParam,
+			_In_ LPARAM lParam
+		);
+
 		//------------------------------------------------------------------------------
 		// Private Variables:
 		//------------------------------------------------------------------------------
@@ -79,6 +86,9 @@ namespace Levels
 		Space* levelSpace;
 
 		std::string LevelFilePath = "Assets/";
+
+		static WNDPROC PreviousWndProc;
+		static Levels::LevelManagerLevel* Instance;
 	};
 }
 

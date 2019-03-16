@@ -4,6 +4,6 @@ LevelEditor
   {
     GameObjectName : TileMap
     GameObjectName : Circle
-	GameObjectName : Rectangle
+    GameObjectName : Rectangle
   }
 }
