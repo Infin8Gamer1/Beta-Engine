@@ -9,7 +9,7 @@ TileMap
   }
   SpriteTilemap
   {
-    frameIndex : 8
+    frameIndex : 10
     color : { 1 , 1 , 1 , 1 }
     spriteSourceName : TileMap
     tilemapLoc : Default

@@ -26,6 +26,7 @@
 //------------------------------------------------------------------------------
 
 class Tilemap;
+class MenuController;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -58,22 +59,6 @@ public:
 
 	void SetTilemap(Tilemap * _map);
 
-	void SetSelectedTile(int selectedTileID);
-
-	// Write object data to file
-		// Params:
-		//   parser = The parser that is writing this object to a file.
-	void Serialize(Parser& parser) const override;
-
-	// Read object data from a file
-	// Params:
-	//   parser = The parser that is reading this object's data from a file.
-	void Deserialize(Parser& parser) override;
-
-    void Enable();
-
-    void Disable();
-
 private:
 	//------------------------------------------------------------------------------
 	// Private Variables:
@@ -83,9 +68,10 @@ private:
 	Tilemap* map;
 	GameObject* TileMapObject;
 
-	int SelectedTileID;
+	GameObject* menuObject;
+	MenuController* menuController;
 
-    bool enabled;
+	bool enabled;
 };
 
 

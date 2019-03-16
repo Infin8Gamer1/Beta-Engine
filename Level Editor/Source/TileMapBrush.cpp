@@ -12,11 +12,14 @@
 #include <GameObject.h>
 #include <Engine.h>
 #include <SpaceManager.h>
+#include "MenuController.h"
 
 TileMapBrush::TileMapBrush() : Component("TileMapBrush")
 {
 	map = nullptr;
 	TileMapObject = nullptr;
+	menuController = nullptr;
+	menuObject = nullptr;
 }
 
 Component * TileMapBrush::Clone() const
@@ -32,18 +35,34 @@ void TileMapBrush::Initialize()
 	{
 		map = TileMapObject->GetComponent<ColliderTilemap>()->GetTilemap();
 	}
+
+	menuObject = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("UI")->GetObjectManager().GetObjectByName("MenuController");
+
+	if (menuObject != nullptr)
+	{
+		menuController = menuObject->GetComponent<MenuController>();
+	}
 }
 
 void TileMapBrush::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
 
-	if (TileMapObject == nullptr || map == nullptr || TileMapObject)
+	if (TileMapObject == nullptr || map == nullptr || menuController == nullptr || menuObject == nullptr)
 	{
 		Initialize();
+		return;
 	}
 
-	//see if the player has clicked and has enough tiles
+	bool canBrush = !menuController->IsMouseOnUI();
+	if (canBrush && !Input::GetInstance().IsKeyDown(VK_LBUTTON))
+	{
+		enabled = true;
+	}
+	else if (!canBrush) {
+		enabled = false;
+	}
+
 	if (enabled && Input::GetInstance().IsKeyDown(VK_LBUTTON)) {
 		PlaceTile(Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition()));
 	}
@@ -54,37 +73,8 @@ void TileMapBrush::SetTilemap(Tilemap * _map)
 	map = _map;
 }
 
-void TileMapBrush::SetSelectedTile(int selectedTileID)
-{
-	SelectedTileID = selectedTileID;
-	std::cout << "Selected Tile : " << SelectedTileID << std::endl;
-}
-
-void TileMapBrush::Serialize(Parser & parser) const
-{
-	parser.WriteVariable("SelectedTileID", SelectedTileID);
-}
-
-void TileMapBrush::Deserialize(Parser & parser)
-{
-	parser.ReadVariable("SelectedTileID", SelectedTileID);
-}
-
-void TileMapBrush::Enable()
-{
-    enabled = true;
-}
-
-void TileMapBrush::Disable()
-{
-    enabled = false;
-}
-
 void TileMapBrush::PlaceTile(Vector2D MousePos)
 {
-	if (map == nullptr || TileMapObject == nullptr) {
-		return;
-	}
 
 	ColliderTilemap* CT = TileMapObject->GetComponent<ColliderTilemap>();
 
@@ -101,7 +91,7 @@ void TileMapBrush::PlaceTile(Vector2D MousePos)
 
 	//std::cout << "X : " << tileX << "Y : " << tileY << std::endl;
 
-	Vector2D offset = map->SetCellValue(tileX, tileY, SelectedTileID);
+	Vector2D offset = map->SetCellValue(tileX, tileY, menuController->GetSelectedTile());
 	offset.y = offset.y * CT->GetOwner()->GetComponent<Transform>()->GetScale().y;
 	offset.x = offset.x * CT->GetOwner()->GetComponent<Transform>()->GetScale().x;
 

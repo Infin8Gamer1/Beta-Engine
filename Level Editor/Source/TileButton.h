@@ -24,7 +24,7 @@
 // Forward Declarations:
 //------------------------------------------------------------------------------
 
-class TileMapBrush;
+class MenuController;
 class Sprite;
 
 //------------------------------------------------------------------------------
@@ -48,8 +48,6 @@ public:
 	//Click function for tab
 	void Clicked();
 
-	void SetBrush(TileMapBrush* brush);
-
 	void SetTileID(int ID);
 
 private:
@@ -58,7 +56,7 @@ private:
 	// Private Variables:
 	//------------------------------------------------------------------------------
 
-	TileMapBrush* brush;
+	MenuController* menuController;
 	Sprite* sprite;
 
 	int TileID;

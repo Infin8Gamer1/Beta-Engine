@@ -23,7 +23,6 @@
 
 MenuController::MenuController() : Component("MenuController"), tabBuffer(10)
 {
-	brush = nullptr;
 }
 
 Component * MenuController::Clone() const
@@ -58,56 +57,29 @@ void MenuController::Initialize()
     GameObject* ObjectTab = ObjectMenu->GetComponent<Menu>()->InitTab(1, tabBuffer);
 
     ShowMenu(TileMenu);
-
-	GameObject* brushObject = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Management")->GetObjectManager().GetObjectByName("Brush");
-
-	if (brushObject != nullptr)
-	{
-		brush = brushObject->GetComponent<TileMapBrush>();
-	}
 }
 
-void MenuController::Update(float dt)
+bool MenuController::IsMouseOnUI()
 {
-	if (brush != nullptr) {
+	bool IsMouseOnUI = false;
 
-		bool canBrush = true;
-
-		for (size_t i = 0; i < menus.size(); i++)
+	for (size_t i = 0; i < menus.size(); i++)
+	{
+		if (menus[i]->GetComponent<Menu>()->IsMouseOnUI())
 		{
-			if (menus[i]->GetComponent<Menu>()->IsMouseOnUI())
-			{
-				canBrush = false;
-			}
-
-		}
-		for (size_t i = 0; i < buttons.size(); i++)
-		{
-			if (buttons[i]->getIsHovered())
-			{
-				canBrush = false;
-			}
-
+			IsMouseOnUI = true;
 		}
 
-		if (canBrush && !Input::GetInstance().IsKeyDown(VK_LBUTTON))
+	}
+	for (size_t i = 0; i < buttons.size(); i++)
+	{
+		if (buttons[i]->getIsHovered())
 		{
-			brush->Enable();
-		}
-		else if (!canBrush)
-		{
-			brush->Disable();
+			IsMouseOnUI = true;
 		}
 	}
-	else {
-		GameObject* brushObject = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Management")->GetObjectManager().GetObjectByName("Brush");
 
-		if (brushObject != nullptr)
-		{
-			brush = brushObject->GetComponent<TileMapBrush>();
-		}
-	}
-	
+	return IsMouseOnUI;
 }
 
 void MenuController::ShowMenu(GameObject * menu)
@@ -159,10 +131,12 @@ void MenuController::RestoreTabsPos()
     }
 }
 
-void MenuController::Refresh()
+int MenuController::GetSelectedTile()
 {
-	for (size_t i = 0; i < menus.size(); i++)
-	{
-		menus[i]->GetComponent<Menu>()->InitButtons();
-	}
+	return SelectedTileID;
+}
+
+void MenuController::SetSelectedTile(int ID)
+{
+	SelectedTileID = ID;
 }

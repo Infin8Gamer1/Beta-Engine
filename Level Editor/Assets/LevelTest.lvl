@@ -1,9 +1,8 @@
 LevelEditor
 {
-  numGameObjects : 3
+  numGameObjects : 2
   {
     GameObjectName : TileMap
     GameObjectName : Circle
-    GameObjectName : Rectangle
   }
 }

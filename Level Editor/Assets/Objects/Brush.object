@@ -3,6 +3,5 @@ Brush
   numComponents : 1
   TileMapBrush
   {
-	SelectedTileID : 3
   }
 }

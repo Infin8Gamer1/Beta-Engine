@@ -7,11 +7,11 @@
 #include <GameObjectManager.h>
 #include <GameObject.h>
 #include <SpriteTilemap.h>
-#include "TileMapBrush.h"
+#include "MenuController.h"
 
 TileButton::TileButton() : Button("TileButton")
 {
-	brush = nullptr;
+	menuController = nullptr;
 }
 
 Component * TileButton::Clone() const
@@ -21,27 +21,22 @@ Component * TileButton::Clone() const
 
 void TileButton ::Initialize()
 {
-	GameObject* brushObject = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Management")->GetObjectManager().GetObjectByName("Brush");
+	GameObject* MenuObject = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("MenuController");
 
-	if (brushObject != nullptr)
+	if (MenuObject != nullptr)
 	{
-		brush = brushObject->GetComponent<TileMapBrush>();
+		menuController = MenuObject->GetComponent<MenuController>();
 	}
 }
 
 void TileButton::Clicked()
 {
-	if (brush == nullptr)
+	if (menuController == nullptr)
 	{
 		Initialize();
 	}
 
-	brush->SetSelectedTile(TileID);
-}
-
-void TileButton::SetBrush(TileMapBrush* _brush)
-{
-	brush = _brush;
+	menuController->SetSelectedTile(TileID);
 }
 
 void TileButton::SetTileID(int ID)

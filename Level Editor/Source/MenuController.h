@@ -65,7 +65,9 @@ public:
     // Update function for this component.
     // Params:
     //   dt = The (fixed) change in time since the last step.
-    void Update(float dt) override;
+    //void Update(float dt) override;
+
+	bool IsMouseOnUI();
 
     void ShowMenu(GameObject* menu);
 
@@ -73,7 +75,9 @@ public:
 
     void RestoreTabsPos();
 
-	void Refresh();
+	int GetSelectedTile();
+
+	void SetSelectedTile(int ID);
 
 private:
 
@@ -87,5 +91,5 @@ private:
 
     int tabBuffer;
 
-    TileMapBrush* brush;
+	int SelectedTileID;
 };
