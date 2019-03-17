@@ -259,16 +259,3 @@ MenuType Menu::GetType()
 {
     return menuType;
 }
-
-void Menu::SetTool(bool enabled)
-{
-	switch (menuType)
-	{
-	case TileMap:
-		break;
-	case GameObjects:
-		break;
-	default:
-		break;
-	}
-}
