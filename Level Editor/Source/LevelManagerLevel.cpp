@@ -16,8 +16,6 @@
 #include "LevelEditorUI.h"
 
 //Components
-#include "ScreenWrap.h"
-#include "TimedDeath.h"
 #include "CameraMovement.h"
 #include "TileMapBrush.h"
 #include <SpriteText.h>

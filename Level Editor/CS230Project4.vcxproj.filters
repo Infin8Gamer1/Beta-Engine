@@ -40,15 +40,6 @@
     <ClCompile Include="Source\Menu.cpp">
       <Filter>Game\Behaviors\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Source\ColorChange.cpp">
-      <Filter>Game\Behaviors\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\ScreenWrap.cpp">
-      <Filter>Game\Behaviors\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\TimedDeath.cpp">
-      <Filter>Game\Behaviors\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Source\TileMapBrush.cpp">
       <Filter>Game\Behaviors\LevelEdit</Filter>
     </ClCompile>
@@ -89,15 +80,6 @@
     </ClInclude>
     <ClInclude Include="Source\Menu.h">
       <Filter>Game\Behaviors\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ColorChange.h">
-      <Filter>Game\Behaviors\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\ScreenWrap.h">
-      <Filter>Game\Behaviors\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\TimedDeath.h">
-      <Filter>Game\Behaviors\Utils</Filter>
     </ClInclude>
     <ClInclude Include="Source\TileMapBrush.h">
       <Filter>Game\Behaviors\LevelEdit</Filter>

@@ -107,7 +107,6 @@ xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
   <ItemGroup>
     <ClCompile Include="Source\Button.cpp" />
     <ClCompile Include="Source\CameraMovement.cpp" />
-    <ClCompile Include="Source\ColorChange.cpp" />
     <ClCompile Include="Source\GameObjectButton.cpp" />
     <ClCompile Include="Source\GameObjectPlacer.cpp" />
     <ClCompile Include="Source\LevelEditorLevel.cpp" />
@@ -116,7 +115,6 @@ xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\Menu.cpp" />
     <ClCompile Include="Source\MenuController.cpp" />
-    <ClCompile Include="Source\ScreenWrap.cpp" />
     <ClCompile Include="Source\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -124,13 +122,11 @@ xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
     <ClCompile Include="Source\Tab.cpp" />
     <ClCompile Include="Source\TileButton.cpp" />
     <ClCompile Include="Source\TileMapBrush.cpp" />
-    <ClCompile Include="Source\TimedDeath.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
     <ClInclude Include="Source\Button.h" />
     <ClInclude Include="Source\CameraMovement.h" />
-    <ClInclude Include="Source\ColorChange.h" />
     <ClInclude Include="Source\GameObjectButton.h" />
     <ClInclude Include="Source\GameObjectPlacer.h" />
     <ClInclude Include="Source\LevelEditorLevel.h" />
@@ -138,12 +134,10 @@ xcopy glfw\lib\x64\glfw3.dll "$(OutDir)" /Y</Command>
     <ClInclude Include="Source\LevelManagerLevel.h" />
     <ClInclude Include="Source\Menu.h" />
     <ClInclude Include="Source\MenuController.h" />
-    <ClInclude Include="Source\ScreenWrap.h" />
     <ClInclude Include="Source\stdafx.h" />
     <ClInclude Include="Source\Tab.h" />
     <ClInclude Include="Source\TileButton.h" />
     <ClInclude Include="Source\TileMapBrush.h" />
-    <ClInclude Include="Source\TimedDeath.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
