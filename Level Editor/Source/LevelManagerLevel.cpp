@@ -99,15 +99,8 @@ void Levels::LevelManagerLevel::Load()
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::CameraMovement>();
 	GameObjectFactory::GetInstance().RegisterComponent<TileMapBrush>();
 
-	//Create Menu and Register new windows call back
-	HMENU hmenu = LoadMenu(GetModuleHandle(NULL), MAKEINTRESOURCE(IDR_MENU1));
-	if (hmenu != NULL) {
-		HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());
-
-		PreviousWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)&WindowProc);
-
-		SetMenu(hwnd, hmenu);
-	}
+	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());
+	PreviousWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)&WindowProc);
 }
 
 void Levels::LevelManagerLevel::Initialize()

@@ -39,6 +39,14 @@
 #include <Graphics.h>
 #include "CameraMovement.h"
 
+//GLFW STUFF
+#define GLFW_EXPOSE_NATIVE_WIN32
+#define GLFW_EXPOSE_NATIVE_WGL
+#include <glfw3.h>
+#include <glfw3native.h>
+
+#include "../resource.h"
+
 Levels::LevelEditorUI::LevelEditorUI() : Level("UI")
 {
 	
@@ -47,6 +55,15 @@ Levels::LevelEditorUI::LevelEditorUI() : Level("UI")
 void Levels::LevelEditorUI::Load()
 {
 	std::cout << GetName() << "::Load" << std::endl;
+
+	//Create Menu and Register new windows call back
+	HMENU hmenu = LoadMenu(GetModuleHandle(NULL), MAKEINTRESOURCE(IDR_MENU1));
+	if (hmenu != NULL) {
+
+		HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());
+
+		SetMenu(hwnd, hmenu);
+	}
 
 	Graphics::GetInstance().GetCurrentCamera().Reset();
 
