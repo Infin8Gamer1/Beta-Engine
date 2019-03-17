@@ -87,7 +87,7 @@ void Level::Serialize(Parser & parser) const
 
 	for (unsigned i = 0; i < numGameObjects; i++)
 	{
-		std::string GameObjectName = activeGOs[i]->GetName();
+		std::string GameObjectName = activeGOs[i]->GetSavePath();
 		parser.WriteVar(GameObjectName);
 
 		Transform* transform = activeGOs[i]->GetComponent<Transform>();

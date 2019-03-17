@@ -61,9 +61,16 @@ GameObjectFactory::~GameObjectFactory()
 
 GameObject * GameObjectFactory::CreateObject(const std::string & name, Mesh * mesh, SpriteSource * spriteSource)
 {
-	GameObject* GO = new GameObject(name);
+	std::string path = name;
+	std::replace(path.begin(), path.end(), '\\', '/');
 
-	Parser* parser = new Parser(objectFilePath + name + ".object", std::fstream::in);
+	std::string GOName = path.substr(path.find_last_of("/") + 1);
+	
+	GameObject* GO = new GameObject(GOName);
+
+	GO->SetSavePath(path);
+
+	Parser* parser = new Parser(objectFilePath + path + ".object", std::fstream::in);
 	
 	try
 	{
@@ -118,14 +125,14 @@ Component * GameObjectFactory::CreateComponent(const std::string & name)
 
 void GameObjectFactory::SaveObjectToFile(GameObject * object)
 {
-	Parser* parser = new Parser(objectFilePath + object->GetName() + ".object", std::fstream::out);
+	Parser* parser = new Parser(objectFilePath + object->GetSavePath() + ".object", std::fstream::out);
 
 	object->Serialize(*parser);
 
 	delete parser;
 	parser = nullptr;
 
-	std::cout << "The Game Object: " << object->GetName() << " was saved to \"" << objectFilePath << object->GetName() << ".object\"" << std::endl;
+	std::cout << "The Game Object: " << object->GetName() << " was saved to \"" << objectFilePath + object->GetSavePath() << ".object\"" << std::endl;
 }
 
 GameObjectFactory & GameObjectFactory::GetInstance()

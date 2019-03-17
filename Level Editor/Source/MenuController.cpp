@@ -45,14 +45,14 @@ void MenuController::Deserialize(Parser & parser)
 
 void MenuController::Initialize()
 {
-    GameObject* TileMenu = GameObjectFactory::GetInstance().CreateObject("TileMenu");
+    GameObject* TileMenu = GameObjectFactory::GetInstance().CreateObject("LevelEditor/TileMenu");
     TileMenu->GetComponent<Menu>()->SetMenuController(GetOwner());
     TileMenu->GetComponent<Menu>()->SetType(TileMap);
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*TileMenu);
     menus.push_back(TileMenu);
     TileMenu->GetComponent<Menu>()->InitTab(0, tabBuffer);
 
-    GameObject* ObjectMenu = GameObjectFactory::GetInstance().CreateObject("ObjectMenu");
+    GameObject* ObjectMenu = GameObjectFactory::GetInstance().CreateObject("LevelEditor/ObjectMenu");
     ObjectMenu->GetComponent<Menu>()->SetMenuController(GetOwner());
     ObjectMenu->GetComponent<Menu>()->SetType(GameObjects);
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*ObjectMenu);

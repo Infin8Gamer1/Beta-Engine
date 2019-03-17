@@ -86,7 +86,7 @@ bool Menu::IsMouseOnUI()
 
 GameObject* Menu::InitTab(int order, int buffer)
 {
-    GameObject* newTab = GameObjectFactory::GetInstance().CreateObject("Tab");
+    GameObject* newTab = GameObjectFactory::GetInstance().CreateObject("LevelEditor/Tab");
     newTab->GetComponent<Tab>()->SetMenu(GetOwner());
     SetTab(newTab);
 
@@ -190,7 +190,7 @@ void Menu::InitButtons()
 
 		for (int i = 0; i < TileCount; i++)
 		{
-			GameObject* button = GameObjectFactory::GetInstance().CreateObject("TileButton");
+			GameObject* button = GameObjectFactory::GetInstance().CreateObject("LevelEditor/TileButton");
 
 			button->GetComponent<TileButton>()->SetTileID(i);
 
@@ -227,7 +227,7 @@ void Menu::InitButtons()
 
 		for (int i = 0; i < gameObjectNames.size(); i++)
 		{
-			GameObject* button = GameObjectFactory::GetInstance().CreateObject("GOButton");
+			GameObject* button = GameObjectFactory::GetInstance().CreateObject("LevelEditor/GOButton");
 
 			button->GetComponent<GameObjectButton>()->SetGameObjectName(gameObjectNames[i]);
 

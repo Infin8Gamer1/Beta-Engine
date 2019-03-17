@@ -109,13 +109,13 @@ void Levels::LevelManagerLevel::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
 
-	GameObject* Brush = GameObjectFactory::GetInstance().CreateObject("Brush");
+	GameObject* Brush = GameObjectFactory::GetInstance().CreateObject("LevelEditor/Brush");
 	GetSpace()->GetObjectManager().AddObject(*Brush);
 
-	GameObject* GOPlacer = GameObjectFactory::GetInstance().CreateObject("GameObjectPlacer");
+	GameObject* GOPlacer = GameObjectFactory::GetInstance().CreateObject("LevelEditor/GameObjectPlacer");
 	GetSpace()->GetObjectManager().AddObject(*GOPlacer);
 
-	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("CameraManager");
+	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("LevelEditor/CameraManager");
 	GetSpace()->GetObjectManager().AddObject(*CameraMovement);
 }
 
@@ -218,7 +218,11 @@ void Levels::LevelManagerLevel::AddGameObject()
 		return;
 	}
 
-	fileName = fileName.substr(fileName.find_last_of("\\") + 1);
+	std::string ObjectPath = "Assets\\Objects\\";
+
+	size_t position = fileName.rfind(ObjectPath);
+
+	fileName = fileName.substr(position + ObjectPath.length());
 
 	fileName = fileName.substr(0, fileName.find_first_of("."));
 

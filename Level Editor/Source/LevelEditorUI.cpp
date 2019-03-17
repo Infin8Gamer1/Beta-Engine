@@ -79,7 +79,7 @@ void Levels::LevelEditorUI::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
 
-	GameObject* MenuController = GameObjectFactory::GetInstance().CreateObject("MenuController");
+	GameObject* MenuController = GameObjectFactory::GetInstance().CreateObject("LevelEditor/MenuController");
 	GetSpace()->GetObjectManager().AddObject(*MenuController);
 }
 

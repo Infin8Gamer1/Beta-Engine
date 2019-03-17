@@ -211,3 +211,13 @@ void GameObject::SetSaveTranslation(bool _saveTranslation)
 {
 	saveTranslation = _saveTranslation;
 }
+
+std::string GameObject::GetSavePath()
+{
+	return Path;
+}
+
+void GameObject::SetSavePath(std::string _Path)
+{
+	Path = _Path;
+}

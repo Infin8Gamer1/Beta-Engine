@@ -161,6 +161,10 @@ public:
 
 	void SetSaveTranslation(bool saveTranslation);
 
+	std::string GetSavePath();
+
+	void SetSavePath(std::string Path);
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Variables:
@@ -179,6 +183,8 @@ private:
 
 
 	bool saveTranslation;
+
+	std::string Path;
 };
 
 //------------------------------------------------------------------------------
