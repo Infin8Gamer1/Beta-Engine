@@ -131,7 +131,4 @@
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
-  <ItemGroup>
-    <Image Include="toolbar1.bmp" />
-  </ItemGroup>
 </Project>
