@@ -61,6 +61,8 @@ namespace Levels
 
 		void SaveLevel();
 
+		void AddGameObject();
+
 		void Test();
 
 	private:

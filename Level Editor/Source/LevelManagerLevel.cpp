@@ -81,6 +81,7 @@ LRESULT CALLBACK Levels::LevelManagerLevel::WindowProc(HWND hwnd, UINT uMsg, WPA
 			break;
 		case ID_FILE_OPENGAMEOBJECT:
 			std::cout << "Open Game Object Menu Clicked" << std::endl;
+			Instance->AddGameObject();
 			break;
 		}
 		break;
@@ -144,7 +145,8 @@ void Levels::LevelManagerLevel::Update(float dt)
 
 	if (Input::GetInstance().CheckReleased(VK_F3))
 	{
-		Test();
+		//Test();
+		AddGameObject();
 	}
 }
 
@@ -205,6 +207,22 @@ void Levels::LevelManagerLevel::SaveLevel()
 	levelSpace->GetLevel()->SetFileLocation(fileName);
 
 	levelSpace->GetLevel()->SaveLevel();
+}
+
+void Levels::LevelManagerLevel::AddGameObject()
+{
+	std::string fileName = BasicFileOpen();
+
+	if (fileName == "")
+	{
+		return;
+	}
+
+	fileName = fileName.substr(fileName.find_last_of("\\") + 1);
+
+	fileName = fileName.substr(0, fileName.find_first_of("."));
+
+	uiSpace->GetObjectManager().GetObjectByName("MenuController")->GetComponent<MenuController>()->AddGameObjectNames(fileName);
 }
 
 void Levels::LevelManagerLevel::Test() {

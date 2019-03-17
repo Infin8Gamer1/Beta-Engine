@@ -79,6 +79,14 @@ public:
 
 	void SetSelectedTile(int ID);
 
+	std::string GetSelectedGameObjectName();
+
+	void SetSelectedGameObjectName(std::string name);
+
+	void AddGameObjectNames(std::string name);
+
+	std::vector<std::string> GetGameObjectNames();
+
 private:
 
     //------------------------------------------------------------------------------
@@ -92,4 +100,7 @@ private:
     int tabBuffer;
 
 	int SelectedTileID;
+	std::string SelectedGameObjectTemplateName;
+
+	std::vector<std::string> GameObjectNames;
 };

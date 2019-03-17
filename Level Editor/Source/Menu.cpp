@@ -18,6 +18,8 @@
 #include <SpriteSource.h>
 #include "TileButton.h"
 #include "TileMapBrush.h"
+#include "MenuController.h"
+#include "GameObjectButton.h"
 
 Menu::Menu() : Component("Menu")
 {
@@ -158,40 +160,90 @@ void Menu::ShowButtons()
 
 void Menu::InitButtons()
 {
-    if (menuType != TileMap) return;
 
-	GameObject* tileMapGO = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("TileMap");
-
-	if (tileMapGO == nullptr)
+	if (buttons.size() > 0)
 	{
-		return;
+		buttons.clear();
 	}
 
-	int TileCount = tileMapGO->GetComponent<SpriteTilemap>()->GetSpriteSource()->GetFrameCountTexture();
-
-	int rows = 5;
-	float xScale = 55;
-	float yScale = 65;
-
-	Transform* transform = GetOwner()->GetComponent<Transform>();
-
-	for (int i = 0; i < TileCount; i++)
+	switch (menuType)
 	{
-		GameObject* button = GameObjectFactory::GetInstance().CreateObject("TileButton");
+	case TileMap:
+	{
+		GameObject* tileMapGO = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetObjectManager().GetObjectByName("TileMap");
 
-		button->GetComponent<TileButton>()->SetTileID(i);
-		
-		//button->GetComponent<TileButton>()->SetBrush(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>());
-		
-		Vector2D pos = Vector2D(i % rows, -(i / rows));
+		if (tileMapGO == nullptr)
+		{
+			return;
+		}
 
-		Vector2D offset = Vector2D(-(rows * xScale / 2) + 30, 300);
+		int TileCount = tileMapGO->GetComponent<SpriteTilemap>()->GetSpriteSource()->GetFrameCountTexture();
 
-		button->GetComponent<Transform>()->SetTranslation(transform->GetTranslation() + Vector2D(pos.x * xScale, pos.y * yScale) + offset);
+		int rows = 5;
+		float xScale = 55;
+		float yScale = 65;
 
-		GetOwner()->GetSpace()->GetObjectManager().AddObject(*button);
+		Transform* transform = GetOwner()->GetComponent<Transform>();
 
-		buttons.push_back(button);
+		for (int i = 0; i < TileCount; i++)
+		{
+			GameObject* button = GameObjectFactory::GetInstance().CreateObject("TileButton");
+
+			button->GetComponent<TileButton>()->SetTileID(i);
+
+			//button->GetComponent<TileButton>()->SetBrush(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>());
+
+			Vector2D pos = Vector2D(i % rows, -(i / rows));
+
+			Vector2D offset = Vector2D(-(rows * xScale / 2) + 30, 300);
+
+			button->GetComponent<Transform>()->SetTranslation(transform->GetTranslation() + Vector2D(pos.x * xScale, pos.y * yScale) + offset);
+
+			GetOwner()->GetSpace()->GetObjectManager().AddObject(*button);
+
+			buttons.push_back(button);
+		}
+		break;
+	}
+	case GameObjects:
+	{
+		GameObject* menuControllerGameObject = GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("MenuController");
+
+		if (menuControllerGameObject == nullptr)
+		{
+			return;
+		}
+
+		std::vector<std::string> gameObjectNames = menuControllerGameObject->GetComponent<MenuController>()->GetGameObjectNames();
+
+		int rows = 5;
+		float xScale = 55;
+		float yScale = 65;
+
+		Transform* transform = GetOwner()->GetComponent<Transform>();
+
+		for (int i = 0; i < gameObjectNames.size(); i++)
+		{
+			GameObject* button = GameObjectFactory::GetInstance().CreateObject("GOButton");
+
+			button->GetComponent<GameObjectButton>()->SetGameObjectName(gameObjectNames[i]);
+
+			//button->GetComponent<TileButton>()->SetBrush(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>());
+
+			Vector2D pos = Vector2D(i % rows, -(i / rows));
+
+			Vector2D offset = Vector2D(-(rows * xScale / 2) + 30, 300);
+
+			button->GetComponent<Transform>()->SetTranslation(transform->GetTranslation() + Vector2D(pos.x * xScale, pos.y * yScale) + offset);
+
+			GetOwner()->GetSpace()->GetObjectManager().AddObject(*button);
+
+			buttons.push_back(button);
+		}
+		break;
+	}
+	default:
+		break;
 	}
 }
 

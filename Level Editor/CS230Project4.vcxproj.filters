@@ -70,6 +70,9 @@
     <ClCompile Include="Source\CameraMovement.cpp">
       <Filter>Game\Behaviors\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameObjectButton.cpp">
+      <Filter>Game\Behaviors\UI\Buttons</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -115,6 +118,9 @@
       <Filter>Game\Behaviors\Utils</Filter>
     </ClInclude>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="Source\GameObjectButton.h">
+      <Filter>Game\Behaviors\UI\Buttons</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />

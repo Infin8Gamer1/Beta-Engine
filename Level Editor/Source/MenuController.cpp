@@ -23,6 +23,8 @@
 
 MenuController::MenuController() : Component("MenuController"), tabBuffer(10)
 {
+	SelectedTileID = 0;
+	SelectedGameObjectTemplateName = "";
 }
 
 Component * MenuController::Clone() const
@@ -139,4 +141,26 @@ int MenuController::GetSelectedTile()
 void MenuController::SetSelectedTile(int ID)
 {
 	SelectedTileID = ID;
+}
+
+std::string MenuController::GetSelectedGameObjectName()
+{
+	return SelectedGameObjectTemplateName;
+}
+
+void MenuController::SetSelectedGameObjectName(std::string name)
+{
+	SelectedGameObjectTemplateName = name;
+}
+
+void MenuController::AddGameObjectNames(std::string name)
+{
+	GameObjectNames.push_back(name);
+
+	menus[1]->GetComponent<Menu>()->InitButtons();
+}
+
+std::vector<std::string> MenuController::GetGameObjectNames()
+{
+	return GameObjectNames;
 }

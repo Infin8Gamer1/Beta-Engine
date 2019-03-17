@@ -27,6 +27,8 @@ void TileButton ::Initialize()
 	{
 		menuController = MenuObject->GetComponent<MenuController>();
 	}
+
+	sprite = GetOwner()->GetComponent<Sprite>();
 }
 
 void TileButton::Clicked()
