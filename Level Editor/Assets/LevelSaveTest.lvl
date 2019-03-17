@@ -3,7 +3,10 @@ LevelEditor
   numGameObjects : 3
   {
     GameObjectName : TileMap
+    Translation : Null
     GameObjectName : Circle
+    Translation : { -100, 0 }
     GameObjectName : Rectangle
+    Translation : { 0, 0 }
   }
 }

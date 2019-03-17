@@ -157,6 +157,10 @@ public:
 	// Set the health of this gameobject
 	void setHealth(int Health);
 
+	bool GetSaveTranslation();
+
+	void SetSaveTranslation(bool saveTranslation);
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Variables:
@@ -172,6 +176,9 @@ private:
 
 	// the health of this object
 	int Health;
+
+
+	bool saveTranslation;
 };
 
 //------------------------------------------------------------------------------

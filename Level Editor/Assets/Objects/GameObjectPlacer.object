@@ -1,0 +1,7 @@
+GameObjectPlacer
+{
+  numComponents : 1
+  GameObjectPlacer
+  {
+  }
+}

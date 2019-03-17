@@ -25,6 +25,7 @@
 #include <Physics.h>
 #include <ColliderTilemap.h>
 #include "MenuController.h"
+#include "GameObjectPlacer.h"
 
 //Resources
 #include <Mesh.h>
@@ -98,6 +99,7 @@ void Levels::LevelManagerLevel::Load()
 
 	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::CameraMovement>();
 	GameObjectFactory::GetInstance().RegisterComponent<TileMapBrush>();
+	GameObjectFactory::GetInstance().RegisterComponent<GameObjectPlacer>();
 
 	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());
 	PreviousWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)&WindowProc);
@@ -109,6 +111,9 @@ void Levels::LevelManagerLevel::Initialize()
 
 	GameObject* Brush = GameObjectFactory::GetInstance().CreateObject("Brush");
 	GetSpace()->GetObjectManager().AddObject(*Brush);
+
+	GameObject* GOPlacer = GameObjectFactory::GetInstance().CreateObject("GameObjectPlacer");
+	GetSpace()->GetObjectManager().AddObject(*GOPlacer);
 
 	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("CameraManager");
 	GetSpace()->GetObjectManager().AddObject(*CameraMovement);

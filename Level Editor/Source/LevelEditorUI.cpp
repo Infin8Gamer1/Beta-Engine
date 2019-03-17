@@ -46,6 +46,7 @@
 #include <glfw3native.h>
 
 #include "../resource.h"
+#include <CommCtrl.h>
 
 Levels::LevelEditorUI::LevelEditorUI() : Level("UI")
 {
@@ -56,12 +57,11 @@ void Levels::LevelEditorUI::Load()
 {
 	std::cout << GetName() << "::Load" << std::endl;
 
+	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());
+
 	//Create Menu and Register new windows call back
 	HMENU hmenu = LoadMenu(GetModuleHandle(NULL), MAKEINTRESOURCE(IDR_MENU1));
 	if (hmenu != NULL) {
-
-		HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());
-
 		SetMenu(hwnd, hmenu);
 	}
 

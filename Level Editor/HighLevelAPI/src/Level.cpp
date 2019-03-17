@@ -14,6 +14,8 @@
 #include <Space.h>
 #include <Parser.h>
 #include <GameObjectFactory.h>
+#include <Transform.h>
+#include <sstream>
 
 Level::Level(const std::string & name) : BetaObject(name)
 {
@@ -30,49 +32,6 @@ void Level::Deserialize(Parser & parser)
 	parser.ReadSkip(GetName());
 	parser.ReadSkip("{");
 
-	/*std::string TileMapName;
-	parser.ReadVar(TileMapName);
-
-	if (TileMapName != "Null" && TileMapName != "")
-	{
-		Tilemap* map = ResourceManager::GetInstance().GetTilemap(TileMapName, true, true);
-
-		if (map == nullptr) {
-			throw ParseException(TileMapName, "TileMap " + TileMapName + " could not be found! ERROR 404");
-		}
-
-		Vector2D TileMapPos;
-		parser.ReadVar(TileMapPos);
-
-		Vector2D TileMapScale;
-		parser.ReadVar(TileMapScale);
-
-		std::string TileMapSpriteSource;
-		parser.ReadVar(TileMapSpriteSource);
-
-		SpriteSource* ss = ResourceManager::GetInstance().GetSpriteSource(TileMapSpriteSource, true);
-
-		GameObject* otherTileMap = GetSpace()->GetObjectManager().GetObjectByName("TileMap");
-
-		if (otherTileMap != nullptr)
-		{
-			otherTileMap->Destroy();
-		}
-
-		GameObject* GO = GameObjectFactory::GetInstance().CreateObject("TileMap");
-
-		GO->GetComponent<Transform>()->SetScale(TileMapScale);
-		GO->GetComponent<Transform>()->SetTranslation(TileMapPos);
-
-		GO->GetComponent<SpriteTilemap>()->SetTilemap(map);
-		GO->GetComponent<SpriteTilemap>()->SetSpriteSource(ss);
-
-		GO->GetComponent<ColliderTilemap>()->SetTilemap(map);
-
-		GetSpace()->GetObjectManager().AddObject(*GO);
-		//gameObjects.push_back(GO);
-	}*/
-
 	unsigned numGameObjects = 0;
 	parser.ReadVar(numGameObjects);
 
@@ -84,6 +43,26 @@ void Level::Deserialize(Parser & parser)
 		parser.ReadVar(GameObjectName);
 
 		GameObject* object = GameObjectFactory::GetInstance().CreateObject(GameObjectName);
+
+		std::string TranslationString;
+		parser.ReadVariable("Translation", TranslationString);
+
+		Transform* transform = object->GetComponent<Transform>();
+
+		if (transform != nullptr && (TranslationString != "" && TranslationString != "Null")) {
+			std::stringstream ss;
+			ss.str(TranslationString);
+
+			Vector2D Translation;
+			ss >> Translation;
+
+			transform->SetTranslation(Translation);
+
+			object->SetSaveTranslation(true);
+		}
+		else {
+			object->SetSaveTranslation(false);
+		}
 
 		GetSpace()->GetObjectManager().AddObject(*object);
 	}
@@ -99,38 +78,6 @@ void Level::Serialize(Parser & parser) const
 
 	parser.BeginScope();
 
-	/*GameObject* tileMapGO = GetSpace()->GetObjectManager().GetObjectByName("TileMap");
-
-	if (tileMapGO != nullptr) {
-		SpriteTilemap* spriteTileMap = tileMapGO->GetComponent<SpriteTilemap>();
-
-		Tilemap* map = spriteTileMap->GetTilemap();
-		SpriteSource* ss = spriteTileMap->GetSpriteSource();
-		Transform* transform = spriteTileMap->GetOwner()->GetComponent<Transform>();
-
-		//save the map to it's file
-		ResourceManager::GetInstance().SaveTilemapToFile(map);
-
-		//save the location of the map
-		std::string TileMapName = map->GetName();
-		parser.WriteVar(TileMapName);
-
-		Vector2D TileMapPos = transform->GetTranslation();
-		parser.WriteVar(TileMapPos);
-
-		Vector2D TileMapScale = transform->GetScale();
-		parser.WriteVar(TileMapScale);
-
-		std::string TileMapSpriteSource = ss->GetName();
-		parser.WriteVar(TileMapSpriteSource);
-
-
-	}
-	else {
-		std::string TileMapName = "Null";
-		parser.WriteVar(TileMapName);
-	}*/
-
 	std::vector<GameObject*> activeGOs = GetSpace()->GetObjectManager().GetGameObjectActiveList();
 
 	unsigned numGameObjects = (unsigned)activeGOs.size();
@@ -142,6 +89,16 @@ void Level::Serialize(Parser & parser) const
 	{
 		std::string GameObjectName = activeGOs[i]->GetName();
 		parser.WriteVar(GameObjectName);
+
+		Transform* transform = activeGOs[i]->GetComponent<Transform>();
+
+		if (transform != nullptr && activeGOs[i]->GetSaveTranslation())
+		{
+			parser.WriteVariable("Translation", transform->GetTranslation());
+		}
+		else {
+			parser.WriteVariable("Translation", "Null");
+		}
 
 		GameObjectFactory::GetInstance().SaveObjectToFile(activeGOs[i]);
 	}

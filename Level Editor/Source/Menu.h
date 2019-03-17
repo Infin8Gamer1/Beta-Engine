@@ -96,6 +96,8 @@ public:
 
     MenuType GetType();
 
+	void SetTool(bool enabled);
+
 private:
 
     //------------------------------------------------------------------------------

@@ -25,6 +25,7 @@ MenuController::MenuController() : Component("MenuController"), tabBuffer(10)
 {
 	SelectedTileID = 0;
 	SelectedGameObjectTemplateName = "";
+	EnabledTool = ToolType::TMBrush;
 }
 
 Component * MenuController::Clone() const
@@ -93,6 +94,20 @@ void MenuController::ShowMenu(GameObject * menu)
             menus[i]->GetComponent<Sprite>()->SetAlpha(1.0f);
             menus[i]->GetComponent<Menu>()->setIsShown(true);
             menus[i]->GetComponent<Menu>()->ShowButtons();
+
+			MenuType type = menus[i]->GetComponent<Menu>()->GetType();
+			
+			switch (type)
+			{
+			case TileMap:
+				SetEnabledTool(ToolType::TMBrush);
+				break;
+			case GameObjects:
+				SetEnabledTool(ToolType::GOPlacer);
+				break;
+			default:
+				break;
+			}
         }
         else
         {
@@ -160,6 +175,7 @@ void MenuController::AddGameObjectNames(std::string _name)
 	menus[1]->GetComponent<Menu>()->InitButtons();
 
 	ShowMenu(menus[1]);
+	RestoreTabsPos();
 
 	SetSelectedGameObjectName(_name);
 }
@@ -167,4 +183,14 @@ void MenuController::AddGameObjectNames(std::string _name)
 std::vector<std::string> MenuController::GetGameObjectNames()
 {
 	return GameObjectNames;
+}
+
+ToolType MenuController::GetEnabledTool()
+{
+	return EnabledTool;
+}
+
+void MenuController::SetEnabledTool(ToolType tool)
+{
+	EnabledTool = tool;
 }

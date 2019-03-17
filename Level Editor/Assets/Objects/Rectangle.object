@@ -3,7 +3,7 @@ Rectangle
   numComponents : 4
   Transform
   {
-    translation : { 25, 0 }
+    translation : { 275, 400 }
     rotation : 0
     scale : { 250, 100 }
   }

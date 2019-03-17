@@ -19,6 +19,7 @@
 GameObject::GameObject(const std::string & name) : BetaObject(name)
 {
 	isDestroyed = false;
+	saveTranslation = true;
 	damageHandler = nullptr;
 }
 
@@ -199,4 +200,14 @@ int GameObject::getHealth()
 
 void GameObject::setHealth(int _health) {
 	Health = _health;
+}
+
+bool GameObject::GetSaveTranslation()
+{
+	return saveTranslation;
+}
+
+void GameObject::SetSaveTranslation(bool _saveTranslation)
+{
+	saveTranslation = _saveTranslation;
 }

@@ -73,6 +73,9 @@
     <ClCompile Include="Source\GameObjectButton.cpp">
       <Filter>Game\Behaviors\UI\Buttons</Filter>
     </ClCompile>
+    <ClCompile Include="Source\GameObjectPlacer.cpp">
+      <Filter>Game\Behaviors\LevelEdit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\stdafx.h">
@@ -121,8 +124,14 @@
     <ClInclude Include="Source\GameObjectButton.h">
       <Filter>Game\Behaviors\UI\Buttons</Filter>
     </ClInclude>
+    <ClInclude Include="Source\GameObjectPlacer.h">
+      <Filter>Game\Behaviors\LevelEdit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="toolbar1.bmp" />
   </ItemGroup>
 </Project>

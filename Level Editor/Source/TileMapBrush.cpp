@@ -54,6 +54,10 @@ void TileMapBrush::Update(float dt)
 		return;
 	}
 
+	if (menuController->GetEnabledTool() != ToolType::TMBrush) {
+		return;
+	}
+
 	bool canBrush = !menuController->IsMouseOnUI();
 	if (canBrush && !Input::GetInstance().IsKeyDown(VK_LBUTTON))
 	{

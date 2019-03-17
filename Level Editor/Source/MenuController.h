@@ -35,6 +35,12 @@ class Button;
 // Public Structures:
 //------------------------------------------------------------------------------
 
+enum ToolType
+{
+	TMBrush,
+	GOPlacer
+};
+
 class MenuController : public Component
 {
 public:
@@ -87,6 +93,10 @@ public:
 
 	std::vector<std::string> GetGameObjectNames();
 
+	ToolType GetEnabledTool();
+
+	void SetEnabledTool(ToolType tool);
+
 private:
 
     //------------------------------------------------------------------------------
@@ -103,4 +113,6 @@ private:
 	std::string SelectedGameObjectTemplateName;
 
 	std::vector<std::string> GameObjectNames;
+
+	ToolType EnabledTool;
 };

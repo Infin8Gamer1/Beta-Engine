@@ -3,7 +3,7 @@ Circle
   numComponents : 2
   Transform
   {
-    translation : { 0, 0 }
+    translation : { -100, 0 }
     rotation : 0
     scale : { 10, 10 }
   }
