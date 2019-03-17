@@ -72,7 +72,7 @@ public:
 	// Returns the number of active objects with the given name.
 	// Params:
 	//   objectName = The name of the objects that should be counted.
-	unsigned GetSpaceCount(const std::string& objectName) const;
+	unsigned GetSpaceCount() const;
 
 private:
 	// Disable copy constructor and assignment operator

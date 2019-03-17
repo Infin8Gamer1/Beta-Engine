@@ -49,14 +49,14 @@ void MenuController::Initialize()
     TileMenu->GetComponent<Menu>()->SetType(TileMap);
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*TileMenu);
     menus.push_back(TileMenu);
-    GameObject* TileTab = TileMenu->GetComponent<Menu>()->InitTab(0, tabBuffer);
+    TileMenu->GetComponent<Menu>()->InitTab(0, tabBuffer);
 
     GameObject* ObjectMenu = GameObjectFactory::GetInstance().CreateObject("ObjectMenu");
     ObjectMenu->GetComponent<Menu>()->SetMenuController(GetOwner());
     ObjectMenu->GetComponent<Menu>()->SetType(GameObjects);
     GetOwner()->GetSpace()->GetObjectManager().AddObject(*ObjectMenu);
     menus.push_back(ObjectMenu);
-    GameObject* ObjectTab = ObjectMenu->GetComponent<Menu>()->InitTab(1, tabBuffer);
+    ObjectMenu->GetComponent<Menu>()->InitTab(1, tabBuffer);
 
     ShowMenu(TileMenu);
 }
@@ -148,16 +148,20 @@ std::string MenuController::GetSelectedGameObjectName()
 	return SelectedGameObjectTemplateName;
 }
 
-void MenuController::SetSelectedGameObjectName(std::string name)
+void MenuController::SetSelectedGameObjectName(std::string _name)
 {
-	SelectedGameObjectTemplateName = name;
+	SelectedGameObjectTemplateName = _name;
 }
 
-void MenuController::AddGameObjectNames(std::string name)
+void MenuController::AddGameObjectNames(std::string _name)
 {
-	GameObjectNames.push_back(name);
+	GameObjectNames.push_back(_name);
 
 	menus[1]->GetComponent<Menu>()->InitButtons();
+
+	ShowMenu(menus[1]);
+
+	SetSelectedGameObjectName(_name);
 }
 
 std::vector<std::string> MenuController::GetGameObjectNames()

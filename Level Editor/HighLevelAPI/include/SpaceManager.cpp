@@ -59,7 +59,7 @@ Space * SpaceManager::GetSpaceByName(const std::string & spaceName) const
 	return nullptr;
 }
 
-unsigned SpaceManager::GetSpaceCount(const std::string & objectName) const
+unsigned SpaceManager::GetSpaceCount() const
 {
 	return static_cast<unsigned>(spaceList.size());
 }

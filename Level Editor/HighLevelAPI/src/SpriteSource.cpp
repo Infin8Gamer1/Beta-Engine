@@ -123,5 +123,5 @@ const std::string & SpriteSource::GetTextureName() const
 
 const Vector2D SpriteSource::GetTextureDimensions() const
 {
-	return Vector2D(numCols, numRows);
+	return Vector2D((float)numCols, (float)numRows);
 }

@@ -133,7 +133,7 @@ void Level::Serialize(Parser & parser) const
 
 	std::vector<GameObject*> activeGOs = GetSpace()->GetObjectManager().GetGameObjectActiveList();
 
-	unsigned numGameObjects = activeGOs.size();
+	unsigned numGameObjects = (unsigned)activeGOs.size();
 	parser.WriteVar(numGameObjects);
 
 	parser.BeginScope();
@@ -205,7 +205,7 @@ std::string Level::GetFileLocation()
 
 void Level::DisplayMessage(std::string what)
 {
-	int msgBoxID = MessageBox(
+	MessageBox(
 		NULL,
 		what.c_str(),
 		"There Was An ERROR!",

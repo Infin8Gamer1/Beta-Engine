@@ -115,7 +115,7 @@ Vector2D Tilemap::SetCellValue(int column, int row, int newValue) {
 		Resize(colL, colR, rowT, rowB);
 		
 		data[column + colL][row + rowT] = newValue;
-		return Vector2D(-colL, rowT);
+		return Vector2D((float)-colL, (float)rowT);
 	}
 
 	data[column][row] = newValue;

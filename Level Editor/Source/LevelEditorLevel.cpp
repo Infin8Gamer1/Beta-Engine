@@ -81,7 +81,7 @@ void Levels::LevelEditorLevel::Initialize()
 
 void Levels::LevelEditorLevel::Update(float dt)
 {
-	
+	UNREFERENCED_PARAMETER(dt);
 }
 
 void Levels::LevelEditorLevel::Shutdown()

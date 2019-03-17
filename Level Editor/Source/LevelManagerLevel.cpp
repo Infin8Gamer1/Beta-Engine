@@ -123,6 +123,8 @@ void Levels::LevelManagerLevel::Initialize()
 
 void Levels::LevelManagerLevel::Update(float dt)
 {
+	UNREFERENCED_PARAMETER(dt);
+
 	if (uiSpace == nullptr)
 	{
 		uiSpace = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("UI");

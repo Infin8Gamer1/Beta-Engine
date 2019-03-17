@@ -33,10 +33,12 @@ Component * Menu::Clone() const
 
 void Menu::Serialize(Parser & parser) const
 {
+	UNREFERENCED_PARAMETER(parser);
 }
 
 void Menu::Deserialize(Parser & parser)
 {
+	UNREFERENCED_PARAMETER(parser);
 }
 
 void Menu::Initialize()
@@ -52,13 +54,14 @@ void Menu::Initialize()
 	Vector2D menuLocation = Vector2D((windowWidth / 2) - (menuScale.x / 2), 0);
 
 	transform->SetTranslation(menuLocation);
-	transform->SetScale(Vector2D(menuScale.x, windowHeight));
+	transform->SetScale(Vector2D(menuScale.x, (float)windowHeight));
 
 	InitButtons();
 }
 
 void Menu::Update(float dt)
 {
+	UNREFERENCED_PARAMETER(dt);
 }
 
 bool Menu::IsMouseOnUI()
@@ -193,9 +196,9 @@ void Menu::InitButtons()
 
 			//button->GetComponent<TileButton>()->SetBrush(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>());
 
-			Vector2D pos = Vector2D(i % rows, -(i / rows));
+			Vector2D pos = Vector2D((float)(i % rows), (float)-(i / rows));
 
-			Vector2D offset = Vector2D(-(rows * xScale / 2) + 30, 300);
+			Vector2D offset = Vector2D(-(rows * xScale / 2) + 30, 300.0f);
 
 			button->GetComponent<Transform>()->SetTranslation(transform->GetTranslation() + Vector2D(pos.x * xScale, pos.y * yScale) + offset);
 
@@ -230,7 +233,7 @@ void Menu::InitButtons()
 
 			//button->GetComponent<TileButton>()->SetBrush(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>());
 
-			Vector2D pos = Vector2D(i % rows, -(i / rows));
+			Vector2D pos = Vector2D((float)(i % rows), (float)-(i / rows));
 
 			Vector2D offset = Vector2D(-(rows * xScale / 2) + 30, 300);
 

@@ -27,7 +27,10 @@ int Behaviors::CameraMovement::MouseWheelY = 0;
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	Behaviors::CameraMovement::MouseWheelY = yoffset;
+	UNREFERENCED_PARAMETER(xoffset);
+	UNREFERENCED_PARAMETER(window);
+
+	Behaviors::CameraMovement::MouseWheelY = (int)yoffset;
 }
 
 Behaviors::CameraMovement::CameraMovement() : Component("CameraMovement")
@@ -75,6 +78,8 @@ void Behaviors::CameraMovement::Serialize(Parser & parser) const
 
 void Behaviors::CameraMovement::Update(float dt)
 {
+	UNREFERENCED_PARAMETER(dt);
+
 	Camera* camera = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetCamera();
 
 	Vector2D cameraTranslation = camera->GetTranslation();
