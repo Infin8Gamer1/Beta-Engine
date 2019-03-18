@@ -71,6 +71,46 @@ void Parser::ReadSkip(const std::string & text)
 	}
 }
 
+std::string Parser::ReadSkipComponent()
+{
+	CheckFileOpen();
+
+	std::string readValue = "";
+
+	//create a var to keep track of how many open brackets ({) have been read
+	unsigned levels = 0;
+
+	//before we can start the loop we need to see if the next word is ({) if it is then we will start the loop
+	std::string wordA;
+	stream >> wordA;
+
+	if (wordA == "{") {
+		levels += 1;
+
+		readValue += wordA + " ";
+	}
+
+	while (levels > 0)
+	{
+		//read each word if it is { then add one to the counter otherwise if it is } remove one from the counter
+		//continue until the counter <= 0
+
+		std::string word;
+		stream >> word;
+
+		if (word == "{") {
+			levels += 1;
+		}
+		else if (word == "}") {
+			levels -= 1;
+		}
+
+		readValue += word + " ";
+	}
+
+	return readValue;
+}
+
 void Parser::CheckFileOpen()
 {
 	if (!stream.is_open()) {

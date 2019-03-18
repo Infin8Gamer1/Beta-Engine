@@ -11,7 +11,7 @@ Tab
   {
     frameIndex : 0
     color : { 0.5 , 1 , 1 , 0.5 }
-	spriteSourceName : Tab
+	spriteSourceName : LevelEditor/Tab
   }
   Tab
   {

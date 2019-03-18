@@ -1,8 +1,0 @@
-SaveLoad
-{
-	textureName : UI\metalPanel_plate-Button.png
-    textureRows : 1
-    textureColumns : 1
-	frameCount : 1
-	frameStart : 0
-}

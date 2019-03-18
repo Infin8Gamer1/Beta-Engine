@@ -1,7 +1,7 @@
 CameraManager
 {
   numComponents : 1
-  Behaviors::CameraMovement
+  CameraMovement
   {
 	UP : W
 	DOWN : S

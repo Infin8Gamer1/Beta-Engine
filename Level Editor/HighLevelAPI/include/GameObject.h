@@ -185,6 +185,10 @@ private:
 	bool saveTranslation;
 
 	std::string Path;
+
+	std::vector<std::string> UnloadedComponentNames;
+
+	std::vector<std::string> UnloadedComponentStrings;
 };
 
 //------------------------------------------------------------------------------

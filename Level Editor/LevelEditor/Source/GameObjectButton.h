@@ -26,6 +26,8 @@
 
 class MenuController;
 class Sprite;
+class SpriteText;
+class GameObject;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -45,6 +47,8 @@ public:
 	// Initialize this component (happens at object creation).
 	void Initialize() override;
 
+	void Update(float dt) override;
+
 	//Click function for tab
 	void Clicked();
 
@@ -60,4 +64,7 @@ private:
 	Sprite* sprite;
 
 	std::string GameObjectName;
+
+	GameObject* TextGO;
+	SpriteText* TextSprite;
 };

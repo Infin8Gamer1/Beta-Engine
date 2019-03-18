@@ -74,6 +74,7 @@ bool MenuController::IsMouseOnUI()
 		}
 
 	}
+
 	for (size_t i = 0; i < buttons.size(); i++)
 	{
 		if (buttons[i]->getIsHovered())
@@ -87,7 +88,7 @@ bool MenuController::IsMouseOnUI()
 
 void MenuController::ShowMenu(GameObject * menu)
 {
-    for (int i = 0; i < menuCount; i++)
+    for (size_t i = 0; i < menus.size(); i++)
     {
         if (menu == menus[i])
         {

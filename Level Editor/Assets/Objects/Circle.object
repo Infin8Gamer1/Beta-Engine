@@ -3,7 +3,7 @@ Circle
   numComponents : 2
   Transform
   {
-    translation : { -100, 0 }
+    translation : { -99.5, -99.5 }
     rotation : 0
     scale : { 10, 10 }
   }
@@ -11,6 +11,6 @@ Circle
   {
     frameIndex : 0
     color : { 1 , 1 , 1 , 1 }
-    spriteSourceName : UICircle
+    spriteSourceName : Circle
   }
 }

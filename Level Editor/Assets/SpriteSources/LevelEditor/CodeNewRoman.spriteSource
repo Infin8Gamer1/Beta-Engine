@@ -1,0 +1,8 @@
+LevelEditor/CodeNewRoman
+{
+	textureName : CodeNewRoman.png
+    textureRows : 8
+    textureColumns : 12
+	frameCount : 1
+	frameStart : 0
+}

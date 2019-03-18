@@ -7,7 +7,8 @@
 #include <GameObjectFactory.h>
 #include <ResourceManager.h>
 #include <SpriteSource.h>
-
+#include <SpriteText.h>
+#include <Transform.h>
 
 GameObjectButton::GameObjectButton() : Button("GameObjectButton")
 {
@@ -30,6 +31,21 @@ void GameObjectButton::Initialize()
 	}
 
 	sprite = GetOwner()->GetComponent<Sprite>();
+
+	if (TextGO != nullptr)
+	{
+		Transform* transform = TextGO->GetComponent<Transform>();
+
+		transform->SetTranslation(GetOwner()->GetComponent<Transform>()->GetTranslation() + Vector2D(0, -35.0f));
+		transform->SetScale(Vector2D(30, 30));
+
+		GetOwner()->GetSpace()->GetObjectManager().AddObject(*TextGO);
+	}
+}
+
+void GameObjectButton::Update(float dt)
+{
+	TextSprite->SetAlpha(sprite->GetAlpha());
 }
 
 void GameObjectButton::Clicked()
@@ -58,6 +74,19 @@ void GameObjectButton::SetGameObjectName(std::string Name)
 			sprite->SetSpriteSource(otherSprite->GetSpriteSource());
 			sprite->RefreshAutoMesh();
 			sprite->SetFrame(0);
+		}
+
+		TextGO = GameObjectFactory::GetInstance().CreateObject("LevelEditor/SpriteText");
+
+		if (TextGO != nullptr)
+		{
+			TextSprite = TextGO->GetComponent<SpriteText>();
+
+			TextSprite->SetText(go->GetName());
+		}
+		else {
+			delete TextGO;
+			TextGO = nullptr;
 		}
 	}
 

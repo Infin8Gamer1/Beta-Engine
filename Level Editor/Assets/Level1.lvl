@@ -1,10 +1,28 @@
 LevelEditor
 {
-  numGameObjects : 2
+  numGameObjects : 11
   {
     GameObjectName : TileMap
     Translation : Null
     GameObjectName : Circle
     Translation : { -100, 0 }
+    GameObjectName : Monkey
+    Translation : { -199.5, -100 }
+    GameObjectName : Circle
+    Translation : { -99.5, -199.5 }
+    GameObjectName : Circle
+    Translation : { 0.5, -199.5 }
+    GameObjectName : Circle
+    Translation : { -299.5, -99.5 }
+    GameObjectName : Circle
+    Translation : { -299.5, 0.5 }
+    GameObjectName : Circle
+    Translation : { -199.5, 0.5 }
+    GameObjectName : Circle
+    Translation : { -99.5, -99.5 }
+    GameObjectName : Monkey
+    Translation : { 100.5, -100 }
+    GameObjectName : Monkey
+    Translation : { 500.5, -100 }
   }
 }

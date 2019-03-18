@@ -141,33 +141,28 @@ void Menu::setIsShown(bool show)
 
 void Menu::HideButtons()
 {
-    for (unsigned i = 0; i < buttons.size(); ++i)
+    for (size_t i = 0; i < buttons.size(); i++)
     {
-        if (buttons[i] == tab) continue;
-        if(menuType == TileMap) buttons[i]->GetComponent<TileButton>()->setEnabled(false);
+		buttons[i]->GetComponent<Button>()->setEnabled(false);
+
         buttons[i]->GetComponent<Sprite>()->SetAlpha(0.0f);
     }
 }
 
 void Menu::ShowButtons()
 {
-    for (unsigned i = 0; i < buttons.size(); ++i)
-    {
-        if (buttons[i] == tab) continue;
-        if (menuType == TileMap) buttons[i]->GetComponent<TileButton>()->setEnabled(true);
+    for (size_t i = 0; i < buttons.size(); i++)
+    {	
+		buttons[i]->GetComponent<Button>()->setEnabled(true);
+
         buttons[i]->GetComponent<Sprite>()->SetAlpha(1.0f);
     }
 }
 
-
-
 void Menu::InitButtons()
 {
 
-	if (buttons.size() > 0)
-	{
-		buttons.clear();
-	}
+	buttons.clear();
 
 	switch (menuType)
 	{
@@ -219,23 +214,21 @@ void Menu::InitButtons()
 
 		std::vector<std::string> gameObjectNames = menuControllerGameObject->GetComponent<MenuController>()->GetGameObjectNames();
 
-		int rows = 5;
-		float xScale = 55;
-		float yScale = 65;
+		int rows = 3;
+		float xScale = 100;
+		float yScale = 80;
 
 		Transform* transform = GetOwner()->GetComponent<Transform>();
 
 		for (int i = 0; i < gameObjectNames.size(); i++)
 		{
 			GameObject* button = GameObjectFactory::GetInstance().CreateObject("LevelEditor/GOButton");
-
+			
 			button->GetComponent<GameObjectButton>()->SetGameObjectName(gameObjectNames[i]);
-
-			//button->GetComponent<TileButton>()->SetBrush(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>());
 
 			Vector2D pos = Vector2D((float)(i % rows), (float)-(i / rows));
 
-			Vector2D offset = Vector2D(-(rows * xScale / 2) + 30, 275.0f);
+			Vector2D offset = Vector2D(-(rows * xScale / 2) + 40, 275.0f);
 
 			button->GetComponent<Transform>()->SetTranslation(transform->GetTranslation() + Vector2D(pos.x * xScale, pos.y * yScale) + offset);
 

@@ -71,14 +71,22 @@ void GameObject::Deserialize(Parser & parser)
 		Component* component = GameObjectFactory::GetInstance().CreateComponent(componentName);
 
 		if (component == nullptr) {
-			throw ParseException(componentName, "Component " + componentName + " could not be found! ERROR 404");
+			std::cout << "WARNING : Component " << componentName << " could not be found ... Skipping" << std::endl;
+
+			std::string ref = parser.ReadSkipComponent();
+
+			UnloadedComponentNames.push_back(componentName);
+			UnloadedComponentStrings.push_back(ref);
+
+			//throw ParseException(componentName, "Component " + componentName + " could not be found! ERROR 404");
 		}
+		else {
+			AddComponent(component);
 
-		AddComponent(component);
-
-		parser.ReadSkip("{");
-		component->Deserialize(parser);
-		parser.ReadSkip("}");
+			parser.ReadSkip("{");
+			component->Deserialize(parser);
+			parser.ReadSkip("}");
+		}
 	}
 
 	parser.ReadSkip("}");
@@ -90,10 +98,10 @@ void GameObject::Serialize(Parser & parser) const
 
 	parser.BeginScope();
 
-	size_t numComponents = components.size();
+	size_t numComponents = components.size() + UnloadedComponentNames.size();
 	parser.WriteVar(numComponents);
 
-	for (size_t i = 0; i < numComponents; i++)
+	for (size_t i = 0; i < components.size(); i++)
 	{
 		//write components name
 		parser.WriteValue(std::string(typeid(*components[i]).name()).substr(6));
@@ -103,6 +111,13 @@ void GameObject::Serialize(Parser & parser) const
 		components[i]->Serialize(parser);
 
 		parser.EndScope();
+	}
+
+	for (size_t i = 0; i < UnloadedComponentNames.size(); i++)
+	{
+		parser.WriteValue(UnloadedComponentNames[i]);
+
+		parser.WriteValue(UnloadedComponentStrings[i]);
 	}
 
 	parser.EndScope();
@@ -221,3 +236,5 @@ void GameObject::SetSavePath(std::string _Path)
 {
 	Path = _Path;
 }
+
+

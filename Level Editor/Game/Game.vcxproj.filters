@@ -1,34 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Precompiled">
-      <UniqueIdentifier>{c54e400a-0b22-4fb9-ad4a-68aaa9abc7ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game">
-      <UniqueIdentifier>{d6a6b6cd-f9a5-4355-88ae-c73c49b1ecae}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Levels">
-      <UniqueIdentifier>{eb42e325-6dc2-4ec9-a38c-fed4827f3174}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Game\Behaviors">
-      <UniqueIdentifier>{30b4313e-2f34-40ba-9613-d250bab122eb}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source\stdafx.cpp">
-      <Filter>Precompiled</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\ColorChange.cpp">
+      <Filter>Game\Behaviors\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ScreenWrap.cpp">
+      <Filter>Game\Behaviors\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\TimedDeath.cpp">
+      <Filter>Game\Behaviors\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\MonkeyMovement.cpp">
+      <Filter>Game\Behaviors</Filter>
+    </ClCompile>
     <ClCompile Include="Source\Level1.cpp">
       <Filter>Game\Levels</Filter>
     </ClCompile>
+    <ClCompile Include="Source\stdafx.cpp">
+      <Filter>Precompiled</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\stdafx.h">
-      <Filter>Precompiled</Filter>
+    <ClInclude Include="Source\ColorChange.h">
+      <Filter>Game\Behaviors\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ScreenWrap.h">
+      <Filter>Game\Behaviors\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\TimedDeath.h">
+      <Filter>Game\Behaviors\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\MonkeyMovement.h">
+      <Filter>Game\Behaviors</Filter>
     </ClInclude>
     <ClInclude Include="Source\Level1.h">
       <Filter>Game\Levels</Filter>
     </ClInclude>
+    <ClInclude Include="Source\stdafx.h">
+      <Filter>Precompiled</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Game">
+      <UniqueIdentifier>{1d6c1fe3-8763-41d8-bd43-c365e6da692c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Behaviors">
+      <UniqueIdentifier>{ecd1bbe7-eb0b-47d5-b984-9674d41f0e5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Behaviors\Utils">
+      <UniqueIdentifier>{14cadf37-0c7d-47ef-96fc-86665d11c68b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\Levels">
+      <UniqueIdentifier>{697ec7e0-9f0d-4cfd-a391-3f83e744bfb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Precompiled">
+      <UniqueIdentifier>{e5939826-553f-41c0-86ab-4a31f6293a2e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

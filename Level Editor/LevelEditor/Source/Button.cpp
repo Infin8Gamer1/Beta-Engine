@@ -15,8 +15,10 @@
 #include "SpaceManager.h"
 #include "TileMapBrush.h"
 
-Button::Button(std::string name) : Component(name), enabled(true)
+Button::Button(std::string name) : Component(name)
 {
+	enabled = true;
+	isHovered = false;
 }
 
 void Button::Update(float dt)

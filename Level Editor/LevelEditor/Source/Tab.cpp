@@ -28,22 +28,22 @@ void Tab::Clicked()
 {
     Menu* m = menu->GetComponent<Menu>();
 
-    std::cout << m->GetType() << std::endl;
+    //std::cout << m->GetType() << std::endl;
 
     if (!m->IsShown())
     {
 		//show self
-		m->GetMenuController()->GetComponent<MenuController>()->ShowMenu(GetMenu());
+		m->GetMenuController()->GetComponent<MenuController>()->ShowMenu(menu);
         m->GetMenuController()->GetComponent<MenuController>()->RestoreTabsPos();
     }
     else
     {
-        m->GetMenuController()->GetComponent<MenuController>()->ShowMenu(GetMenu());
+        m->GetMenuController()->GetComponent<MenuController>()->ShowMenu(menu);
         m->GetMenuController()->GetComponent<MenuController>()->ShiftTabsPos();
 
-        GetMenu()->GetComponent<Sprite>()->SetAlpha(0.0f);
-        GetMenu()->GetComponent<Menu>()->setIsShown(false);
-        GetMenu()->GetComponent<Menu>()->HideButtons();
+		menu->GetComponent<Sprite>()->SetAlpha(0.0f);
+		m->setIsShown(false);
+		m->HideButtons();
     }
 }
 

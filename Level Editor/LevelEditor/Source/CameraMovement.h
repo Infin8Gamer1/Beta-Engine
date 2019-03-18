@@ -28,64 +28,61 @@
 // Public Structures:
 //------------------------------------------------------------------------------
 
-namespace Behaviors
+class CameraMovement : public Component
 {
-
-	class CameraMovement : public Component
-	{
-	public:
-		//------------------------------------------------------------------------------
-		// Public Functions:
-		//------------------------------------------------------------------------------
+public:
+	//------------------------------------------------------------------------------
+	// Public Functions:
+	//------------------------------------------------------------------------------
 		
-		// Constructor
-		// Params:
-		CameraMovement();
+	// Constructor
+	// Params:
+	CameraMovement();
 
-		// Clone a component and return a pointer to the cloned component.
-		// Returns:
-		//   A pointer to a dynamically allocated clone of the component.
-		Component* Clone() const override;
+	// Clone a component and return a pointer to the cloned component.
+	// Returns:
+	//   A pointer to a dynamically allocated clone of the component.
+	Component* Clone() const override;
 
-		// Initialize data for this object.
-		void Initialize() override;
+	// Initialize data for this object.
+	void Initialize() override;
 
-		// Update function for this component.
-		// Params:
-		//   dt = The (fixed) change in time since the last step.
-		void Update(float dt) override;
+	// Update function for this component.
+	// Params:
+	//   dt = The (fixed) change in time since the last step.
+	void Update(float dt) override;
 
-		// Write object data to file
-		// Params:
-		//   parser = The parser that is writing this object to a file.
-		void Serialize(Parser& parser) const override;
+	// Write object data to file
+	// Params:
+	//   parser = The parser that is writing this object to a file.
+	void Serialize(Parser& parser) const override;
 
-		// Read object data from a file
-		// Params:
-		//   parser = The parser that is reading this object's data from a file.
-		void Deserialize(Parser& parser) override;
+	// Read object data from a file
+	// Params:
+	//   parser = The parser that is reading this object's data from a file.
+	void Deserialize(Parser& parser) override;
 
-		static int MouseWheelY;
+	static int MouseWheelY;
 
-	private:
-		//------------------------------------------------------------------------------
-		// Private Variables:
-		//------------------------------------------------------------------------------
+private:
+	//------------------------------------------------------------------------------
+	// Private Variables:
+	//------------------------------------------------------------------------------
 		
 
 
-		char up;
-		char down;
-		char left;
-		char right;
-		char in;
-		char out;
-		float zoomSpeed;
-		float speed;
+	char up;
+	char down;
+	char left;
+	char right;
+	char in;
+	char out;
+	float zoomSpeed;
+	float speed;
 
 
-		int previousMouseWheelY;
-	};
-}
+	int previousMouseWheelY;
+};
+
 
 //------------------------------------------------------------------------------

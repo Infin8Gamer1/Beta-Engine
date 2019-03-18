@@ -23,17 +23,17 @@
 #include <SpaceManager.h>
 #include <GameObject.h>
 
-int Behaviors::CameraMovement::MouseWheelY = 0;
+int CameraMovement::MouseWheelY = 0;
 
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
 	UNREFERENCED_PARAMETER(xoffset);
 	UNREFERENCED_PARAMETER(window);
 
-	Behaviors::CameraMovement::MouseWheelY = (int)yoffset;
+	CameraMovement::MouseWheelY = (int)yoffset;
 }
 
-Behaviors::CameraMovement::CameraMovement() : Component("CameraMovement")
+CameraMovement::CameraMovement() : Component("CameraMovement")
 {
 	up = 'W';
 	down = 'S';
@@ -48,17 +48,17 @@ Behaviors::CameraMovement::CameraMovement() : Component("CameraMovement")
 	previousMouseWheelY = 0;
 }
 
-Component * Behaviors::CameraMovement::Clone() const
+Component * CameraMovement::Clone() const
 {
 	return new CameraMovement(*this);
 }
 
-void Behaviors::CameraMovement::Initialize()
+void CameraMovement::Initialize()
 {
 	glfwSetScrollCallback(System::GetInstance().GetWindowHandle(), scroll_callback);
 }
 
-void Behaviors::CameraMovement::Deserialize(Parser & parser)
+void CameraMovement::Deserialize(Parser & parser)
 {
 	parser.ReadVariable("UP", up);
 	parser.ReadVariable("DOWN", down);
@@ -67,7 +67,7 @@ void Behaviors::CameraMovement::Deserialize(Parser & parser)
 	parser.ReadVariable("Speed", speed);
 }
 
-void Behaviors::CameraMovement::Serialize(Parser & parser) const
+void CameraMovement::Serialize(Parser & parser) const
 {
 	parser.WriteVariable("UP", up);
 	parser.WriteVariable("DOWN", down);
@@ -76,7 +76,7 @@ void Behaviors::CameraMovement::Serialize(Parser & parser) const
 	parser.WriteVariable("Speed", speed);
 }
 
-void Behaviors::CameraMovement::Update(float dt)
+void CameraMovement::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
 

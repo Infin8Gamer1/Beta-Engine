@@ -1,0 +1,35 @@
+Monkey
+{
+  numComponents : 6
+  Transform
+  {
+    translation : { 500.5, -100 }
+    rotation : 0
+    scale : { 100, 100 }
+  }
+  Sprite
+  {
+    frameIndex : 0
+    color : { 1 , 1 , 1 , 1 }
+    spriteSourceName : MonkeyWalk
+  }
+  Animation
+  {
+  }
+  Physics
+  {
+    acceleration : { 0, -98 }
+    velocity : { 0, 0 }
+    angularVelocity : 0
+    mass : 1
+    gravity : { 0, -98 }
+  }
+  ColliderRectangle
+  {
+    CollisionGroup : default
+    CollisionFlags : all
+    extents : { 50, 50 }
+  }
+  Behaviors::MonkeyMovement
+  { } 
+}

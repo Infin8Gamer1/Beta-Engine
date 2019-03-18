@@ -19,6 +19,7 @@
 #include <Physics.h>
 #include <ColliderTilemap.h>
 #include <SpriteTilemap.h>
+#include "MonkeyMovement.h"
 
 //Resources
 #include <Mesh.h>
@@ -55,9 +56,7 @@ void Levels::Level1::Load()
 	Graphics::GetInstance().GetCurrentCamera().Reset();
 
 	////Register Custom Components
-
-	//GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Bullet"));
-	//GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Asteroid"));
+	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::MonkeyMovement>();
 
 	//Setup Sounds
 	soundManager = Engine::GetInstance().GetModule<SoundManager>();
@@ -80,13 +79,15 @@ void Levels::Level1::Initialize()
 void Levels::Level1::Update(float dt)
 {
 	UNREFERENCED_PARAMETER(dt);
+
+	Graphics::GetInstance().GetCurrentCamera().SetTranslation(GetSpace()->GetObjectManager().GetObjectByName("Monkey")->GetComponent<Transform>()->GetTranslation());
 }
 
 void Levels::Level1::Shutdown()
 {
 	std::cout << GetName() << "::Shutdown" << std::endl;
 
-	//Save();
+	//SaveLevel();
 
 	musicChannel->stop();
 	musicChannel = nullptr;

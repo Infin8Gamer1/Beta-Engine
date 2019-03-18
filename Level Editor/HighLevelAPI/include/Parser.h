@@ -158,6 +158,8 @@ public:
 	// and skips to the next word afterwards.
 	void ReadSkip(const std::string& text);
 
+	std::string ReadSkipComponent();
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Functions:

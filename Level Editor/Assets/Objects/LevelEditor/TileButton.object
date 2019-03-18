@@ -11,7 +11,7 @@ TileButton
   {
     frameIndex : 0
     color : { 1 , 1 , 1 , 0.8 }
-	spriteSourceName : EmptyTileLogo
+	spriteSourceName : LevelEditor/EmptyTileLogo
   }
   TileButton
   {

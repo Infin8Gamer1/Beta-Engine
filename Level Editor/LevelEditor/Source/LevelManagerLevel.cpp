@@ -95,7 +95,7 @@ void Levels::LevelManagerLevel::Load()
 
 	Graphics::GetInstance().GetCurrentCamera().Reset();
 
-	GameObjectFactory::GetInstance().RegisterComponent<Behaviors::CameraMovement>();
+	GameObjectFactory::GetInstance().RegisterComponent<CameraMovement>();
 	GameObjectFactory::GetInstance().RegisterComponent<TileMapBrush>();
 	GameObjectFactory::GetInstance().RegisterComponent<GameObjectPlacer>();
 

@@ -15,8 +15,6 @@
 #include "LevelEditorUI.h"
 
 //Components
-#include "CameraMovement.h"
-#include "TileMapBrush.h"
 #include <SpriteText.h>
 #include <Transform.h>
 #include <Physics.h>
@@ -54,12 +52,10 @@ void Levels::LevelEditorLevel::Load()
 	std::cout << GetName() << "::Load" << std::endl;
 
 	System::GetInstance().SetWindowTitle(WindowTitle);
+
 	Graphics::GetInstance().GetCurrentCamera().Reset();
 
 	////Register Custom Components
-
-	//GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Bullet"));
-	//GetSpace()->GetObjectManager().AddArchetype(*GameObjectFactory::GetInstance().CreateObject("Asteroid"));
 
 	//Setup Sounds
 	soundManager = Engine::GetInstance().GetModule<SoundManager>();
