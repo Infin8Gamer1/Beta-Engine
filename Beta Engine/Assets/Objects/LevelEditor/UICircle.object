@@ -1,0 +1,16 @@
+UICircle
+{
+  numComponents : 2
+  Transform
+  {
+    translation : { 0, 0 }
+    rotation : 0
+    scale : { 20, 20 }
+  }
+  Sprite
+  {
+    frameIndex : 0
+    color : { 1 , 1 , 1 , 1 }
+    spriteSourceName : LevelEditor/UICircle
+  }
+}

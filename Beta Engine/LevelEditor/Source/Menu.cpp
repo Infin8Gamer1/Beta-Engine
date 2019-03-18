@@ -193,7 +193,7 @@ void Menu::InitButtons()
 
 			Vector2D pos = Vector2D((float)(i % rows), (float)-(i / rows));
 
-			Vector2D offset = Vector2D(-(rows * xScale / 2) + 30, 275.0f);
+			Vector2D offset = Vector2D(-(rows * xScale / 2) + 30, (transform->GetScale().y / 2) - 75);
 
 			button->GetComponent<Transform>()->SetTranslation(transform->GetTranslation() + Vector2D(pos.x * xScale, pos.y * yScale) + offset);
 
@@ -228,7 +228,7 @@ void Menu::InitButtons()
 
 			Vector2D pos = Vector2D((float)(i % rows), (float)-(i / rows));
 
-			Vector2D offset = Vector2D(-(rows * xScale / 2) + 40, 275.0f);
+			Vector2D offset = Vector2D(-(rows * xScale / 2) + 40, (transform->GetScale().y / 2) - 75);
 
 			button->GetComponent<Transform>()->SetTranslation(transform->GetTranslation() + Vector2D(pos.x * xScale, pos.y * yScale) + offset);
 

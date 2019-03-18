@@ -107,6 +107,9 @@ void Levels::LevelManagerLevel::Initialize()
 {
 	std::cout << GetName() << "::Initialize" << std::endl;
 
+	GameObject* CenterCircle = GameObjectFactory::GetInstance().CreateObject("LevelEditor/UICircle");
+	GetSpace()->GetObjectManager().AddObject(*CenterCircle);
+
 	GameObject* Brush = GameObjectFactory::GetInstance().CreateObject("LevelEditor/Brush");
 	GetSpace()->GetObjectManager().AddObject(*Brush);
 

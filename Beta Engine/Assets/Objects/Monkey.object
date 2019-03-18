@@ -3,7 +3,7 @@ Monkey
   numComponents : 6
   Transform
   {
-    translation : { 500.5, -100 }
+    translation : { -175, -75 }
     rotation : 0
     scale : { 100, 100 }
   }

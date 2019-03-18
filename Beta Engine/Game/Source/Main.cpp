@@ -60,8 +60,8 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	Engine::GetInstance().AddModule(new SoundManager());
 
 	// Game engine goes!
-	int Height = 720;
-	int Width = 1280;
+	int Height = 1080;
+	int Width = 1920;
 	Engine::GetInstance().Start(Width, Height, 200);
 
 	return 0;
