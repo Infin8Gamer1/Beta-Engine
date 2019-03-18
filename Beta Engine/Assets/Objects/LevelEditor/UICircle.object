@@ -5,12 +5,12 @@ UICircle
   {
     translation : { 0, 0 }
     rotation : 0
-    scale : { 20, 20 }
+    scale : { 40, 40 }
   }
   Sprite
   {
     frameIndex : 0
     color : { 1 , 1 , 1 , 1 }
-    spriteSourceName : LevelEditor/UICircle
+    spriteSourceName : LevelEditor/Axes
   }
 }
