@@ -69,6 +69,15 @@ public:
 	//	   else return nullptr.
 	Space* GetSpaceByName(const std::string& spaceName) const;
 
+	// Returns a pointer to the first active game object matching the specified name.
+	// Params:
+	//	 objectName = The name of the object to be returned, if found.
+	// Returns:
+	//   If the named object is found,
+	//	   then return the pointer to the named game object,
+	//	   else return nullptr.
+	Space* GetSpaceByID(size_t spaceID) const;
+
 	// Returns the number of active objects with the given name.
 	// Params:
 	//   objectName = The name of the objects that should be counted.

@@ -44,6 +44,8 @@ public:
 
 	Component* Clone() const;
 
+	~GameObjectButton();
+
 	// Initialize this component (happens at object creation).
 	void Initialize() override;
 

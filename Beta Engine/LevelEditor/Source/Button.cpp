@@ -27,7 +27,7 @@ void Button::Update(float dt)
 
     if (!enabled) return;
 
-    if (IsClicked() && Input::GetInstance().CheckTriggered(VK_LBUTTON))
+    if (IsMouseHovering() && Input::GetInstance().CheckTriggered(VK_LBUTTON))
     {
         Clicked();
     }
@@ -54,7 +54,7 @@ Vector2D Button::GetMousePosition()
     return Graphics::GetInstance().ScreenToWorldPosition(mousepos);
 }
 
-bool Button::IsClicked()
+bool Button::IsMouseHovering()
 {
     Vector2D pos = GetMousePosition();
     Transform* tran = GetOwner()->GetComponent<Transform>();

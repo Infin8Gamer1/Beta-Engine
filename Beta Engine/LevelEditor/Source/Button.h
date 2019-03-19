@@ -60,7 +60,7 @@ private:
     // Get Muse Pos
     Vector2D GetMousePosition();
 
-    bool IsClicked();
+    bool IsMouseHovering();
 
     bool enabled;
 	

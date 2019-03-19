@@ -14,11 +14,20 @@ GameObjectButton::GameObjectButton() : Button("GameObjectButton")
 {
 	menuController = nullptr;
 	sprite = nullptr;
+	TextGO = nullptr;
+	TextSprite = nullptr;
 }
 
 Component * GameObjectButton::Clone() const
 {
 	return new GameObjectButton(*this);
+}
+
+GameObjectButton::~GameObjectButton()
+{
+	if (TextGO != nullptr) {
+		TextGO->Destroy();
+	}	
 }
 
 void GameObjectButton::Initialize()
@@ -45,6 +54,10 @@ void GameObjectButton::Initialize()
 
 void GameObjectButton::Update(float dt)
 {
+	UNREFERENCED_PARAMETER(dt);
+
+	Button::Update(dt);
+
 	TextSprite->SetAlpha(sprite->GetAlpha());
 }
 

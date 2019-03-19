@@ -61,6 +61,8 @@ void GameObjectPlacer::Update(float dt)
 		enabled = false;
 	}
 
+	//std::cout << enabled << std::endl;
+
 	if (enabled && Input::GetInstance().CheckReleased(VK_LBUTTON)) {
 		PlaceObject(Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition()));
 	}

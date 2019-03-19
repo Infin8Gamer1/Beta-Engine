@@ -39,7 +39,7 @@ public:
 	//------------------------------------------------------------------------------
 
 	// Constructor(s)
-	Space(const std::string& name, bool depth, bool useFirstSpaceCamera = false);
+	Space(const std::string& name, bool depth = false, bool useFirstSpaceCamera = false);
 
 	// Destructor
 	~Space();

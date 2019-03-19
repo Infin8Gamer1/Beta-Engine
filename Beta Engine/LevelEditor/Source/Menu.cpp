@@ -80,6 +80,8 @@ bool Menu::IsMouseOnUI()
     {
         inOnUI = true;
     }
+
+	//std::cout << GetOwner()->GetName() << ", " << inOnUI << std::endl;
     
     return inOnUI;
 }
@@ -147,7 +149,7 @@ void Menu::HideButtons()
 
         buttons[i]->GetComponent<Sprite>()->SetAlpha(0.0f);
 
-		std::cout << buttons[i]->GetName() << ", " << i << ", " << buttons[i]->GetComponent<Sprite>()->GetAlpha() << std::endl;
+		//std::cout << buttons[i]->GetName() << ", " << i << ", " << buttons[i]->GetComponent<Sprite>()->GetAlpha() << ", " << buttons[i]->GetComponent<Button>()->getEnabled() << std::endl;
     }
 }
 
@@ -158,13 +160,21 @@ void Menu::ShowButtons()
 		buttons[i]->GetComponent<Button>()->setEnabled(true);
 
         buttons[i]->GetComponent<Sprite>()->SetAlpha(1.0f);
+
+		//std::cout << buttons[i]->GetName() << ", " << i << ", " << buttons[i]->GetComponent<Sprite>()->GetAlpha() << ", " << buttons[i]->GetComponent<Button>()->getEnabled() << std::endl;
     }
 }
 
 void Menu::InitButtons()
 {
+	if (buttons.size() > 0) {
+		for (size_t i = 0; i < buttons.size(); i++)
+		{
+			buttons[i]->Destroy();
+		}
 
-	buttons.clear();
+		buttons.clear();
+	}
 
 	switch (menuType)
 	{

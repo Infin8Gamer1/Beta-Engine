@@ -43,8 +43,8 @@ void Space::Update(float dt)
 
 	if (useFirstSpaceCamera)
 	{
-		Graphics::GetInstance().SetCurrentCamera(*Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->camera);
-		Graphics::GetInstance().SetDepthEnabled(Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->depth);
+		Graphics::GetInstance().SetCurrentCamera(*Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByID(0)->camera);
+		Graphics::GetInstance().SetDepthEnabled(Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByID(0)->depth);
 	}
 	else {
 		Graphics::GetInstance().SetCurrentCamera(*camera);
@@ -54,6 +54,7 @@ void Space::Update(float dt)
 	if (nextLevel != nullptr) {
 		ChangeLevel();
 	}
+
 	if (currentLevel != nullptr && !paused) {
 		currentLevel->Update(dt);
 		objectManager.Update(dt);

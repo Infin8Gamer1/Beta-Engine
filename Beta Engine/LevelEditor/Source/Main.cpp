@@ -50,16 +50,14 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 
 	// Create a new space called "Level"
 	Space* space = new Space("Level", true);
-	// Set initial level to the second level.
 	space->SetLevel(new Levels::LevelEditorLevel());
 
 	//setup the UI Space
-	Space* uiSpace = new Space("UI", false);
+	Space* uiSpace = new Space("UI");
 	uiSpace->SetLevel(new Levels::LevelEditorUI());
 
-	// Create a new space called "Level"
+	// Create a new space called "Management"
 	Space* managmentSpace = new Space("Management", true, true);
-	// Set initial level to the second level.
 	managmentSpace->SetLevel(new Levels::LevelManagerLevel());
 
 	SpaceManager* spaceManager = new SpaceManager();
@@ -72,9 +70,11 @@ int WINAPI WinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prevInstance, _In
 	// Add Sound Manager
 	Engine::GetInstance().AddModule(new SoundManager());
 
-	// Game engine goes!
-	int Height = 1080;
-	int Width = 1920;
+	Engine::GetInstance().SetCloseOnEscape(false);
+
+	// Game engine go!
+	int Height = 720;
+	int Width = 1280;
 	Engine::GetInstance().Start(Width, Height, 200);
 
 	return 0;
