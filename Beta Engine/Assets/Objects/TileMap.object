@@ -3,7 +3,7 @@ TileMap
   numComponents : 3
   Transform
   {
-    translation : { -250, 250 }
+    translation : { -300, 350 }
     rotation : 0
     scale : { 50, 50 }
   }

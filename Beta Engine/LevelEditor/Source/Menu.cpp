@@ -146,6 +146,8 @@ void Menu::HideButtons()
 		buttons[i]->GetComponent<Button>()->setEnabled(false);
 
         buttons[i]->GetComponent<Sprite>()->SetAlpha(0.0f);
+
+		std::cout << buttons[i]->GetName() << ", " << i << ", " << buttons[i]->GetComponent<Sprite>()->GetAlpha() << std::endl;
     }
 }
 
@@ -188,8 +190,6 @@ void Menu::InitButtons()
 			GameObject* button = GameObjectFactory::GetInstance().CreateObject("LevelEditor/TileButton");
 
 			button->GetComponent<TileButton>()->SetTileID(i);
-
-			//button->GetComponent<TileButton>()->SetBrush(GetOwner()->GetSpace()->GetObjectManager().GetObjectByName("Brush")->GetComponent<TileMapBrush>());
 
 			Vector2D pos = Vector2D((float)(i % rows), (float)-(i / rows));
 
