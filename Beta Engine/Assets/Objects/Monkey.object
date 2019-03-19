@@ -3,7 +3,7 @@ Monkey
   numComponents : 6
   Transform
   {
-    translation : { 0, -75 }
+    translation : { -99.5, -75 }
     rotation : 0
     scale : { 100, 100 }
   }
@@ -18,11 +18,11 @@ Monkey
   }
   Physics
   {
-    acceleration : { 0, -98 }
+    acceleration : { 0, -275 }
     velocity : { 0, 0 }
     angularVelocity : 0
     mass : 1
-    gravity : { 0, -98 }
+    gravity : { 0, -275 }
   }
   ColliderRectangle
   {

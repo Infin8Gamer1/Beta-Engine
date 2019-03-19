@@ -3,13 +3,13 @@ TileMap
   numComponents : 3
   Transform
   {
-    translation : { -300, 350 }
+    translation : { -300, 400 }
     rotation : 0
     scale : { 50, 50 }
   }
   SpriteTilemap
   {
-    frameIndex : 6
+    frameIndex : 4
     color : { 1 , 1 , 1 , 1 }
     spriteSourceName : TileMap
     tilemapLoc : Default
