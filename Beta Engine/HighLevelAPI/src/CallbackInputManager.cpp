@@ -3,16 +3,11 @@
 #include <Vector2D.h>
 #include <System.h>
 
-static CallbackInputManager* instance = nullptr;
-
 CallbackInputManager & CallbackInputManager::GetInstance()
 {
-	if (instance == nullptr)
-	{
-		instance = new CallbackInputManager();
-	}
+	static CallbackInputManager instance;
 
-	return *instance;
+	return instance;
 }
 
 void CallbackInputManager::InputCursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
