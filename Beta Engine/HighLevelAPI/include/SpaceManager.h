@@ -27,6 +27,7 @@
 //------------------------------------------------------------------------------
 
 class Space;
+class CTwBar;
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -42,10 +43,13 @@ public:
 	//------------------------------------------------------------------------------
 
 	// Constructor(s)
-	SpaceManager();
+	SpaceManager(bool CreateTwBar = false);
 
 	// Destructor
 	~SpaceManager();
+
+	// Initialize this
+	void Initialize() override;
 
 	// Update all objects in the active game objects list.
 	// Params:
@@ -83,6 +87,8 @@ public:
 	//   objectName = The name of the objects that should be counted.
 	unsigned GetSpaceCount() const;
 
+	CTwBar* GetTwBar();
+
 private:
 	// Disable copy constructor and assignment operator
 	SpaceManager(const SpaceManager&) = delete;
@@ -90,6 +96,9 @@ private:
 
 	// Objects
 	std::vector<Space*> spaceList;
+
+	bool CreateTwBar;
+	CTwBar* bar;
 };
 
 //------------------------------------------------------------------------------

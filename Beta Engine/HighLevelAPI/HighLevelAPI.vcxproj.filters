@@ -35,6 +35,9 @@
     <Filter Include="Resources">
       <UniqueIdentifier>{1e25f3bd-ca43-4edf-bd1d-9f4ba420f76b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{ffa26e4e-aeab-43a6-b552-fb48aca55870}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation.h">
@@ -124,6 +127,9 @@
     <ClInclude Include="include\SpaceManager.h">
       <Filter>Levels</Filter>
     </ClInclude>
+    <ClInclude Include="include\CallbackInputManager.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
@@ -207,11 +213,14 @@
     <ClCompile Include="src\ResourceManager.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="include\ColliderLine.cpp">
+    <ClCompile Include="src\ColliderLine.cpp">
       <Filter>Collisions</Filter>
     </ClCompile>
-    <ClCompile Include="include\SpaceManager.cpp">
+    <ClCompile Include="src\SpaceManager.cpp">
       <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CallbackInputManager.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -22,16 +22,7 @@
 #include <Engine.h>
 #include <SpaceManager.h>
 #include <GameObject.h>
-
-int CameraMovement::MouseWheelY = 0;
-
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
-{
-	UNREFERENCED_PARAMETER(xoffset);
-	UNREFERENCED_PARAMETER(window);
-
-	CameraMovement::MouseWheelY = (int)yoffset;
-}
+#include <CallbackInputManager.h>
 
 CameraMovement::CameraMovement() : Component("CameraMovement")
 {
@@ -43,19 +34,11 @@ CameraMovement::CameraMovement() : Component("CameraMovement")
 	out = 'Q';
 	zoomSpeed = 1.5f;
 	speed = 10.0f;
-
-	MouseWheelY = 0;
-	previousMouseWheelY = 0;
 }
 
 Component * CameraMovement::Clone() const
 {
 	return new CameraMovement(*this);
-}
-
-void CameraMovement::Initialize()
-{
-	glfwSetScrollCallback(System::GetInstance().GetWindowHandle(), scroll_callback);
 }
 
 void CameraMovement::Deserialize(Parser & parser)
@@ -81,6 +64,8 @@ void CameraMovement::Update(float dt)
 	UNREFERENCED_PARAMETER(dt);
 
 	Camera* camera = Engine::GetInstance().GetModule<SpaceManager>()->GetSpaceByName("Level")->GetCamera();
+
+	int MouseWheelY = CallbackInputManager::GetInstance().GetCursorScroll();
 
 	Vector2D cameraTranslation = camera->GetTranslation();
 	float cameraFOV = camera->GetFOV();
