@@ -22,10 +22,16 @@
 // Forward Declarations:
 //------------------------------------------------------------------------------
 
-typedef std::function<void()> Callback;
+//typedef std::function<void()> Callback;
 
 //class Vector2D;
 struct GLFWwindow;
+
+// Function pointer for Damage event handlers.
+// Params:
+//   callingObject = The object whose handler is being called.
+//   otherObject = The other object that the object collided with.
+typedef void(*Callback)(int key);
 
 //------------------------------------------------------------------------------
 // Public Structures:
@@ -40,13 +46,13 @@ public:
 	// Retrieve the instance of the Input singleton.
 	static CallbackInputManager& GetInstance();
 
-	void addKeyPressBinding(int key, const Callback& callback);
+	void addKeyPressBinding(int key, const Callback callback);
 
 	//void removeKeyPressBinding(int key, const Callback& callback);
 
 	void onKeyPress(int key);
 
-	void addKeyReleaseBinding(int key, const Callback& callback);
+	void addKeyReleaseBinding(int key, const Callback callback);
 
 	//void removeKeyReleaseBinding(int key, const Callback& callback);
 

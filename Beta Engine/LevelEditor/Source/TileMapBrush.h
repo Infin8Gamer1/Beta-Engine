@@ -62,7 +62,7 @@ private:
 	//------------------------------------------------------------------------------
 	// Private Variables:
 	//------------------------------------------------------------------------------
-	void onMouseClick();
+	static void onMouseClick(int key);
 
 	void PlaceTile(Vector2D mousePosition);
 

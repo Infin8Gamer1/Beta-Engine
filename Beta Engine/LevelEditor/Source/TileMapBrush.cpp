@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "TileMapBrush.h"
-//#include <glfw3.h>
+#include <glfw3.h>
 #include <Tilemap.h>
 #include <CallbackInputManager.h>
 #include <Input.h>
@@ -45,7 +45,7 @@ void TileMapBrush::Initialize()
 		menuController = menuObject->GetComponent<MenuController>();
 	}
 
-	CallbackInputManager::GetInstance().addKeyPressBinding(0/*GLFW_MOUSE_BUTTON_1*/, [this]() { this->onMouseClick(); });
+	CallbackInputManager::GetInstance().addKeyPressBinding(GLFW_MOUSE_BUTTON_1, TileMapBrush::onMouseClick);
 }
 
 void TileMapBrush::Update(float dt)
@@ -81,7 +81,7 @@ void TileMapBrush::SetTilemap(Tilemap * _map)
 	map = _map;
 }
 
-void TileMapBrush::onMouseClick()
+void TileMapBrush::onMouseClick(int key)
 {
 	std::cout << "Clicked!" << std::endl;
 }

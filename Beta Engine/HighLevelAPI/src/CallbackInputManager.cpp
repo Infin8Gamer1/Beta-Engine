@@ -54,29 +54,29 @@ CallbackInputManager::CallbackInputManager()
 	glfwSetKeyCallback(handle, (GLFWkeyfun)InputKeyCallback);
 }
 
-void CallbackInputManager::addKeyPressBinding(int key, const Callback & callback)
+void CallbackInputManager::addKeyPressBinding(int key, const Callback callback)
 {
 	m_KeyPressCallbacks[key].push_back(callback);
 }
 
 void CallbackInputManager::onKeyPress(int key)
 {
-	for (Callback& callback : m_KeyPressCallbacks[key])
+	for (Callback& call : m_KeyPressCallbacks[key])
 	{
-		callback();
+		call(key);
 	}
 }
 
-void CallbackInputManager::addKeyReleaseBinding(int key, const Callback & callback)
+void CallbackInputManager::addKeyReleaseBinding(int key, const Callback callback)
 {
 	m_KeyReleaseCallbacks[key].push_back(callback);
 }
 
 void CallbackInputManager::onKeyRelease(int key)
 {
-	for (Callback& callback : m_KeyReleaseCallbacks[key])
+	for (Callback& call : m_KeyReleaseCallbacks[key])
 	{
-		callback();
+		call(key);
 	}
 }
 
