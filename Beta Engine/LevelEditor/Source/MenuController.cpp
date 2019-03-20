@@ -20,6 +20,7 @@
 #include <SpaceManager.h>
 #include "glfw3.h"
 #include <System.h>
+#include <AntTweakBar.h>
 
 MenuController::MenuController() : Component("MenuController"), tabBuffer(10)
 {
@@ -60,6 +61,9 @@ void MenuController::Initialize()
     ObjectMenu->GetComponent<Menu>()->InitTab(1, tabBuffer);
 
     ShowMenu(TileMenu);
+
+	TwAddVarRW(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected Tile ID", TW_TYPE_INT8, &SelectedTileID, " label='Selected Tile ID' help='The Tile that is selected' ");
+	TwAddVarRW(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected GO Name", TW_TYPE_STDSTRING, &SelectedGameObjectTemplateName, " label='Selected GO' help='The Game Object that is selected' ");
 }
 
 bool MenuController::IsMouseOnUI()

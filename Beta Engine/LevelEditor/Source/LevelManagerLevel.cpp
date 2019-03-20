@@ -50,7 +50,7 @@
 
 #include "../resource.h"
 
-#include <shobjidl.h> 
+#include <shobjidl.h>
 #include <sstream>
 
 WNDPROC Levels::LevelManagerLevel::PreviousWndProc = nullptr;
@@ -163,7 +163,7 @@ void Levels::LevelManagerLevel::Unload()
 
 void Levels::LevelManagerLevel::LoadLevel()
 {
-	std::string fileName = BasicFileOpen();//GetOpenLocation();
+	std::string fileName = BasicFileOpen();
 
 	if (fileName == "")
 	{

@@ -44,9 +44,6 @@ public:
 	//   A pointer to a dynamically allocated clone of the component.
 	Component* Clone() const override;
 
-	// Initialize data for this object.
-	void Initialize() override;
-
 	// Update function for this component.
 	// Params:
 	//   dt = The (fixed) change in time since the last step.
@@ -62,14 +59,10 @@ public:
 	//   parser = The parser that is reading this object's data from a file.
 	void Deserialize(Parser& parser) override;
 
-	static int MouseWheelY;
-
 private:
 	//------------------------------------------------------------------------------
 	// Private Variables:
 	//------------------------------------------------------------------------------
-		
-
 
 	char up;
 	char down;
@@ -79,7 +72,6 @@ private:
 	char out;
 	float zoomSpeed;
 	float speed;
-
 
 	int previousMouseWheelY;
 };

@@ -46,15 +46,15 @@
     <OutDir>$(ProjectDir)\lib\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>BetaHigh_x64_D</TargetName>
-    <IncludePath>..\LowLevelAPI\include;..\FMOD\inc;include;src;$(IncludePath)</IncludePath>
-    <LibraryPath>..\LowLevelAPI\lib;..\FMOD\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\LowLevelAPI\include;..\AntTweakBar\include;..\glfw\include;..\FMOD\inc;include;src;$(IncludePath)</IncludePath>
+    <LibraryPath>..\AntTweakBar\lib;..\LowLevelAPI\lib;..\glfw\lib;..\FMOD\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)\lib\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>BetaHigh_x64</TargetName>
-    <IncludePath>..\LowLevelAPI\include;..\FMOD\inc;include;src;$(IncludePath)</IncludePath>
-    <LibraryPath>..\LowLevelAPI\lib;..\FMOD\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>..\LowLevelAPI\include;..\AntTweakBar\include;..\glfw\include;..\FMOD\inc;include;src;$(IncludePath)</IncludePath>
+    <LibraryPath>..\AntTweakBar\lib;..\LowLevelAPI\lib;..\glfw\lib;..\FMOD\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -65,7 +65,7 @@
       <ProgramDataBaseFileName>$(ProjectDir)\lib\BetaHigh_x64_D.pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Lib>
-      <AdditionalDependencies>BetaLow_x64_D.lib;fmodL64_vc.lib;fmodstudioL64_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>BetaLow_x64_D.lib;fmodL64_vc.lib;fmodstudioL64_vc.lib;AntTweakBar64.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -83,11 +83,12 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
     <Lib>
-      <AdditionalDependencies>BetaLow_x64.lib;fmod64_vc.lib;fmodstudio64_vc.lib</AdditionalDependencies>
+      <AdditionalDependencies>BetaLow_x64.lib;fmod64_vc.lib;fmodstudio64_vc.lib;AntTweakBar64.lib</AdditionalDependencies>
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Animation.h" />
+    <ClInclude Include="include\CallbackInputManager.h" />
     <ClInclude Include="include\Collider.h" />
     <ClInclude Include="include\ColliderCircle.h" />
     <ClInclude Include="include\ColliderLine.h" />
@@ -118,8 +119,9 @@
     <ClInclude Include="include\Transform.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="include\ColliderLine.cpp" />
-    <ClCompile Include="include\SpaceManager.cpp" />
+    <ClCompile Include="src\CallbackInputManager.cpp" />
+    <ClCompile Include="src\ColliderLine.cpp" />
+    <ClCompile Include="src\SpaceManager.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Collider.cpp" />
     <ClCompile Include="src\ColliderCircle.cpp" />

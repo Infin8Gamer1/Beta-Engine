@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "TileMapBrush.h"
+//#include <glfw3.h>
 #include <Tilemap.h>
+#include <CallbackInputManager.h>
 #include <Input.h>
 #include <Graphics.h>
 #include <ColliderTilemap.h>
@@ -42,6 +44,8 @@ void TileMapBrush::Initialize()
 	{
 		menuController = menuObject->GetComponent<MenuController>();
 	}
+
+	CallbackInputManager::GetInstance().addKeyPressBinding(0/*GLFW_MOUSE_BUTTON_1*/, [this]() { this->onMouseClick(); });
 }
 
 void TileMapBrush::Update(float dt)
@@ -75,6 +79,11 @@ void TileMapBrush::Update(float dt)
 void TileMapBrush::SetTilemap(Tilemap * _map)
 {
 	map = _map;
+}
+
+void TileMapBrush::onMouseClick()
+{
+	std::cout << "Clicked!" << std::endl;
 }
 
 void TileMapBrush::PlaceTile(Vector2D MousePos)
