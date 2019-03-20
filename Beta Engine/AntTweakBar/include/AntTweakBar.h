@@ -16,6 +16,7 @@
 //
 // ----------------------------------------------------------------------------
 
+#pragma once
 
 #if !defined TW_INCLUDED
 #define TW_INCLUDED

@@ -29,7 +29,7 @@
 
 // Used to track memory leaks to specific files and line numbers
 #ifdef _DEBUG
-	#define new new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
+#define new new ( _NORMAL_BLOCK , __FILE__ , __LINE__ )
 #endif
 
 #ifdef max
