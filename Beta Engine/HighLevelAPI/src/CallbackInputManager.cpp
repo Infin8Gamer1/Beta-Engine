@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "CallbackInputManager.h"
-#include <glfw3.h>
 #include <Vector2D.h>
 #include <System.h>
 

@@ -27,6 +27,15 @@
 #include <list>
 #include <algorithm>
 
+//GLFW STUFF
+#define GLFW_EXPOSE_NATIVE_WIN32
+#define GLFW_EXPOSE_NATIVE_WGL
+#include <glfw3.h>
+#include <glfw3native.h>
+
+#define GLFW_CDECL
+#include <AntTweakBar.h>
+
 #define _CRTDBG_MAP_ALLOC
 #include <crtdbg.h>
 

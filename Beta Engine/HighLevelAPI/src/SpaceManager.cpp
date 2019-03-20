@@ -3,12 +3,8 @@
 #include "Space.h"
 #include <GameObjectFactory.h>
 #include <ResourceManager.h>
-#include <glfw3.h>
 #include <System.h>
 #include <CallbackInputManager.h>
-
-#define GLFW_CDECL
-#include <AntTweakBar.h>
 
 SpaceManager::SpaceManager(bool createTwBar) : BetaObject("SpaceManager")
 {

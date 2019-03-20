@@ -11,7 +11,6 @@
 #include "Space.h"
 #include "Tab.h"
 #include <System.h>
-#include <glfw3.h>
 #include <SpriteTilemap.h>
 #include <Engine.h>
 #include <SpaceManager.h>

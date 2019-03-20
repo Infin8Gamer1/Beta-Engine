@@ -15,7 +15,6 @@
 #include <Input.h>
 #include <Parser.h>
 #include <Camera.h>
-#include <glfw3.h>
 #include <System.h>
 #include <Space.h>
 #include <Camera.h>

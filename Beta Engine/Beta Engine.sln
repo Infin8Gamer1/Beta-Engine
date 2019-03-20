@@ -11,6 +11,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LevelEditor", "LevelEditor\
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{18019478-9140-4B77-B0F5-38F759B6640C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4D019903-DA3D-466B-8863-DE77285C6531} = {4D019903-DA3D-466B-8863-DE77285C6531}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

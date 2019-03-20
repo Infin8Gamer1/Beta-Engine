@@ -1,5 +1,4 @@
 #include "stdafx.h"
-
 #include "MenuController.h"
 #include "Menu.h"
 #include "Sprite.h" 
@@ -18,9 +17,7 @@
 #include "TileMapBrush.h"
 #include <Engine.h>
 #include <SpaceManager.h>
-#include "glfw3.h"
 #include <System.h>
-#include <AntTweakBar.h>
 
 MenuController::MenuController() : Component("MenuController"), tabBuffer(10)
 {

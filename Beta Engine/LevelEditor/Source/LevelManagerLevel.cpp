@@ -42,12 +42,6 @@
 #include <Graphics.h>
 #include <Parser.h>
 
-//GLFW STUFF
-#define GLFW_EXPOSE_NATIVE_WIN32
-#define GLFW_EXPOSE_NATIVE_WGL
-#include <glfw3.h>
-#include <glfw3native.h>
-
 #include "../resource.h"
 
 #include <shobjidl.h>

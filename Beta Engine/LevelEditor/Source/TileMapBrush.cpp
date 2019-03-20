@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "TileMapBrush.h"
-#include <glfw3.h>
 #include <Tilemap.h>
 #include <CallbackInputManager.h>
 #include <Input.h>
