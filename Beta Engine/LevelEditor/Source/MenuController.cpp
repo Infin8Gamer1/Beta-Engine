@@ -26,6 +26,12 @@ MenuController::MenuController() : Component("MenuController"), tabBuffer(10)
 	EnabledTool = ToolType::TMBrush;
 }
 
+MenuController::~MenuController()
+{
+	TwRemoveVar(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected Tile ID");
+	TwRemoveVar(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected GO Name");
+}
+
 Component * MenuController::Clone() const
 {
     return new MenuController(*this);
@@ -62,6 +68,8 @@ void MenuController::Initialize()
 	TwAddVarRW(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected Tile ID", TW_TYPE_INT8, &SelectedTileID, " label='Selected Tile ID' help='The Tile that is selected' ");
 	TwAddVarRW(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected GO Name", TW_TYPE_STDSTRING, &SelectedGameObjectTemplateName, " label='Selected GO' help='The Game Object that is selected' ");
 }
+
+
 
 bool MenuController::IsMouseOnUI()
 {

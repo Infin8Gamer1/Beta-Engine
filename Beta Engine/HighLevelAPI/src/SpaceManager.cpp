@@ -19,7 +19,7 @@ SpaceManager::~SpaceManager()
 static GLFWmousebuttonfun originalMouseButtonCallback = nullptr;
 
 void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
-	if (!TwEventMouseButtonGLFW(button, action))
+	if (!TwEventMouseButtonGLFW3(window, button, action, mods))
 	{
 		if (originalMouseButtonCallback != nullptr)
 			originalMouseButtonCallback(window, button, action, mods);
@@ -29,7 +29,7 @@ void MouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
 static GLFWcursorposfun originalCursorPosCallback = nullptr;
 
 void CursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
-	if (!TwEventMousePosGLFW((int)xpos, (int)ypos))
+	if (!TwEventMousePosGLFW3(window, xpos, ypos))
 	{
 		if (originalCursorPosCallback != nullptr)
 			originalCursorPosCallback(window, xpos, ypos);
@@ -39,7 +39,7 @@ void CursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
 static GLFWscrollfun originalScrollCallback = nullptr;
 
 void CursorScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
-	if (!TwEventMouseWheelGLFW((int)yoffset))
+	if (!TwEventMouseWheelGLFW3(window, xoffset, yoffset))
 	{
 		if (originalScrollCallback != nullptr)
 			originalScrollCallback(window, xoffset, yoffset);
@@ -49,20 +49,18 @@ void CursorScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
 static GLFWkeyfun originalKeyCallback = nullptr;
 
 void MyKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-	if (!TwEventKeyGLFW(key, action))
+
+	if (!TwEventKeyGLFW3(window, key, scancode, action, mods))
 	{
 		if (originalKeyCallback != nullptr)
 			originalKeyCallback(window, key, scancode, action, mods);
-	}
-	else {
-		std::cout << "Testing!" << std::endl;
 	}
 }
 
 static GLFWcharfun originalCharCallback = nullptr;
 
 void CharCallback(GLFWwindow* window, int codepoint) {
-	if (!TwEventCharGLFW(codepoint, 0))
+	if (!TwEventCharGLFW3(window, codepoint))
 	{
 		if (originalCharCallback != nullptr)
 			originalCharCallback(window, codepoint);

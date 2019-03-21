@@ -33,7 +33,7 @@
 #include <glfw3.h>
 #include <glfw3native.h>
 
-#define GLFW_CDECL
+//#define GLFW_CDECL
 #include <AntTweakBar.h>
 
 #define _CRTDBG_MAP_ALLOC

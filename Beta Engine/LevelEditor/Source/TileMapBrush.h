@@ -64,6 +64,8 @@ private:
 	//------------------------------------------------------------------------------
 	static void onMouseClick(int key);
 
+	static void onMouseClickUp(int key);
+
 	void PlaceTile(Vector2D mousePosition);
 
 	Tilemap* map;
@@ -73,6 +75,7 @@ private:
 	MenuController* menuController;
 
 	bool enabled;
+	static bool clicking;
 };
 
 

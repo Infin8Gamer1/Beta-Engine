@@ -15,6 +15,8 @@
 #include <SpaceManager.h>
 #include "MenuController.h"
 
+bool TileMapBrush::clicking = false;
+
 TileMapBrush::TileMapBrush() : Component("TileMapBrush")
 {
 	map = nullptr;
@@ -45,6 +47,7 @@ void TileMapBrush::Initialize()
 	}
 
 	CallbackInputManager::GetInstance().addKeyPressBinding(GLFW_MOUSE_BUTTON_1, TileMapBrush::onMouseClick);
+	CallbackInputManager::GetInstance().addKeyReleaseBinding(GLFW_MOUSE_BUTTON_1, TileMapBrush::onMouseClickUp);
 }
 
 void TileMapBrush::Update(float dt)
@@ -70,7 +73,7 @@ void TileMapBrush::Update(float dt)
 		enabled = false;
 	}
 
-	if (enabled && Input::GetInstance().IsKeyDown(VK_LBUTTON)) {
+	if (enabled && clicking) {
 		PlaceTile(Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition()));
 	}
 }
@@ -82,7 +85,16 @@ void TileMapBrush::SetTilemap(Tilemap * _map)
 
 void TileMapBrush::onMouseClick(int key)
 {
-	std::cout << "Clicked!" << std::endl;
+	UNREFERENCED_PARAMETER(key);
+
+	clicking = true;
+}
+
+void TileMapBrush::onMouseClickUp(int key)
+{
+	UNREFERENCED_PARAMETER(key);
+
+	clicking = false;
 }
 
 void TileMapBrush::PlaceTile(Vector2D MousePos)
