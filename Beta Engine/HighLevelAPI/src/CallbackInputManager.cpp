@@ -15,7 +15,7 @@ void CallbackInputManager::InputCursorPosCallback(GLFWwindow* window, double xpo
 }
 
 void CallbackInputManager::InputCursorScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
-	GetInstance().scroll = (int)yoffset;
+	GetInstance().scroll = yoffset;
 }
 
 void CallbackInputManager::InputMouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
@@ -100,7 +100,7 @@ Vector2D CallbackInputManager::GetCursorPosition() const
 	return CursorPosition;
 }
 
-int CallbackInputManager::GetCursorScroll() const
+double CallbackInputManager::GetCursorScroll() const
 {
 	return scroll;
 }

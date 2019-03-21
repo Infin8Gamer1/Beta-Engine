@@ -67,7 +67,7 @@ public:
 	// Get the current location of the mouse in screen coordinates
 	Vector2D GetCursorPosition() const;
 
-	int GetCursorScroll() const;
+	double GetCursorScroll() const;
 
 private:
 	// Constructor/destructor private to prevent accidental instantiation/destruction.
@@ -89,7 +89,7 @@ private:
 
 	static void InputKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
-	int scroll;
+	double scroll;
 	Vector2D CursorPosition;
 };
 
