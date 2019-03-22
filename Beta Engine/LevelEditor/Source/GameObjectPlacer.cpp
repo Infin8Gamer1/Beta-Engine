@@ -13,6 +13,9 @@
 #include <SpaceManager.h>
 #include "MenuController.h"
 #include <GameObjectFactory.h>
+#include <CallbackInputManager.h>
+
+bool GameObjectPlacer::clicked = false;
 
 GameObjectPlacer::GameObjectPlacer() : Component("GameObjectPlacer")
 {
@@ -36,6 +39,8 @@ void GameObjectPlacer::Initialize()
 	{
 		menuController = menuObject->GetComponent<MenuController>();
 	}
+
+	CallbackInputManager::GetInstance().addKeyReleaseBinding(GLFW_MOUSE_BUTTON_1, GameObjectPlacer::onMouseClickUp);
 }
 
 void GameObjectPlacer::Update(float dt)
@@ -63,8 +68,11 @@ void GameObjectPlacer::Update(float dt)
 
 	//std::cout << enabled << std::endl;
 
-	if (enabled && Input::GetInstance().CheckReleased(VK_LBUTTON)) {
+	if (enabled && clicked) {
 		PlaceObject(Graphics::GetInstance().ScreenToWorldPosition(Input::GetInstance().GetCursorPosition()));
+	}
+	else {
+		clicked = false;
 	}
 }
 
@@ -96,4 +104,15 @@ void GameObjectPlacer::PlaceObject(Vector2D mousePosition)
 	}
 
 	TileMapObject->GetSpace()->GetObjectManager().AddObject(*object);
+
+	object->CreateTweakBar();
+
+	clicked = false;
+}
+
+void GameObjectPlacer::onMouseClickUp(int key)
+{
+	UNREFERENCED_PARAMETER(key);
+
+	clicked = true;
 }

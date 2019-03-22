@@ -30,6 +30,7 @@ MenuController::~MenuController()
 {
 	TwRemoveVar(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected Tile ID");
 	TwRemoveVar(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected GO Name");
+	TwRemoveVar(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected Tool");
 }
 
 Component * MenuController::Clone() const
@@ -65,8 +66,13 @@ void MenuController::Initialize()
 
     ShowMenu(TileMenu);
 
-	TwAddVarRW(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected Tile ID", TW_TYPE_INT8, &SelectedTileID, " label='Selected Tile ID' help='The Tile that is selected' ");
-	TwAddVarRW(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected GO Name", TW_TYPE_STDSTRING, &SelectedGameObjectTemplateName, " label='Selected GO' help='The Game Object that is selected' ");
+	TwEnumVal ToolTypesEV[] = { {ToolType::TMBrush, "Tile Map Brush"}, {ToolType::GOPlacer, "Game Object Placer"}, {ToolType::GOSelecter, "Game Object Selector"} };
+	TW_TYPE_TOOL_TYPE = TwDefineEnum("ToolType", ToolTypesEV, 3);
+
+	TwAddVarRW(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected Tool", TW_TYPE_TOOL_TYPE, &EnabledTool, " enum='0 {Tile Map Brush}, 1 {Game Object Placer}, 2 {Game Object Selector}' ");
+
+	TwAddVarRO(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected Tile ID", TW_TYPE_INT8, &SelectedTileID, " label='Selected Tile ID' help='The Tile that is selected' ");
+	TwAddVarRO(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar(), "Selected GO Name", TW_TYPE_STDSTRING, &SelectedGameObjectTemplateName, " label='Selected GO' help='The Game Object that is selected' ");
 }
 
 

@@ -1,16 +1,80 @@
 LevelEditor
 {
-  numGameObjects : 5
+  numGameObjects : 3
   {
-    GameObjectName : TileMap
-    Translation : Null
-    GameObjectName : Monkey
-    Translation : { 100.5, -75 }
-    GameObjectName : Circle
-    Translation : { 800.5, -99.5 }
-    GameObjectName : Circle
-    Translation : { 550.5, -49.5 }
-    GameObjectName : Circle
-    Translation : { -99.5, 0.5 }
+    TileMap
+    {
+      numComponents : 3
+      Transform
+      {
+        translation : { -300, 400 }
+        rotation : 0
+        scale : { 50, 50 }
+      }
+      SpriteTilemap
+      {
+        frameIndex : 4
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : TileMap
+        tilemapLoc : Default
+      }
+      ColliderTilemap
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        tilemapLoc : Default
+      }
+    }
+    Monkey
+    {
+      numComponents : 6
+      Transform
+      {
+        translation : { 100.5, -75 }
+        rotation : 0
+        scale : { 100, 100 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : MonkeyWalk
+      }
+      Animation
+      {
+      }
+      Physics
+      {
+        acceleration : { 0, -275 }
+        velocity : { 0, 0 }
+        angularVelocity : 0
+        mass : 1
+        gravity : { 0, -275 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 50, 50 }
+      }
+      Behaviors::MonkeyMovement
+      { } 
+    }
+    Circle
+    {
+      numComponents : 2
+      Transform
+      {
+        translation : { -141.5, 200.5 }
+        rotation : 0
+        scale : { -137, -47 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : Circle
+      }
+    }
   }
 }

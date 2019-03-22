@@ -111,6 +111,17 @@ std::string Parser::ReadSkipComponent()
 	return readValue;
 }
 
+std::string Parser::ReadLine()
+{
+	CheckFileOpen();
+
+	std::string line;
+
+	stream >> line;
+
+	return line;
+}
+
 void Parser::CheckFileOpen()
 {
 	if (!stream.is_open()) {

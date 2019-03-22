@@ -160,6 +160,8 @@ public:
 
 	std::string ReadSkipComponent();
 
+	std::string ReadLine();
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Functions:

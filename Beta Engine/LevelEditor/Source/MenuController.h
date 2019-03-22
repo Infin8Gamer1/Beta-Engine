@@ -38,7 +38,8 @@ class Button;
 enum ToolType
 {
 	TMBrush,
-	GOPlacer
+	GOPlacer,
+	GOSelecter
 };
 
 class MenuController : public Component
@@ -117,4 +118,5 @@ private:
 	std::vector<std::string> GameObjectNames;
 
 	ToolType EnabledTool;
+	TwType TW_TYPE_TOOL_TYPE;
 };

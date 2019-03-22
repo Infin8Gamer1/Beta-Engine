@@ -1,0 +1,16 @@
+LevelEditor
+{
+  numGameObjects : 5
+  {
+    GameObjectName : TileMap
+    Translation : Null
+    GameObjectName : Monkey
+    Translation : { 100.5, -75 }
+    GameObjectName : Circle
+    Translation : { 800.5, -99.5 }
+    GameObjectName : Circle
+    Translation : { 550.5, -49.5 }
+    GameObjectName : Circle
+    Translation : { -99.5, 0.5 }
+  }
+}

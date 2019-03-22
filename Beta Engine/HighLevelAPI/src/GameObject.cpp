@@ -19,8 +19,9 @@
 GameObject::GameObject(const std::string & name) : BetaObject(name)
 {
 	isDestroyed = false;
-	saveTranslation = true;
 	damageHandler = nullptr;
+	Health = 0;
+	Path = name;
 }
 
 GameObject::GameObject(const GameObject & other) : BetaObject(other.GetName())
@@ -37,7 +38,9 @@ GameObject::GameObject(const GameObject & other) : BetaObject(other.GetName())
 	}
 	
 	isDestroyed = false;
-	damageHandler = nullptr;
+	damageHandler = other.damageHandler;
+	Health = other.Health;
+	Path = other.Path;
 }
 
 GameObject::~GameObject()
@@ -52,12 +55,53 @@ GameObject::~GameObject()
 
 	components.clear();
 	components.shrink_to_fit();
+
+	if (bar != nullptr)
+	{
+		TwDeleteBar(bar);
+	}
 }
 
 void GameObject::Deserialize(Parser & parser)
 {
 	std::string mName = this->GetName();
 	parser.ReadSkip(mName);
+	parser.ReadSkip("{");
+
+	unsigned numComponents = 0;
+	parser.ReadVar(numComponents);
+
+	for (unsigned i = 0; i < numComponents; i++)
+	{
+		std::string componentName;
+		parser.ReadValue(componentName);
+
+		Component* component = GameObjectFactory::GetInstance().CreateComponent(componentName);
+
+		if (component == nullptr) {
+			std::cout << "WARNING : Component " << componentName << " could not be found ... Skipping" << std::endl;
+
+			std::string ref = parser.ReadSkipComponent();
+
+			UnloadedComponentNames.push_back(componentName);
+			UnloadedComponentStrings.push_back(ref);
+
+			//throw ParseException(componentName, "Component " + componentName + " could not be found! ERROR 404");
+		}
+		else {
+			AddComponent(component);
+
+			parser.ReadSkip("{");
+			component->Deserialize(parser);
+			parser.ReadSkip("}");
+		}
+	}
+
+	parser.ReadSkip("}");
+}
+
+void GameObject::DeserializeB(Parser & parser)
+{
 	parser.ReadSkip("{");
 
 	unsigned numComponents = 0;
@@ -123,21 +167,32 @@ void GameObject::Serialize(Parser & parser) const
 	parser.EndScope();
 }
 
-TwBar* GameObject::CreateTweakBar(TwBar* bar)
+void TW_CALL DeleteCallback(void *clientData)
 {
-	TwBar* outputBar = bar;
+	// do something
+	GameObject* go = static_cast<GameObject*>(clientData);
 
-	if (outputBar == nullptr) {
+	go->Destroy();
+}
+
+TwBar* GameObject::CreateTweakBar(TwBar* bar_)
+{
+	bar = bar_;
+
+	if (bar == nullptr) {
 		std::string name = GetName() + " Properties";
-		outputBar = TwNewBar(name.c_str());
+		bar = TwNewBar(name.c_str());
+		TwDefine(std::string(" '" + name + "' size = '200 300' position = '25 135' alpha = 128 refresh = 0.15 movable = true resizable = true contained = false color = '28 183 255'").c_str());
 	}
 	
 	for (size_t i = 0; i < components.size(); i++)
 	{
-		components[i]->AddVarsToTweakBar(outputBar);
+		components[i]->AddVarsToTweakBar(bar);
 	}
 
-	return outputBar;
+	TwAddButton(bar, "Delete Game Object", DeleteCallback, this, NULL);
+
+	return bar;
 }
 
 void GameObject::Initialize()
@@ -232,16 +287,6 @@ int GameObject::getHealth()
 
 void GameObject::setHealth(int _health) {
 	Health = _health;
-}
-
-bool GameObject::GetSaveTranslation()
-{
-	return saveTranslation;
-}
-
-void GameObject::SetSaveTranslation(bool _saveTranslation)
-{
-	saveTranslation = _saveTranslation;
 }
 
 std::string GameObject::GetSavePath()

@@ -114,8 +114,6 @@ void Levels::LevelManagerLevel::Initialize()
 
 	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("LevelEditor/CameraManager");
 	GetSpace()->GetObjectManager().AddObject(*CameraMovement);
-
-	CenterCircle->CreateTweakBar(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar());
 }
 
 void Levels::LevelManagerLevel::Update(float dt)

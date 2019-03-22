@@ -63,6 +63,9 @@ public:
 	// Loads object data from a file.
 	void Deserialize(Parser& parser) override;
 
+	// Loads object data from a file. The B function is used to read the object in without readskiping the name of the object
+	void DeserializeB(Parser& parser);
+
 	// Saves object data to a file.
 	void Serialize(Parser& parser) const override;
 
@@ -159,10 +162,6 @@ public:
 	// Set the health of this gameobject
 	void setHealth(int Health);
 
-	bool GetSaveTranslation();
-
-	void SetSaveTranslation(bool saveTranslation);
-
 	std::string GetSavePath();
 
 	void SetSavePath(std::string Path);
@@ -180,11 +179,10 @@ private:
 	// Whether the object has been marked for destruction.
 	bool isDestroyed;
 
+	TwBar* bar;
+
 	// the health of this object
 	int Health;
-
-
-	bool saveTranslation;
 
 	std::string Path;
 

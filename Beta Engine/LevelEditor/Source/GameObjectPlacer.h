@@ -62,13 +62,15 @@ private:
 	//------------------------------------------------------------------------------
 	void PlaceObject(Vector2D mousePosition);
 
+	static void onMouseClickUp(int key);
+
 	MenuController* menuController;
 
 	GameObject* TileMapObject;
 	GameObject* menuObject;
-	
 
 	bool enabled;
+	static bool clicked;
 };
 
 

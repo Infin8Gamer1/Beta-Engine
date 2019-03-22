@@ -25,6 +25,8 @@ Transform::Transform(float x, float y) : Component("Transform")
 	matrix = CS230::Matrix2D();
 
 	isDirty = true;
+
+	bar = nullptr;
 }
 
 Transform::Transform(Vector2D _translation, Vector2D _scale, float _rotation) : Component("Transform")
@@ -36,6 +38,18 @@ Transform::Transform(Vector2D _translation, Vector2D _scale, float _rotation) : 
 	matrix = CS230::Matrix2D();
 
 	isDirty = true;
+
+	bar = nullptr;
+}
+
+Transform::~Transform()
+{
+	if (bar != nullptr)
+	{
+		TwRemoveVar(bar, "Position");
+		TwRemoveVar(bar, "Rotation");
+		TwRemoveVar(bar, "Scale");
+	}
 }
 
 Component * Transform::Clone() const
@@ -76,8 +90,10 @@ void Transform::Serialize(Parser & parser) const
 	parser.WriteVariable("scale", GetScale());
 }
 
-void Transform::AddVarsToTweakBar(TwBar * bar)
+void Transform::AddVarsToTweakBar(TwBar * bar_)
 {
+	bar = bar_;
+
 	Component::AddVarsToTweakBar(bar);
 	std::string params = " group='" + GetName() + "' ";
 
@@ -88,26 +104,31 @@ void Transform::AddVarsToTweakBar(TwBar * bar)
 
 void Transform::Update(float dt)
 {
-	if (translation.x != previousTranslation.x || translation.y != previousTranslation.y)
+	UNREFERENCED_PARAMETER(dt);
+
+	if (bar != nullptr)
 	{
-		isDirty = true;
-	}
-	
-	previousTranslation = translation;
+		if (translation.x != previousTranslation.x || translation.y != previousTranslation.y)
+		{
+			isDirty = true;
+		}
 
-	if (rotation != previousRotation)
-	{
-		isDirty = true;
-	}
+		previousTranslation = translation;
 
-	previousRotation = rotation;
+		if (rotation != previousRotation)
+		{
+			isDirty = true;
+		}
 
-	if (scale.x != previousScale.x || scale.y != previousScale.y)
-	{
-		isDirty = true;
-	}
+		previousRotation = rotation;
 
-	previousScale = scale;
+		if (scale.x != previousScale.x || scale.y != previousScale.y)
+		{
+			isDirty = true;
+		}
+
+		previousScale = scale;
+	}	
 }
 
 const CS230::Matrix2D & Transform::GetMatrix()

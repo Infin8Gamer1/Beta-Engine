@@ -39,7 +39,7 @@ void Level::Deserialize(Parser & parser)
 
 	for (unsigned i = 0; i < numGameObjects; i++)
 	{
-		std::string GameObjectName;
+		/*std::string GameObjectName;
 		parser.ReadVar(GameObjectName);
 
 		GameObject* object = GameObjectFactory::GetInstance().CreateObject(GameObjectName);
@@ -62,7 +62,14 @@ void Level::Deserialize(Parser & parser)
 		}
 		else {
 			object->SetSaveTranslation(false);
-		}
+		}*/
+
+		std::string name;
+		name = parser.ReadLine();
+
+		GameObject* object = new GameObject(name);
+
+		object->DeserializeB(parser);
 
 		GetSpace()->GetObjectManager().AddObject(*object);
 	}
@@ -87,7 +94,7 @@ void Level::Serialize(Parser & parser) const
 
 	for (unsigned i = 0; i < numGameObjects; i++)
 	{
-		std::string GameObjectName = activeGOs[i]->GetSavePath();
+		/*std::string GameObjectName = activeGOs[i]->GetSavePath();
 		parser.WriteVar(GameObjectName);
 
 		Transform* transform = activeGOs[i]->GetComponent<Transform>();
@@ -100,7 +107,9 @@ void Level::Serialize(Parser & parser) const
 			parser.WriteVariable("Translation", "Null");
 		}
 
-		GameObjectFactory::GetInstance().SaveObjectToFile(activeGOs[i]);
+		GameObjectFactory::GetInstance().SaveObjectToFile(activeGOs[i]);*/
+
+		activeGOs[i]->Serialize(parser);
 	}
 
 	parser.EndScope();

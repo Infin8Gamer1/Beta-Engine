@@ -79,10 +79,10 @@ void WindowSizeCallback(GLFWwindow* window, int width, int height) {
 
 void SpaceManager::Initialize()
 {
+	TwInit(TwGraphAPI::TW_OPENGL_CORE, NULL);
+
 	if (CreateTwBar)
 	{
-		TwInit(TwGraphAPI::TW_OPENGL_CORE, NULL);
-
 		int windowWidth, windowHeight;
 		GLFWwindow* handle = System::GetInstance().GetWindowHandle();
 		glfwGetWindowSize(handle, &windowWidth, &windowHeight);
@@ -91,7 +91,7 @@ void SpaceManager::Initialize()
 
 		bar = TwNewBar("BAR");
 
-		TwDefine(" BAR label='Properties' position='30 50' alpha=128 refresh=0.15 movable=true resizable=true contained=false color='28 183 255' "); // Message added to the help bar.
+		TwDefine(" BAR label='Properties' size='200 100' position='25 25' alpha=128 refresh=0.15 movable=true resizable=true contained=false color='28 183 255' "); // Message added to the help bar.
 
 		//init input callback because we need to save these as the original callbacks
 		CallbackInputManager::GetInstance();
