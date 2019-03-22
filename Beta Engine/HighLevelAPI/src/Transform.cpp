@@ -41,8 +41,6 @@ Transform::Transform(Vector2D _translation, Vector2D _scale, float _rotation) : 
 Component * Transform::Clone() const
 {
 	return new Transform(*this);
-
-	
 }
 
 void Transform::Deserialize(Parser & parser)
@@ -84,7 +82,7 @@ void Transform::AddVarsToTweakBar(TwBar * bar)
 	std::string params = " group='" + GetName() + "' ";
 
 	TwAddVarRW(bar, "Position", Engine::GetInstance().GetModule<SpaceManager>()->GetVector2DTwType(), (void*)&translation, params.c_str());
-	TwAddVarRW(bar, "Rotation", TW_TYPE_FLOAT, &rotation, params.c_str());
+	TwAddVarRW(bar, "Rotation", TW_TYPE_FLOAT, &rotation, std::string(params + "precision=3 step=" + std::to_string(15.0f * M_PI / 180.0f) + " min=0 max=" + std::to_string(2*M_PI) + " ").c_str());
 	TwAddVarRW(bar, "Scale", Engine::GetInstance().GetModule<SpaceManager>()->GetVector2DTwType(), (void*)&scale, params.c_str());
 }
 

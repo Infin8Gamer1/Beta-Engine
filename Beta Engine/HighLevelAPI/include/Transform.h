@@ -119,15 +119,18 @@ private:
 	//------------------------------------------------------------------------------
 
 	// The translation (or world position) of a game object.
-	Vector2D	translation;
+	Vector2D translation;
+	// The Previous Translation of the game object.
 	Vector2D previousTranslation;
 
 	// The rotation (or orientation) of a game object.
-	float	rotation;
+	float rotation;
+	// The previous rotation of the game object.
 	float previousRotation;
 
 	// The scale (or size) of a game object.
-	Vector2D	scale;
+	Vector2D scale;
+	// The previous Scale of the game object.
 	Vector2D previousScale;
 
 	// The transformation matrix resulting from multiplying the 
@@ -136,7 +139,7 @@ private:
 	CS230::Matrix2D inverseMatrix;
 
 	// True if the transformation matrix needs to be recalculated.
-	bool	isDirty;
+	bool isDirty;
 };
 
 //------------------------------------------------------------------------------
