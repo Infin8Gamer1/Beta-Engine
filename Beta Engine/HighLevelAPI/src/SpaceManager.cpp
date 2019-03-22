@@ -103,6 +103,13 @@ void SpaceManager::Initialize()
 		originalKeyCallback = glfwSetKeyCallback(handle, (GLFWkeyfun)MyKeyCallback);
 		originalCharCallback = glfwSetCharCallback(handle, (GLFWcharfun)CharCallback);
 		originalWindowSizeCallback = glfwSetWindowSizeCallback(handle, (GLFWwindowsizefun)WindowSizeCallback);
+
+		TwStructMember Vector2dMembers[] = {
+		{ "x", TW_TYPE_FLOAT, offsetof(Vector2D, x), ""},
+		{ "y", TW_TYPE_FLOAT, offsetof(Vector2D, y), ""},
+		};
+
+		TW_TYPE_VECTOR2D = TwDefineStruct("Vector2D", Vector2dMembers, 2, sizeof(Vector2D), NULL, NULL);
 	}
 }
 
@@ -169,4 +176,9 @@ unsigned SpaceManager::GetSpaceCount() const
 TwBar * SpaceManager::GetTwBar()
 {
 	return bar;
+}
+
+TwType SpaceManager::GetVector2DTwType()
+{
+	return TW_TYPE_VECTOR2D;
 }

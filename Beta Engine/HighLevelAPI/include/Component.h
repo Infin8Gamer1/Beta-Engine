@@ -45,8 +45,14 @@ public:
 	// Clones the component, returning a dynamically allocated copy.
 	virtual Component* Clone() const = 0;
 
+	virtual void AddVarsToTweakBar(TwBar* bar);
+
+	virtual void RemoveVarsFromTweakBar(TwBar* bar);
+
 	// Retrieve component's owner object (if any).
 	GameObject* GetOwner() const;
+
+
 };
 
 //------------------------------------------------------------------------------

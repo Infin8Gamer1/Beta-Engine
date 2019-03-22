@@ -123,6 +123,23 @@ void GameObject::Serialize(Parser & parser) const
 	parser.EndScope();
 }
 
+TwBar* GameObject::CreateTweakBar(TwBar* bar)
+{
+	TwBar* outputBar = bar;
+
+	if (outputBar == nullptr) {
+		std::string name = GetName() + " Properties";
+		outputBar = TwNewBar(name.c_str());
+	}
+	
+	for (size_t i = 0; i < components.size(); i++)
+	{
+		components[i]->AddVarsToTweakBar(outputBar);
+	}
+
+	return outputBar;
+}
+
 void GameObject::Initialize()
 {
 	for (size_t i = 0; i < components.size(); i++)

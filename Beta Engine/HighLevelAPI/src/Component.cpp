@@ -17,6 +17,19 @@ Component::Component(const std::string & name) : BetaObject(name), Serializable(
 {
 }
 
+void Component::AddVarsToTweakBar(TwBar * bar)
+{
+	/*std::string params = " label='" + GetName() + "' ";
+	
+	TwAddButton(bar, std::string("LabelButton_" + GetName()).c_str(), NULL, NULL, params.c_str());
+	TwAddSeparator(bar, std::string("Separator_" + GetName()).c_str(), NULL);*/
+}
+
+void Component::RemoveVarsFromTweakBar(TwBar * bar)
+{
+	UNREFERENCED_PARAMETER(bar);
+}
+
 GameObject * Component::GetOwner() const
 {
 	return static_cast<GameObject*>(GetParent());

@@ -13,6 +13,8 @@
 #include "Transform.h"
 #include <Parser.h>
 #include <sstream>
+#include <Engine.h>
+#include <SpaceManager.h>
 
 Transform::Transform(float x, float y) : Component("Transform")
 {
@@ -39,6 +41,8 @@ Transform::Transform(Vector2D _translation, Vector2D _scale, float _rotation) : 
 Component * Transform::Clone() const
 {
 	return new Transform(*this);
+
+	
 }
 
 void Transform::Deserialize(Parser & parser)
@@ -72,6 +76,40 @@ void Transform::Serialize(Parser & parser) const
 
 	//set scale
 	parser.WriteVariable("scale", GetScale());
+}
+
+void Transform::AddVarsToTweakBar(TwBar * bar)
+{
+	Component::AddVarsToTweakBar(bar);
+	std::string params = " group='" + GetName() + "' ";
+
+	TwAddVarRW(bar, "Position", Engine::GetInstance().GetModule<SpaceManager>()->GetVector2DTwType(), (void*)&translation, params.c_str());
+	TwAddVarRW(bar, "Rotation", TW_TYPE_FLOAT, &rotation, params.c_str());
+	TwAddVarRW(bar, "Scale", Engine::GetInstance().GetModule<SpaceManager>()->GetVector2DTwType(), (void*)&scale, params.c_str());
+}
+
+void Transform::Update(float dt)
+{
+	if (translation.x != previousTranslation.x || translation.y != previousTranslation.y)
+	{
+		isDirty = true;
+	}
+	
+	previousTranslation = translation;
+
+	if (rotation != previousRotation)
+	{
+		isDirty = true;
+	}
+
+	previousRotation = rotation;
+
+	if (scale.x != previousScale.x || scale.y != previousScale.y)
+	{
+		isDirty = true;
+	}
+
+	previousScale = scale;
 }
 
 const CS230::Matrix2D & Transform::GetMatrix()

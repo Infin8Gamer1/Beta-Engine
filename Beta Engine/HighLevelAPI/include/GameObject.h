@@ -66,6 +66,8 @@ public:
 	// Saves object data to a file.
 	void Serialize(Parser& parser) const override;
 
+	TwBar* CreateTweakBar(TwBar* bar = nullptr);
+
 	// Initialize this object's components and set it to active.
 	void Initialize() override;
 

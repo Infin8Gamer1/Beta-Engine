@@ -23,10 +23,6 @@ void CallbackInputManager::InputMouseButtonCallback(GLFWwindow* window, int butt
 	{
 		GetInstance().onKeyPress(button);
 	}
-	else if (action == GLFW_REPEAT)
-	{
-		GetInstance().onKeyHeld(button);
-	}
 	else if (action == GLFW_RELEASE) {
 		GetInstance().onKeyRelease(button);
 	}
@@ -36,10 +32,6 @@ void CallbackInputManager::InputKeyCallback(GLFWwindow* window, int key, int sca
 	if (action == GLFW_PRESS)
 	{
 		GetInstance().onKeyPress(key);
-	}
-	else if (action == GLFW_REPEAT)
-	{
-		GetInstance().onKeyHeld(key);
 	}
 	else if (action == GLFW_RELEASE) {
 		GetInstance().onKeyRelease(key);
@@ -77,19 +69,6 @@ void CallbackInputManager::addKeyReleaseBinding(int key, const Callback callback
 void CallbackInputManager::onKeyRelease(int key)
 {
 	for (Callback& call : m_KeyReleaseCallbacks[key])
-	{
-		call(key);
-	}
-}
-
-void CallbackInputManager::addKeyHeldBinding(int key, const Callback callback)
-{
-	m_KeyHeldCallbacks[key].push_back(callback);
-}
-
-void CallbackInputManager::onKeyHeld(int key)
-{
-	for (Callback& call : m_KeyHeldCallbacks[key])
 	{
 		call(key);
 	}

@@ -58,12 +58,6 @@ public:
 
 	void onKeyRelease(int key);
 
-	void addKeyHeldBinding(int key, const Callback callback);
-
-	//void removeKeyHeldBinding(int key, const Callback& callback);
-
-	void onKeyHeld(int key);
-
 	// Get the current location of the mouse in screen coordinates
 	Vector2D GetCursorPosition() const;
 
@@ -78,7 +72,6 @@ private:
 	CallbackInputManager& operator=(const CallbackInputManager&) = delete;
 
 	std::map<int, std::vector<Callback>> m_KeyPressCallbacks;
-	std::map<int, std::vector<Callback>> m_KeyHeldCallbacks;
 	std::map<int, std::vector<Callback>> m_KeyReleaseCallbacks;
 
 	static void InputCursorPosCallback(GLFWwindow* window, double xpos, double ypos);

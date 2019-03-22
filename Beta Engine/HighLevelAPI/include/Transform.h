@@ -56,6 +56,10 @@ public:
 	// Saves object data to a file.
 	void Serialize(Parser& parser) const override;
 
+	void AddVarsToTweakBar(TwBar* bar) override;
+
+	void Update(float dt) override;
+
 	// Get the transform matrix, based upon translation, rotation and scale settings.
 	// Returns:
 	//	 A reference to the component's matrix.
@@ -116,12 +120,15 @@ private:
 
 	// The translation (or world position) of a game object.
 	Vector2D	translation;
+	Vector2D previousTranslation;
 
 	// The rotation (or orientation) of a game object.
 	float	rotation;
+	float previousRotation;
 
 	// The scale (or size) of a game object.
 	Vector2D	scale;
+	Vector2D previousScale;
 
 	// The transformation matrix resulting from multiplying the 
 	// translation, rotation, and scale matrices.

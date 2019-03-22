@@ -95,6 +95,8 @@ void Levels::LevelManagerLevel::Load()
 
 	HWND hwnd = glfwGetWin32Window(System::GetInstance().GetWindowHandle());
 	PreviousWndProc = (WNDPROC)SetWindowLongPtr(hwnd, GWLP_WNDPROC, (LONG_PTR)&WindowProc);
+
+	//glfwSetCursor(System::GetInstance().GetWindowHandle(), glfwCreateStandardCursor(GLFW_CROSSHAIR_CURSOR));
 }
 
 void Levels::LevelManagerLevel::Initialize()
@@ -112,6 +114,8 @@ void Levels::LevelManagerLevel::Initialize()
 
 	GameObject* CameraMovement = GameObjectFactory::GetInstance().CreateObject("LevelEditor/CameraManager");
 	GetSpace()->GetObjectManager().AddObject(*CameraMovement);
+
+	CenterCircle->CreateTweakBar(Engine::GetInstance().GetModule<SpaceManager>()->GetTwBar());
 }
 
 void Levels::LevelManagerLevel::Update(float dt)
