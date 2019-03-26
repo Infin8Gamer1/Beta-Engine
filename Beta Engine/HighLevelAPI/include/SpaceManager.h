@@ -90,6 +90,8 @@ public:
 
 	TwType GetVector2DTwType();
 
+	TwType GetColorTwType();
+
 private:
 	// Disable copy constructor and assignment operator
 	SpaceManager(const SpaceManager&) = delete;
@@ -101,6 +103,7 @@ private:
 	bool CreateTwBar;
 	CTwBar* bar;
 	TwType TW_TYPE_VECTOR2D;
+	TwType TW_TYPE_BETA_COLOR;
 };
 
 //------------------------------------------------------------------------------

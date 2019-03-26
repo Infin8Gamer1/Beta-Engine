@@ -130,6 +130,9 @@
     <ClInclude Include="include\CallbackInputManager.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="include\FileOpenHelper.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\stdafx.cpp">
@@ -220,6 +223,9 @@
       <Filter>Levels</Filter>
     </ClCompile>
     <ClCompile Include="src\CallbackInputManager.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FileOpenHelper.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>

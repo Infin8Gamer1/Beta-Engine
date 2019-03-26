@@ -96,6 +96,7 @@
     <ClInclude Include="include\ColliderRectangle.h" />
     <ClInclude Include="include\ColliderTilemap.h" />
     <ClInclude Include="include\Component.h" />
+    <ClInclude Include="include\FileOpenHelper.h" />
     <ClInclude Include="include\GameObject.h" />
     <ClInclude Include="include\GameObjectFactory.h" />
     <ClInclude Include="include\GameObjectManager.h" />
@@ -121,6 +122,7 @@
   <ItemGroup>
     <ClCompile Include="src\CallbackInputManager.cpp" />
     <ClCompile Include="src\ColliderLine.cpp" />
+    <ClCompile Include="src\FileOpenHelper.cpp" />
     <ClCompile Include="src\SpaceManager.cpp" />
     <ClCompile Include="src\Animation.cpp" />
     <ClCompile Include="src\Collider.cpp" />

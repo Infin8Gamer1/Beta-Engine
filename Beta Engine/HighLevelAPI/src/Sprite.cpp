@@ -19,6 +19,9 @@
 #include <Graphics.h>
 #include <Parser.h>
 #include <ResourceManager.h>
+#include <Engine.h>
+#include <SpaceManager.h>
+#include <FileOpenHelper.h>
 
 Sprite::Sprite() : Component("Sprite")
 {
@@ -27,6 +30,19 @@ Sprite::Sprite() : Component("Sprite")
 	spriteSource = nullptr;
 	mesh = nullptr;
 	color = Color();
+	bar = nullptr;
+	ssName = "";
+}
+
+Sprite::~Sprite()
+{
+	if (bar != nullptr)
+	{
+		TwRemoveVar(bar, "Frame Index");
+		TwRemoveVar(bar, "Color");
+		TwRemoveVar(bar, "Sprite Source Name");
+		TwRemoveVar(bar, "Open Sprite Source");
+	}
 }
 
 Component * Sprite::Clone() const
@@ -58,6 +74,43 @@ void Sprite::Serialize(Parser & parser) const
 	parser.WriteVariable("color", color);
 	//set spriteSourceName
 	parser.WriteVariable("spriteSourceName", spriteSource->GetName());
+}
+
+void TW_CALL OpenSpriteSourceCB(void * clientData)
+{
+	std::string fileName = FileOpenHelper::BasicFileOpen();
+
+	if (fileName == "")
+	{
+		return;
+	}
+
+	std::string ObjectPath = "Assets\\SpriteSources\\";
+
+	size_t position = fileName.rfind(ObjectPath);
+
+	fileName = fileName.substr(position + ObjectPath.length());
+
+	fileName = fileName.substr(0, fileName.find_first_of("."));
+
+	Sprite* sprite = static_cast<Sprite*>(clientData);
+
+	sprite->SetSpriteSource(ResourceManager::GetInstance().GetSpriteSource(fileName, true));
+
+	sprite->RefreshAutoMesh();
+}
+
+void Sprite::AddVarsToTweakBar(TwBar * bar_)
+{
+	bar = bar_;
+
+	Component::AddVarsToTweakBar(bar);
+	std::string params = " group='" + GetName() + "' ";
+
+	TwAddVarRW(bar, "Frame Index", TW_TYPE_INT32, (void*)&frameIndex, std::string(params + " min=0 ").c_str());
+	TwAddVarRW(bar, "Color", Engine::GetInstance().GetModule<SpaceManager>()->GetColorTwType(), (void*)&color, params.c_str());
+	TwAddVarRO(bar, "Sprite Source Name", TW_TYPE_STDSTRING, &ssName, params.c_str());
+	TwAddButton(bar, "Open Sprite Source", OpenSpriteSourceCB, this, std::string(params + " label='Open Sprite Source' ").c_str());
 }
 
 void Sprite::Initialize()
@@ -137,6 +190,7 @@ void Sprite::SetMesh(Mesh * meshInput)
 void Sprite::SetSpriteSource(SpriteSource * spriteSourceInput)
 {
 	spriteSource = spriteSourceInput;
+	ssName = spriteSource->GetName();
 }
 
 SpriteSource * Sprite::GetSpriteSource()
@@ -156,6 +210,8 @@ const Color & Sprite::GetColor() const
 
 void Sprite::RefreshAutoMesh()
 {
+	// TODO: Make auto refresh mesh not use a random string to make the name as there is a slight chance that it will break
+
 	char alphanum[] =
 		"0123456789"
 		"!@#$%^&*"
@@ -174,3 +230,5 @@ void Sprite::RefreshAutoMesh()
 	//get mesh
 	SetMesh(ResourceManager::GetInstance().GetMesh(GetOwner()->GetName() + "_AutoMesh_" + random, true, Vector2D(1.0f / spriteSource->GetTextureDimensions().x, 1.0f / spriteSource->GetTextureDimensions().y)));
 }
+
+

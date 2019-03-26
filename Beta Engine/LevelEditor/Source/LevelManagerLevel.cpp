@@ -41,6 +41,7 @@
 #include <SpaceManager.h>
 #include <Graphics.h>
 #include <Parser.h>
+#include <FileOpenHelper.h>
 
 #include "../resource.h"
 
@@ -159,7 +160,7 @@ void Levels::LevelManagerLevel::Unload()
 
 void Levels::LevelManagerLevel::LoadLevel()
 {
-	std::string fileName = BasicFileOpen();
+	std::string fileName = FileOpenHelper::BasicFileOpen();
 
 	if (fileName == "")
 	{
@@ -188,7 +189,7 @@ void Levels::LevelManagerLevel::SaveLevel()
 		return;
 	}
 
-	std::string fileName = BasicFileSave();//GetSaveLocation();
+	std::string fileName = FileOpenHelper::BasicFileSave();//GetSaveLocation();
 
 	if (fileName == "")
 	{
@@ -208,7 +209,7 @@ void Levels::LevelManagerLevel::SaveLevel()
 
 void Levels::LevelManagerLevel::AddGameObject()
 {
-	std::string fileName = BasicFileOpen();
+	std::string fileName = FileOpenHelper::BasicFileOpen();
 
 	if (fileName == "")
 	{
@@ -244,106 +245,4 @@ void Levels::LevelManagerLevel::Test() {
 	else if (msgBoxID == IDNO) {
 		SaveLevel();
 	}
-}
-
-std::string Levels::LevelManagerLevel::BasicFileOpen()
-{
-	std::wstringstream ss;
-
-	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED |
-		COINIT_DISABLE_OLE1DDE);
-	if (SUCCEEDED(hr))
-	{
-		IFileOpenDialog *pFileOpen;
-
-		// Create the FileOpenDialog object.
-		hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_ALL,
-			IID_IFileOpenDialog, reinterpret_cast<void**>(&pFileOpen));
-
-		if (SUCCEEDED(hr))
-		{
-			// Show the Open dialog box.
-			hr = pFileOpen->Show(NULL);
-
-			// Get the file name from the dialog box.
-			if (SUCCEEDED(hr))
-			{
-				IShellItem *pItem;
-				hr = pFileOpen->GetResult(&pItem);
-				if (SUCCEEDED(hr))
-				{
-					//PWSTR pszFilePath;
-					wchar_t* pszFilePath;
-					hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);
-
-					// Display the file name to the user.
-					if (SUCCEEDED(hr))
-					{
-						//std::string filePath(pszFilePath);
-						ss << pszFilePath;
-						//MessageBox(NULL, pszFilePath, "File Path", MB_OK);
-						CoTaskMemFree(pszFilePath);
-					}
-					pItem->Release();
-				}
-			}
-			pFileOpen->Release();
-		}
-		CoUninitialize();
-	}
-
-	std::wstring output = ss.str();
-
-	return std::string(output.begin(), output.end());
-}
-
-std::string Levels::LevelManagerLevel::BasicFileSave()
-{
-	std::wstringstream ss;
-
-	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED |
-		COINIT_DISABLE_OLE1DDE);
-	if (SUCCEEDED(hr))
-	{
-		IFileSaveDialog *pFileSave;
-
-		// Create the FileOpenDialog object.
-		hr = CoCreateInstance(CLSID_FileSaveDialog, NULL, CLSCTX_ALL,
-			IID_IFileSaveDialog, reinterpret_cast<void**>(&pFileSave));
-
-		if (SUCCEEDED(hr))
-		{
-			// Show the Open dialog box.
-			hr = pFileSave->Show(NULL);
-
-			// Get the file name from the dialog box.
-			if (SUCCEEDED(hr))
-			{
-				IShellItem *pItem;
-				hr = pFileSave->GetResult(&pItem);
-				if (SUCCEEDED(hr))
-				{
-					//PWSTR pszFilePath;
-					wchar_t* pszFilePath;
-					hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);
-
-					// Display the file name to the user.
-					if (SUCCEEDED(hr))
-					{
-						//std::string filePath(pszFilePath);
-						ss << pszFilePath;
-						//MessageBox(NULL, pszFilePath, "File Path", MB_OK);
-						CoTaskMemFree(pszFilePath);
-					}
-					pItem->Release();
-				}
-			}
-			pFileSave->Release();
-		}
-		CoUninitialize();
-	}
-
-	std::wstring output = ss.str();
-
-	return std::string(output.begin(), output.end());
 }

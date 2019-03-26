@@ -46,6 +46,8 @@ public:
 	// Create a new sprite object.
 	Sprite();
 
+	~Sprite();
+
 	// Clone the sprite, returning a dynamically allocated copy.
 	Component* Clone() const override;
 
@@ -54,6 +56,9 @@ public:
 
 	// Saves object data to a file.
 	void Serialize(Parser& parser) const override;
+
+	// Add Component Spific Vars to a Tweak Bar
+	void AddVarsToTweakBar(TwBar* bar) override;
 
 	// Initialize components.
 	void Initialize();
@@ -133,6 +138,10 @@ private:
 
 	// Color used for blending/tint
 	Color color;
+
+	TwBar* bar;
+
+	std::string ssName;
 };
 
 //------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 LevelEditor
 {
-  numGameObjects : 3
+  numGameObjects : 4
   {
     TileMap
     {
@@ -75,6 +75,41 @@ LevelEditor
         color : { 1 , 1 , 1 , 1 }
         spriteSourceName : Circle
       }
+    }
+    Monkey_1
+    {
+      numComponents : 6
+      Transform
+      {
+        translation : { -123.5, -75 }
+        rotation : 0
+        scale : { 100, 100 }
+      }
+      Sprite
+      {
+        frameIndex : 12
+        color : { 1 , 1 , 1 , 1 }
+        spriteSourceName : MonkeyIdle
+      }
+      Animation
+      {
+      }
+      Physics
+      {
+        acceleration : { 0, -275 }
+        velocity : { 0, 0 }
+        angularVelocity : 0
+        mass : 1
+        gravity : { 0, -275 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 50, 50 }
+      }
+      Behaviors::MonkeyMovement
+      { } 
     }
   }
 }

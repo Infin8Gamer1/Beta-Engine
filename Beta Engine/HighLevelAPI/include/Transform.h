@@ -66,6 +66,7 @@ public:
 	 */
 	void Serialize(Parser& parser) const override;
 
+	// Add Component Spific Vars to a Tweak Bar
 	void AddVarsToTweakBar(TwBar* bar) override;
 
 	void Update(float dt) override;

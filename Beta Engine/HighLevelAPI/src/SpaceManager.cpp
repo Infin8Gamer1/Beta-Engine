@@ -5,6 +5,7 @@
 #include <ResourceManager.h>
 #include <System.h>
 #include <CallbackInputManager.h>
+#include <Color.h>
 
 SpaceManager::SpaceManager(bool createTwBar) : BetaObject("SpaceManager")
 {
@@ -110,6 +111,17 @@ void SpaceManager::Initialize()
 		};
 
 		TW_TYPE_VECTOR2D = TwDefineStruct("Vector2D", Vector2dMembers, 2, sizeof(Vector2D), NULL, NULL);
+
+		Color myColor = Color();
+
+		TwStructMember ColorMembers[] = {
+		{ "a", TW_TYPE_FLOAT, offsetof(Color, a), "min=0 max=1 step=0.05"},
+		{ "r", TW_TYPE_FLOAT, offsetof(Color, r), "min=0 max=1 step=0.05"},
+		{ "g", TW_TYPE_FLOAT, offsetof(Color, g), "min=0 max=1 step=0.05"},
+		{ "b", TW_TYPE_FLOAT, offsetof(Color, b), "min=0 max=1 step=0.05"},
+		};
+
+		TW_TYPE_BETA_COLOR = TwDefineStruct("Color", ColorMembers, 4, sizeof(Color), NULL, NULL);
 	}
 }
 
@@ -181,4 +193,9 @@ TwBar * SpaceManager::GetTwBar()
 TwType SpaceManager::GetVector2DTwType()
 {
 	return TW_TYPE_VECTOR2D;
+}
+
+TwType SpaceManager::GetColorTwType()
+{
+	return TW_TYPE_BETA_COLOR;
 }
