@@ -96,6 +96,9 @@ public:
 	// Returns a copy of the active game objects
 	std::vector<GameObject*> GetGameObjectActiveList();
 
+	// Returns a unique name 
+	std::string GenerateUniqueGameObjectName(const std::string& name);
+
 private:
 	// Disable copy constructor and assignment operator
 	GameObjectManager(const GameObjectManager&) = delete;

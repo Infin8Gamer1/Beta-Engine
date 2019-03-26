@@ -141,6 +141,43 @@ std::vector<GameObject*> GameObjectManager::GetGameObjectActiveList()
 	return gameObjectActiveList;
 }
 
+std::string GameObjectManager::GenerateUniqueGameObjectName(const std::string & name)
+{
+	std::string outputName = name;
+
+	unsigned numberToAppend = 0;
+
+	for (size_t i = 0; i < gameObjectActiveList.size(); i++)
+	{
+		std::string GOName = gameObjectActiveList[i]->GetName();
+
+		size_t pos = GOName.find_last_of("_");
+
+		std::string currentName = GOName.substr(0, pos);
+
+		if (currentName == name)
+		{
+			if (pos != std::string::npos) {
+				std::string currentNumberString = GOName.substr(pos+1);
+
+				int curNumber = std::stoi(currentNumberString);
+
+				numberToAppend = curNumber + 1;
+			}
+			else {
+				numberToAppend++;
+			}
+		}
+	}
+
+	if (numberToAppend > 0)
+	{
+		outputName = outputName + "_" + std::to_string(numberToAppend);
+	}
+
+	return outputName;
+}
+
 void GameObjectManager::VariableUpdate(float dt)
 {
 	for (size_t i = 0; i < gameObjectActiveList.size(); i++)

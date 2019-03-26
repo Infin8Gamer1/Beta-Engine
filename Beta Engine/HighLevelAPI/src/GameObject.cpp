@@ -22,6 +22,7 @@ GameObject::GameObject(const std::string & name) : BetaObject(name)
 	damageHandler = nullptr;
 	Health = 0;
 	Path = name;
+	gameObjectName = name;
 }
 
 GameObject::GameObject(const GameObject & other) : BetaObject(other.GetName())
@@ -299,4 +300,12 @@ void GameObject::SetSavePath(std::string _Path)
 	Path = _Path;
 }
 
+const std::string & GameObject::GetName() const
+{
+	return gameObjectName;
+}
 
+void GameObject::SetName(const std::string& newName)
+{
+	gameObjectName = newName;
+}

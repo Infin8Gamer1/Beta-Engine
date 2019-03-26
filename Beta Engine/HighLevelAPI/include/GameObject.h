@@ -166,6 +166,10 @@ public:
 
 	void SetSavePath(std::string Path);
 
+	const std::string& GetName() const;
+
+	void SetName(const std::string& newName);
+
 private:
 	//------------------------------------------------------------------------------
 	// Private Variables:
@@ -180,6 +184,8 @@ private:
 	bool isDestroyed;
 
 	TwBar* bar;
+
+	std::string gameObjectName;
 
 	// the health of this object
 	int Health;

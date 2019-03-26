@@ -96,6 +96,10 @@ void GameObjectPlacer::PlaceObject(Vector2D mousePosition)
 
 	GameObject* object = GameObjectFactory::GetInstance().CreateObject(GOName);
 
+	std::string newName = TileMapObject->GetSpace()->GetObjectManager().GenerateUniqueGameObjectName(object->GetName());
+
+	object->SetName(newName);
+
 	Transform* trans = object->GetComponent<Transform>();
 
 	if (trans != nullptr)
