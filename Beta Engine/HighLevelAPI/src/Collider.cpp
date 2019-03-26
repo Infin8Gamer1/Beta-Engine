@@ -49,7 +49,7 @@ void Collider::AddVarsToTweakBar(TwBar * bar_)
 	std::string params = " group='" + GetName() + "' ";
 
 	TwAddVarRW(bar, "Collision Group", TW_TYPE_STDSTRING, &CollisionGroup, params.c_str());
-	//TwAddVarRW(bar, "Flags", TW_TYPE_STDSTRING, &, params.c_str());
+	//TwAddVarRW(bar, "Collision Flags", TW_TYPE_STDSTRING, &CollisionFlags, params.c_str());
 }
 
 void Collider::CheckCollision(const Collider & other)
