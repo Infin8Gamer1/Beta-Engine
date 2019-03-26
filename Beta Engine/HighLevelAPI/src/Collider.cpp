@@ -24,12 +24,32 @@ Collider::Collider(ColliderType _type) : Component("Collider")
 
 	handler = nullptr;
 	mapHandler = nullptr;
+	bar = nullptr;
+}
+
+Collider::~Collider()
+{
+	if (bar != nullptr)
+	{
+		TwRemoveVar(bar, "Collision Group");
+	}
 }
 
 void Collider::Initialize()
 {
 	transform = GetOwner()->GetComponent<Transform>();
 	physics = GetOwner()->GetComponent<Physics>();
+}
+
+void Collider::AddVarsToTweakBar(TwBar * bar_)
+{
+	bar = bar_;
+
+	Component::AddVarsToTweakBar(bar);
+	std::string params = " group='" + GetName() + "' ";
+
+	TwAddVarRW(bar, "Collision Group", TW_TYPE_STDSTRING, &CollisionGroup, params.c_str());
+	//TwAddVarRW(bar, "Flags", TW_TYPE_STDSTRING, &, params.c_str());
 }
 
 void Collider::CheckCollision(const Collider & other)

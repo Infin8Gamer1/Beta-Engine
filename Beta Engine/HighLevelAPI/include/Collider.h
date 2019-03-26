@@ -80,8 +80,13 @@ public:
 	//   type = The type of collider (see the ColliderType enum).
 	Collider(ColliderType type);
 
+	~Collider();
+
 	// Set component pointers.
 	void Initialize() override;
+
+	// Add Component Spific Vars to a Tweak Bar
+	void AddVarsToTweakBar(TwBar* bar) override;
 
 	// Draw collision shape
 	virtual void Draw() = 0;
@@ -173,6 +178,8 @@ private:
 
 	// A List of strings that identify Collision Flags
 	std::vector<std::string> CollisionFlags;
+
+	TwBar* bar;
 };
 
 //------------------------------------------------------------------------------
