@@ -52,10 +52,18 @@ public:
 	// Clone the transform, returning a dynamically allocated copy.
 	Component* Clone() const override;
 
-	// Loads object data from a file.
+	/*!
+	 * Loads object data from a file.
+	 * 
+	 * \param parser
+	 */
 	void Deserialize(Parser& parser) override;
 
-	// Saves object data to a file.
+	/*!
+	 * Saves Object data to a file.
+	 * 
+	 * \param parser
+	 */
 	void Serialize(Parser& parser) const override;
 
 	void AddVarsToTweakBar(TwBar* bar) override;
