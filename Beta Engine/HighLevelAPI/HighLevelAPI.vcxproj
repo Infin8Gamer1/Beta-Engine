@@ -14,7 +14,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{4D019903-DA3D-466B-8863-DE77285C6531}</ProjectGuid>
     <RootNamespace>HighLevelAPI</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -46,14 +46,14 @@
     <OutDir>$(ProjectDir)\lib\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>BetaHigh_x64_D</TargetName>
-    <IncludePath>..\LowLevelAPI\include;..\AntTweakBar\include;..\glfw\include;..\FMOD\inc;include;src;$(IncludePath)</IncludePath>
+    <IncludePath>..\LowLevelAPI\include;..\AntTweakBar\include;..\glfw\include;..\FMOD\inc;include;src;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>..\AntTweakBar\lib;..\LowLevelAPI\lib;..\glfw\lib;..\FMOD\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(ProjectDir)\lib\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
     <TargetName>BetaHigh_x64</TargetName>
-    <IncludePath>..\LowLevelAPI\include;..\AntTweakBar\include;..\glfw\include;..\FMOD\inc;include;src;$(IncludePath)</IncludePath>
+    <IncludePath>..\LowLevelAPI\include;..\AntTweakBar\include;..\glfw\include;..\FMOD\inc;include;src;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>..\AntTweakBar\lib;..\LowLevelAPI\lib;..\glfw\lib;..\FMOD\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

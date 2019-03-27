@@ -14,7 +14,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{18019478-9140-4B77-B0F5-38F759B6640C}</ProjectGuid>
     <RootNamespace>Game</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <ProjectName>Game</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -45,14 +45,14 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <TargetName>Game</TargetName>
-    <IncludePath>..\AntTweakBar\include;..\glfw\include;..\LowLevelAPI\include;..\FMOD\inc;..\HighLevelAPI\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\AntTweakBar\include;..\glfw\include;..\LowLevelAPI\include;..\FMOD\inc;..\HighLevelAPI\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>..\AntTweakBar\lib;..\glfw\lib;..\LowLevelAPI\lib;..\FMOD\lib;..\HighLevelAPI\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <TargetName>Game</TargetName>
-    <IncludePath>..\AntTweakBar\include;..\glfw\include;..\LowLevelAPI\include;..\FMOD\inc;..\HighLevelAPI\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\AntTweakBar\include;..\glfw\include;..\LowLevelAPI\include;..\FMOD\inc;..\HighLevelAPI\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <LibraryPath>..\AntTweakBar\lib;..\glfw\lib;..\LowLevelAPI\lib;..\FMOD\lib;..\HighLevelAPI\lib;$(LibraryPath)</LibraryPath>
     <OutDir>$(ProjectDir)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)\$(Platform)\$(Configuration)\</IntDir>

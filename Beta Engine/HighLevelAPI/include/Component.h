@@ -17,6 +17,7 @@
 
 #include <BetaObject.h>
 #include <Serializable.h>
+#include <AntTweakBar.h>
 
 //------------------------------------------------------------------------------
 
