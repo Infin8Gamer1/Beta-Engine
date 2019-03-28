@@ -1,0 +1,33 @@
+DonkeyKong
+{
+	numComponents : 5
+	Transform
+	{
+		translation : {0.0f, 300.0f}
+		rotation : 0
+		scale : {250, 250}
+	}
+	
+	Sprite
+	{
+		frameIndex : 0
+		color : { 1 , 1 , 1 , 1 }
+		spriteSourceName : Circle
+	}
+	
+	ColliderRectangle
+	{
+		CollisionGroup : default
+		CollisionFlags : all
+		extents : {250, 250}
+	}
+	
+	Animation
+	{
+	
+	}
+	
+	DLPHN::DonkeyKong
+	{
+	}
+}
