@@ -1,13 +1,13 @@
 LevelEditor
 {
-  numGameObjects : 4
+  numGameObjects : 5
   {
     TileMap
     {
       numComponents : 3
       Transform
       {
-        translation : { -300, 400 }
+        translation : { -350, 400 }
         rotation : 0
         scale : { 50, 50 }
       }
@@ -90,6 +90,41 @@ LevelEditor
         frameIndex : 12
         color : { 1 , 1 , 1 , 1 }
         spriteSourceName : MonkeyIdle
+      }
+      Animation
+      {
+      }
+      Physics
+      {
+        acceleration : { 0, -275 }
+        velocity : { 0, 0 }
+        angularVelocity : 0
+        mass : 1
+        gravity : { 0, -275 }
+      }
+      ColliderRectangle
+      {
+        CollisionGroup : default
+        CollisionFlags : all
+        extents : { 50, 50 }
+      }
+      Behaviors::MonkeyMovement
+      { } 
+    }
+    Monkey_2
+    {
+      numComponents : 6
+      Transform
+      {
+        translation : { 425, -75 }
+        rotation : 0
+        scale : { 100, 100 }
+      }
+      Sprite
+      {
+        frameIndex : 0
+        color : { 1 , 0 , 0 , 1 }
+        spriteSourceName : MonkeyWalk
       }
       Animation
       {
